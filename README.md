@@ -17,12 +17,16 @@ cp pre-commit .git/hooks/
 # default port is 3000
 npm start
 
-# run on other port
-PORT=<port> npm start
+# run on other port or host
+PORT=<port> HOST=<host> npm start
 ```
 
 ## Testing (CI / coverage)
 
 ```
+# code syntax check
+npm run lint
 
+# coverage check
+npm run coverage
 ```
