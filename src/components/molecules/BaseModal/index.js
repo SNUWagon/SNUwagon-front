@@ -74,18 +74,18 @@ class BaseModal extends React.Component {
   }
 
   handleOnClick() {
-    this.props.onClose(this.props.children)
+    this.props.onClose(this.props.content)
   }
 
   render() {
     return (
       <StyledReactModal
-        isOpen={this.props.showModal}
+        isOpen={this.props.modalState}
         contentLabel={'modal'}
         onRequestClose={this.handleCloseModal}
       >
         <Content>
-          {this.props.children}
+          <p>{this.props.content}</p>
         </Content>
         <Button onClick={this.handleOnClick}>Close</Button>
       </StyledReactModal>
@@ -94,9 +94,9 @@ class BaseModal extends React.Component {
 }
 
 BaseModal.propTypes = {
-  showModal: PropTypes.boolean,
+  modalState: PropTypes.any,
+  content: PropTypes.string,
   onClose: PropTypes.func,
-  children: PropTypes.node,
   reverse: PropTypes.bool,
 }
 
