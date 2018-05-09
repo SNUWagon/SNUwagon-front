@@ -1,8 +1,9 @@
 import React from 'react'
+import ProfileHeader from '../../../containers/ProfileHeader'
 
 const HomePage = () => {
   return (
-    <h1>Hello World</h1>
+    <ProfileHeader />
   )
 }
 
