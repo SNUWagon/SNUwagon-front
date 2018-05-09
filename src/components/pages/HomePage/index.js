@@ -1,10 +1,9 @@
 import React from 'react'
-
-import { PageTemplate } from 'components'
+import ProfileHeader from '../../../containers/ProfileHeader'
 
 const HomePage = () => {
   return (
-    <PageTemplate>Hello World</PageTemplate>
+    <ProfileHeader />
   )
 }
 

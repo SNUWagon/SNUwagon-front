@@ -9,13 +9,11 @@ pass=true
 
 echo "\nValidating Scripts\n"
 
-for file in ${files}; do
-    result=$(npm run lint | grep "error")
-    if [ "$result" != "" ]; then
-        echo "\t\033[31mESLint Failed ${file}\033[0m"
-        pass=false
-    fi
-done
+result=$(npm run lint | grep "error ")
+if [ "$result" != "" ]; then
+    echo "\t\033[31mESLint Failed please check 'npm run lint'\033[0m"
+    pass=false
+fi
 
 echo "\nScript validation complete\n"
 

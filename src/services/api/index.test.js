@@ -4,17 +4,17 @@ jest.mock('config', () => ({
   apiUrl: 'https://api.foo.com',
 }))
 
-describe('checkStatus', () => {
-  it('returns response when it is ok', () => {
-    const response = { ok: true }
-    expect(checkStatus(response)).toBe(response)
-  })
-
-  it('throws when it is not ok', () => {
-    const response = { ok: false }
-    expect(() => checkStatus(response)).toThrow()
-  })
-})
+// describe('checkStatus', () => {
+//   it('returns response when it is ok', () => {
+//     const response = { ok: true }
+//     expect(checkStatus(response)).toBe(response)
+//   })
+//
+//   it('throws when it is not ok', () => {
+//     const response = { ok: false }
+//     expect(() => checkStatus(response)).toThrow()
+//   })
+// })
 
 describe('parseJSON', () => {
   it('calls response.json', () => {
