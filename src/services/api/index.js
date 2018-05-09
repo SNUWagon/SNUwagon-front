@@ -4,12 +4,13 @@ import merge from 'lodash/merge'
 import { apiUrl } from 'config'
 
 export const checkStatus = (response) => {
-  if (response.ok) {
-    return response
-  }
-  const error = new Error(`${response.status} ${response.statusText}`)
-  error.response = response
-  throw error
+  return response
+  // if (response.ok) {
+  //   return response
+  // }
+  // const error = new Error(`${response.status} ${response.statusText}`)
+  // error.response = response
+  // throw error
 }
 
 export const parseJSON = response => response.json()
@@ -23,6 +24,7 @@ export const parseSettings = ({ method = 'get', data, locale, ...otherSettings }
   const settings = {
     body: data ? JSON.stringify(data) : undefined,
     method,
+    credentials: 'same-origin',
     headers,
     ...otherSettings,
   }
