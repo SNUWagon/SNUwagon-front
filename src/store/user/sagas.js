@@ -2,6 +2,7 @@ import { take, call, fork, put } from 'redux-saga/effects'
 import { push } from 'react-router-redux'
 import api from 'services/api'
 import * as actions from './actions'
+import * as displayActions from '../display/actions'
 
 const baseUrl = ''
 const authUrl = `${baseUrl}/auth`
@@ -17,6 +18,8 @@ export function* handleSignIn(username, password) {
   if (response.success === true) {
     yield put(actions.getUserProfile())
     yield put(actions.changeRoute('/'))
+  } else {
+    yield put(displayActions.updateSignInModal(true, 'Username 또는 password가 잘못되었습니다'))
   }
 }
 
