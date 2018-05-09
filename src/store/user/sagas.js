@@ -12,22 +12,30 @@ export function* handleChangeRoute(newRoute) {
 
 export function* handleSignIn(username, password) {
   const data = { username, password }
-  try {
-    yield call(api.post, `${authUrl}/signin`, data)
-  } catch (error) {
-    yield error
-  }
+  const response = yield call(api.post, `${authUrl}/signin`, data)
 
-  // yield put(actions.updateUserAuth(data))
-  // yield put(push('/'))
+  if (response.success === true) {
+    yield put(actions.getUserProfile())
+    yield put(actions.changeRoute('/'))
+  }
 }
 
 export function* handleSignUp(email, username, password) {
   const data = { email, username, password }
-  try {
-    yield call(api.post, `${authUrl}/signup`, data)
-  } catch (error) {
-    yield error
+  const response = yield call(api.post, `${authUrl}/signup`, data)
+  if (response.success === true) {
+    yield put(actions.changeRoute('/signin'))
+  }
+}
+
+export function* handleGetUserProfile() {
+  const response = yield call(api.get, `${authUrl}/userinfo`)
+  if (response.success === true) {
+    yield put(actions.updateUserProfile(
+      response.data.id,
+      response.data.username,
+      response.data.credit,
+    ))
   }
 }
 
@@ -53,8 +61,16 @@ function* watchSignUp() {
   }
 }
 
+function* watchGetUserProfile() {
+  while (true) {
+    yield take(actions.GET_USER_PROFILE)
+    yield call(handleGetUserProfile)
+  }
+}
+
 export default function* () {
   yield fork(watchSignIn)
   yield fork(watchSignUp)
   yield fork(watchChangeRoute)
+  yield fork(watchGetUserProfile)
 }

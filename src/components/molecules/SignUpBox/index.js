@@ -18,16 +18,16 @@ const ButtonP = styled.p`
 `
 
 const SignUpBox = ({ onClickSignUp, onClickBack }) => {
-  let email = ''
-  let username = ''
-  let password = ''
+  let email
+  let username
+  let password
 
   const onClickSignUpButton = () => {
     if (email && username && password) {
-      onClickSignUp(email, username, password)
-      email = ''
-      username = ''
-      password = ''
+      onClickSignUp(email.value, username.value, password.value)
+      email.value = ''
+      username.value = ''
+      password.value = ''
     }
   }
 
@@ -37,11 +37,11 @@ const SignUpBox = ({ onClickSignUp, onClickBack }) => {
 
   return (
     <SignInDiv>
-      <Input placeholder={'Email Address'} onChange={node => { username = node.target.value }} />
+      <Input placeholder={'Email Address'} onChange={node => { email = node.target }} />
       <br />
-      <Input placeholder={'Username'} onChange={node => { username = node.target.value }} />
+      <Input placeholder={'Username'} onChange={node => { username = node.target }} />
       <br />
-      <Input placeholder={'Password'} type={'password'} onChange={node => { password = node.target.value }} />
+      <Input placeholder={'Password'} type={'password'} onChange={node => { password = node.target }} />
       <ButtonP>
         <Button type={'submit'} onClick={onClickBackButton}>Back</Button>
         {'  '}

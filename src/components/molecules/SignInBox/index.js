@@ -18,14 +18,14 @@ const ButtonP = styled.p`
 `
 
 const SignInBox = ({ onClickSignIn, onClickSignUp }) => {
-  let username = ''
-  let password = ''
+  let username
+  let password
 
   const onClickSignInButton = () => {
     if (username && password) {
-      onClickSignIn(username, password)
-      username = ''
-      password = ''
+      onClickSignIn(username.value, password.value)
+      username.value = ''
+      password.value = ''
     }
   }
 
@@ -35,9 +35,9 @@ const SignInBox = ({ onClickSignIn, onClickSignUp }) => {
 
   return (
     <SignInDiv>
-      <Input placeholder={'Username'} onChange={node => { username = node.target.value }} />
+      <Input placeholder={'Username'} onChange={node => { username = node.target }} />
       <br />
-      <Input placeholder={'Password'} type={'password'} onChange={node => { password = node.target.value }} />
+      <Input placeholder={'Password'} type={'password'} onChange={node => { password = node.target }} />
       <ButtonP>
         <Button type={'submit'} onClick={onClickSignInButton}>Sign In</Button>
         {'  '}
