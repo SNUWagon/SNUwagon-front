@@ -37,15 +37,24 @@ const SignUpBox = ({ onClickSignUp, onClickBack }) => {
 
   return (
     <SignInDiv>
-      <Input placeholder={'Email Address'} onChange={node => { email = node.target }} />
+      <Input
+        className={'email-input'} placeholder={'Email Address'}
+        onChange={node => { email = node.target }}
+      />
       <br />
-      <Input placeholder={'Username'} onChange={node => { username = node.target }} />
+      <Input
+        className={'username-input'} placeholder={'Username'}
+        onChange={node => { username = node.target }}
+      />
       <br />
-      <Input placeholder={'Password'} type={'password'} onChange={node => { password = node.target }} />
+      <Input
+        className={'password-input'} placeholder={'Password'} type={'password'}
+        onChange={node => { password = node.target }}
+      />
       <ButtonP>
-        <Button type={'submit'} onClick={onClickBackButton}>Back</Button>
+        <Button className={'back-button'} type={'submit'} onClick={onClickBackButton}>Back</Button>
         {'  '}
-        <Button type={'submit'} onClick={onClickSignUpButton}>Sign Up</Button>
+        <Button className={'sign-up-button'} type={'submit'} onClick={onClickSignUpButton}>Sign Up</Button>
       </ButtonP>
     </SignInDiv>
   )

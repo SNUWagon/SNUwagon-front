@@ -1,3 +1,4 @@
+import React from 'react'
 import { connect } from 'react-redux'
 import SignInBox from '../components/molecules/SignInBox'
 import { signIn, changeRoute } from '../store/user/actions'

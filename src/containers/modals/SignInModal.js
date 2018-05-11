@@ -1,3 +1,4 @@
+import React from 'react'
 import { connect } from 'react-redux'
 import BaseModal from '../../components/molecules/BaseModal'
 import { updateSignInModal } from '../../store/display/actions'
@@ -18,4 +19,5 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(BaseModal)
+const SignInModal = props => <BaseModal {...props} />
+export default connect(mapStateToProps, mapDispatchToProps)(SignInModal)

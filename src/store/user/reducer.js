@@ -5,7 +5,7 @@ const userReducer = (state = initialState, action) => {
   switch (action.type) {
     case actions.UPDATE_USER_PROFILE:
       return Object.assign({}, state, {
-        login: true,
+        login: action.userId !== undefined,
         profile: {
           userId: action.userId,
           username: action.username,

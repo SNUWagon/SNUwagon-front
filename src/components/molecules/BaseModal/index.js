@@ -43,7 +43,6 @@ const ModalBox = styled(ReactModal)`
   min-width: 320px;
   max-width: calc(640px - 1rem);
   max-height: calc(100% - 1rem);
-  padding-top: ${({ hasHeader }) => hasHeader ? 0 : '1rem'};
   @media screen and (max-width: 640px) {
     width: calc(100% - 1rem);
     min-width: 0;
@@ -87,7 +86,7 @@ class BaseModal extends React.Component {
         <Content>
           <p>{this.props.content}</p>
         </Content>
-        <Button onClick={this.handleOnClick}>Close</Button>
+        <Button className={'modal-button'} onClick={this.handleOnClick}>Close</Button>
       </StyledReactModal>
     )
   }
