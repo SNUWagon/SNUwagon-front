@@ -8,6 +8,11 @@ const displayReducer = (state = initialState, action) => {
         isSignInModalOpened: action.modalState,
         signInModalContent: action.content,
       })
+    case actions.UPDATE_SIGN_UP_MODAL:
+      return Object.assign({}, state, {
+        isSignUpModalOpened: action.modalState,
+        signUpModalContent: action.content,
+      })
     default:
       return state
   }

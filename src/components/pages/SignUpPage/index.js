@@ -1,12 +1,16 @@
 import React from 'react'
 import AuthContainer from '../../organisms/AuthContainer'
 import SignUpBox from '../../../containers/SignUpBox'
+import SignUpModal from '../../../containers/modals/SignUpModal'
 
 const SignUpPage = () => {
   return (
-    <AuthContainer>
-      <SignUpBox />
-    </AuthContainer>
+    <div>
+      <AuthContainer>
+        <SignUpBox />
+      </AuthContainer>
+      <SignUpModal />
+    </div>
   )
 }
 

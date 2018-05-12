@@ -11,6 +11,7 @@ const SignInDiv = styled.div`
   width: 310px;
   background: white;
   border-radius: 3px;
+  text-align: center;
 `
 
 const ButtonP = styled.p`
@@ -35,6 +36,7 @@ const SignInBox = ({ onClickSignIn, onClickSignUp }) => {
 
   return (
     <SignInDiv>
+      <h1>Sign In</h1>
       <Input
         className={'username-input'} placeholder={'Username'}
         onChange={node => { username = node.target }}

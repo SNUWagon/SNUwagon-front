@@ -28,6 +28,19 @@ export function* handleSignUp(email, username, password) {
   const response = yield call(api.post, `${authUrl}/signup`, data)
   if (response.success === true) {
     yield put(actions.changeRoute('/signin'))
+  } else {
+    yield put(displayActions.updateSignUpModal(true, '중복된 email 또는 username이 존재합니다.'))
+  }
+}
+
+export function* handleSignOut() {
+  const response = yield call(api.get, `${authUrl}/signout`)
+  if (response.success === true) {
+    yield put(actions.updateUserProfile(
+      undefined,
+      undefined,
+      undefined,
+    ))
   }
 }
 
@@ -64,6 +77,13 @@ function* watchSignUp() {
   }
 }
 
+function* watchSignOut() {
+  while (true) {
+    yield take(actions.SIGN_OUT)
+    yield call(handleSignOut)
+  }
+}
+
 function* watchGetUserProfile() {
   while (true) {
     yield take(actions.GET_USER_PROFILE)
@@ -74,6 +94,7 @@ function* watchGetUserProfile() {
 export default function* () {
   yield fork(watchSignIn)
   yield fork(watchSignUp)
+  yield fork(watchSignOut)
   yield fork(watchChangeRoute)
   yield fork(watchGetUserProfile)
 }

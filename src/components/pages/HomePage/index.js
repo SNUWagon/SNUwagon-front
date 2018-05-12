@@ -1,10 +1,11 @@
-import React from 'react'
-import ProfileHeader from '../../../containers/ProfileHeader'
+import React, { PropTypes } from 'react'
+import TitleBar from '../../../components/molecules/TitleBar'
 
 const HomePage = () => {
   return (
-    <ProfileHeader />
+    <TitleBar />
   )
 }
+
 
 export default HomePage

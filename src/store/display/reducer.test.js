@@ -16,4 +16,13 @@ describe('display reducer', () => {
     expect(displayReducer({}, actions.updateSignInModal(modalState, content)).signInModalContent)
       .toBe(content)
   })
+
+  it('should handle update siup in modal', () => {
+    const modalState = true
+    const content = 'content'
+    expect(displayReducer({}, actions.updateSignUpModal(modalState, content)).isSignUpModalOpened)
+      .toBe(modalState)
+    expect(displayReducer({}, actions.updateSignUpModal(modalState, content)).signUpModalContent)
+      .toBe(content)
+  })
 })
