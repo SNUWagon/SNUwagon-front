@@ -14,7 +14,7 @@ export function* handleWriteQuestionPost(title, content, due, bounty, author) {
   // TODO: tags
   // let authorId = author.userId
   // const hash = new Buffer(`${author.username}:${author.userId}`).toString('base64')
-  const data = { title, content, username: 'david', due, bounty, question_type: 'private' }
+  const data = { title, content, username: author, due, bounty, question_type: 'private' }
   // const auth = { headers: {'Authorization' : `Basic ${hash}`, 'Content-Type' : 'application/json'} }
   const response = yield call(api.post, `${questionUrl}`, data)
   if (response.success === true) {
