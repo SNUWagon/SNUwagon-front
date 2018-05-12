@@ -1,9 +1,13 @@
 import React from 'react'
 import QuestionWrite from '../../../containers/QuestionWrite'
+import TitleBar from '../../../components/molecules/TitleBar'
 
 const QuestionWritePage = () => {
   return (
-    <QuestionWrite />
+    <div>
+      <TitleBar />
+      <QuestionWrite />
+    </div>
   )
 }
 

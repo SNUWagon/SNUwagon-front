@@ -1,23 +1,64 @@
 import React, { PropTypes } from 'react'
-import styled from 'styled-components'
-import { font, palette } from 'styled-theme'
+import * as colors from 'material-ui/styles/colors'
+import RaisedButton from 'material-ui/RaisedButton'
+import Paper from 'material-ui/Paper'
+import { connect } from 'react-redux'
+import { changeRoute } from '../../../store/user/actions'
 
-const Wrapper = styled.div`
-  font-family: ${font('primary')};
-  color: ${palette('grayscale', 0)};
-`
 
-const IndexBox = ({ children, ...props }) => {
-  return (
-    <Wrapper {...props}>
-      {children}
-    </Wrapper>
-  )
+class IndexBox extends React.Component {
+  constructor(props) {
+    super(props)
+
+    this.handleClickWriteQuestion = this.handleClickWriteQuestion.bind(this)
+  }
+
+  handleClickWriteQuestion() {
+    if (this.props.logged === true) {
+      this.props.changeRoute('/question')
+    } else {
+      // show modal
+    }
+  }
+
+  render() {
+    return (
+      <Paper
+        style={{
+          textAlign: 'center',
+          display: 'inline-block',
+        }}
+      >
+        <RaisedButton className={'question-write-button'} onClick={this.handleClickWriteQuestion}>Write Question</RaisedButton>
+        {' '}
+        <RaisedButton className={'information-write-button'} disabled>Write Information</RaisedButton>
+        {' '}
+        <RaisedButton className={'post-list-button'} disabled>Post List</RaisedButton>
+        {' '}
+        <RaisedButton className={'search-button'} disabled>Search</RaisedButton>
+      </Paper>
+    )
+  }
 }
 
 IndexBox.propTypes = {
-  reverse: PropTypes.bool,
-  children: PropTypes.node,
+  logged: PropTypes.bool,
+  changeRoute: PropTypes.func,
 }
 
-export default IndexBox
+const mapStateToProps = (state) => {
+  return {
+    logged: state.user.login,
+  }
+}
+
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    changeRoute: (route) => {
+      dispatch(changeRoute(route))
+    },
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(IndexBox)

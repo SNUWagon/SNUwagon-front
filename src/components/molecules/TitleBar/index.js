@@ -48,37 +48,6 @@ class TitleBar extends React.Component {
   }
 }
 
-// const TitleBar = ({ logged, profile, onClickSignIn, onClickSignOut }) => {
-//   const onClickRightIconButton = () => {
-//     if (logged === true) onClickSignOut()
-//     else onClickSignIn()
-//   }
-//
-//   const profiles = (
-//     <div>
-//       <FlatButton style={{ color: 'white' }}>{ profile.username }</FlatButton>
-//       <FlatButton style={{ color: 'white' }}>{ profile.credit }</FlatButton>
-//       <FlatButton style={{ color: 'white' }}>Sign out</FlatButton>
-//     </div>
-//   )
-//
-//   return (
-//     <AppBar
-//       title={'SNUwagon'}
-//       showMenuIconButton={false}
-//       iconElementRight={logged === true ? profiles : <FlatButton>Sign in</FlatButton>}
-//       onRightIconButtonClick={onClickRightIconButton}
-//       titleStyle={{
-//         textAlign: 'center',
-//         fontSize: '40',
-//       }}
-//       style={{
-//         backgroundColor: colors.indigo500,
-//       }}
-//     />
-//   )
-// }
-
 TitleBar.propTypes = {
   logged: PropTypes.bool,
   profile: PropTypes.object,
