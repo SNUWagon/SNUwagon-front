@@ -12,21 +12,27 @@ export function* handleChangeRoute(newRoute) {
 
 export function* handleWriteQuestionPost(title, content, due, bounty, author) {
   // TODO: tags
-  // let authorId = author.userId
-  // const hash = new Buffer(`${author.username}:${author.userId}`).toString('base64')
   const data = { title, content, username: author, due, bounty, question_type: 'private' }
-  // const auth = { headers: {'Authorization' : `Basic ${hash}`, 'Content-Type' : 'application/json'} }
   const response = yield call(api.post, `${questionUrl}`, data)
   if (response.success === true) {
-    yield put(actions.updateQuestionPost(response.data.id, response.data.resolved))
-    yield put(actions.getQuestionPost(response.data.id))
+    yield put(actions.changeRoute(`/question/${response.data.id}`))
   }
 }
 
 export function* handleGetQuestionPost(postId) {
   const response = yield call(api.get, `${questionUrl}/${postId}`)
   if (response.success === true) {
-    yield put(actions.changeRoute(`question/${postId}`))
+    yield put(actions.updateQuestionPost(
+      response.data.id,
+      response.data.title,
+      response.data.content,
+      response.data.due,
+      response.data.bounty,
+      response.data.author,
+      response.data.resolved,
+      response.data.selected,
+      response.data.tags,
+    ))
     // TODO: retrieve all answers
   }
 }

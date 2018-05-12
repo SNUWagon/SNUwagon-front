@@ -9,7 +9,7 @@ const Wrapper = styled.div`
 `
 
 const Question = ({ onClickAnswer, onClickDelete, ...props }) => {
-  const q = props.questionstate[0]
+  const q = props.question
 
   const onClickAnswerButton = () => {
     onClickAnswer('')
@@ -29,7 +29,7 @@ const Question = ({ onClickAnswer, onClickDelete, ...props }) => {
       <p>Due: {q.due}</p>
       <p>bounty: {q.bounty}</p>
       <p>author: {q.author}</p>
-      <p>resolved: {q.resolved.toString()}</p>
+      <p>resolved: {q.resolved}</p>
 
       <Button className={'delete-button'} type={'submit'} onClick={onClickDeleteButton}>Delete</Button>
       {'  '}
@@ -50,7 +50,7 @@ Question.propTypes = {
   reverse: PropTypes.bool,
   onClickAnswer: PropTypes.func,
   onClickDelete: PropTypes.func,
-  questionstate: PropTypes.array,
+  question: PropTypes.object,
 }
 
 export default Question
