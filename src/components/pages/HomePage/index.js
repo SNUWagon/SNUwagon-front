@@ -1,9 +1,13 @@
 import React, { PropTypes } from 'react'
 import TitleBar from '../../../components/molecules/TitleBar'
+import ProfileHeader from '../../../containers/ProfileHeader'
 
 const HomePage = () => {
   return (
-    <TitleBar />
+    <div>
+      <TitleBar />
+      <ProfileHeader />
+    </div>
   )
 }
 

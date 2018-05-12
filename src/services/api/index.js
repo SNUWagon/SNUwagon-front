@@ -2,6 +2,7 @@ import 'whatwg-fetch'
 import { stringify } from 'query-string'
 import merge from 'lodash/merge'
 import { apiUrl } from 'config'
+import Cookies from 'js-cookie'
 
 export const checkStatus = (response) => {
   return response
@@ -16,11 +17,14 @@ export const checkStatus = (response) => {
 export const parseJSON = response => response.json()
 
 export const parseSettings = ({ method = 'get', data, locale, ...otherSettings } = {}) => {
+  const csrftoken = Cookies.get('csrftoken')
   const headers = {
     Accept: 'application/json',
     'Content-Type': 'application/json',
     'Accept-Language': locale,
+    'X-CSRFToken': csrftoken,
   }
+
   const settings = {
     body: data ? JSON.stringify(data) : undefined,
     method,
