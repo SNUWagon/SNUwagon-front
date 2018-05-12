@@ -1,5 +1,6 @@
 import { connect } from 'react-redux'
 import ProfileHeader from '../components/molecules/ProfileHeader'
+import { changeRoute } from '../store/user/actions'
 
 const mapStateToProps = (state) => {
   return {
@@ -11,7 +12,11 @@ const mapStateToProps = (state) => {
 
 
 const mapDispatchToProps = (dispatch) => {
-  return {}
+  return {
+    onClickWriteQuestion: (route) => {
+      dispatch(changeRoute(route))
+    },
+  }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProfileHeader)
