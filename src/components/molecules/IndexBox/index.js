@@ -11,6 +11,7 @@ class IndexBox extends React.Component {
     super(props)
 
     this.handleClickWriteQuestion = this.handleClickWriteQuestion.bind(this)
+    this.handleClickPostList = this.handleClickPostList.bind(this)
   }
 
   handleClickWriteQuestion() {
@@ -19,6 +20,10 @@ class IndexBox extends React.Component {
     } else {
       // show modal
     }
+  }
+
+  handleClickPostList() {
+    this.props.changeRoute('/list')
   }
 
   render() {
@@ -33,7 +38,7 @@ class IndexBox extends React.Component {
         {' '}
         <RaisedButton className={'information-write-button'} disabled>Write Information</RaisedButton>
         {' '}
-        <RaisedButton className={'post-list-button'} disabled>Post List</RaisedButton>
+        <RaisedButton className={'post-list-button'} onClick={this.handleClickPostList}>Post List</RaisedButton>
         {' '}
         <RaisedButton className={'search-button'} disabled>Search</RaisedButton>
       </Paper>

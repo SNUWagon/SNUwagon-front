@@ -36,6 +36,7 @@ class TitleBar extends React.Component {
         showMenuIconButton={false}
         iconElementRight={this.props.logged === true ? profiles : <FlatButton>Sign in</FlatButton>}
         onRightIconButtonClick={this.onClickRightIconButton}
+        onTitleClick={this.props.onClickTitle}
         titleStyle={{
           textAlign: 'center',
           fontSize: '40',
@@ -53,6 +54,7 @@ TitleBar.propTypes = {
   profile: PropTypes.object,
   onClickSignIn: PropTypes.func,
   onClickSignOut: PropTypes.func,
+  onClickTitle: PropTypes.func,
   loadProfile: PropTypes.func,
   reverse: PropTypes.bool,
 }
@@ -67,6 +69,9 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    onClickTitle: () => {
+      dispatch(changeRoute('/'))
+    },
     onClickSignIn: () => {
       dispatch(changeRoute('/signin'))
     },

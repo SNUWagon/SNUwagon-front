@@ -1,15 +1,30 @@
 import React from 'react'
 import { shallow } from 'enzyme'
+import configureStore from 'redux-mock-store'
 import IndexBox from '.'
 
 const wrap = (props = {}) => shallow(<IndexBox {...props} />)
 
-it('renders children when passed in', () => {
-  const wrapper = wrap({ children: 'test' })
-  expect(wrapper.contains('test')).toBe(true)
-})
+const mockStore = configureStore([])
 
-it('renders props when passed in', () => {
-  const wrapper = wrap({ id: 'foo' })
-  expect(wrapper.find({ id: 'foo' })).toHaveLength(1)
+it('renders', () => {
+  const initialState = {
+    user: {
+      login: false,
+      profile: {
+        username: '',
+        userId: '',
+        credit: 1,
+      },
+    },
+  }
+  const store = mockStore(initialState)
+
+  const props = {
+    store,
+    postList: [],
+    loadPostList: jest.fn(),
+    changeRoute: jest.fn(),
+  }
+  wrap(props)
 })
