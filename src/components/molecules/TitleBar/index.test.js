@@ -1,15 +1,36 @@
-import React from 'react'
+import React, { PropTypes } from 'react'
 import { shallow } from 'enzyme'
+import configureStore from 'redux-mock-store'
 import TitleBar from '.'
 
 const wrap = (props = {}) => shallow(<TitleBar {...props} />)
+const mockStore = configureStore([])
 
-it('renders children when passed in', () => {
-  const wrapper = wrap({ children: 'test' })
-  expect(wrapper.contains('test')).toBe(true)
-})
+it('renders', () => {
+  const initialState = {
+    user: {
+      login: false,
+      profile: {
+        username: '',
+        userId: '',
+        credit: 1,
+      },
+    },
+  }
+  const store = mockStore(initialState)
 
-it('renders props when passed in', () => {
-  const wrapper = wrap({ id: 'foo' })
-  expect(wrapper.find({ id: 'foo' })).toHaveLength(1)
+  const props = {
+    store,
+    logged: false,
+    profile: {
+      username: '',
+      userId: '',
+      credit: 1,
+    },
+    onClickSignIn: jest.fn(),
+    onClickSignOut: jest.fn(),
+    onClickTitle: jest.fn(),
+    loadProfile: jest.fn(),
+  }
+  wrap(props)
 })
