@@ -4,6 +4,7 @@ import { changeRoute } from '../store/question/actions'
 
 const mapStateToProps = (state, ownProps) => {
   return {
+    user: state.user,
     question: state.question,
     questionId: ownProps.id,
   }
