@@ -1,8 +1,9 @@
 import React from 'react'
 import { shallow } from 'enzyme'
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import SignInBox from '.'
 
-const wrap = (props = {}) => shallow(<SignInBox {...props} />).dive()
+const wrap = (props = {}) => shallow(<MuiThemeProvider><SignInBox {...props} /></MuiThemeProvider>).dive()
 
 it('renders', () => {
   wrap({

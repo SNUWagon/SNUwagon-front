@@ -1,18 +1,17 @@
 import React, { PropTypes } from 'react'
+import Paper from 'material-ui/Paper'
 import styled from 'styled-components'
-import { font, palette } from 'styled-theme'
-import Button from '../../atoms/Button'
-import Input from '../../atoms/Input'
+import Input from '../../atoms/BaseInput'
+import Button from '../../atoms/BaseButton'
 
-const SignInDiv = styled.div`
-  position: relative;
-  margin: 0 auto;
-  padding: 20px 20px 20px;
-  width: 310px;
-  background: white;
-  border-radius: 3px;
-  text-align: center;
-`
+const style = {
+  height: 500,
+  width: 500,
+  margin: 30,
+  textAlign: 'center',
+  display: 'inline-block',
+  padding: '20px 20px 20px 20px',
+}
 
 const ButtonP = styled.p`
   text-align: center;
@@ -37,7 +36,7 @@ const SignUpBox = ({ onClickSignUp, onClickBack }) => {
   }
 
   return (
-    <SignInDiv>
+    <Paper style={style} zDepth={3}>
       <h1>Sign Up</h1>
       <Input
         className={'email-input'} placeholder={'Email Address'}
@@ -58,7 +57,7 @@ const SignUpBox = ({ onClickSignUp, onClickBack }) => {
         {'  '}
         <Button className={'sign-up-button'} type={'submit'} onClick={onClickSignUpButton}>Sign Up</Button>
       </ButtonP>
-    </SignInDiv>
+    </Paper>
   )
 }
 

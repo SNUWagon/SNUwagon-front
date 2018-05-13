@@ -28,12 +28,7 @@ class IndexBox extends React.Component {
 
   render() {
     return (
-      <Paper
-        style={{
-          textAlign: 'center',
-          display: 'inline-block',
-        }}
-      >
+      <div>
         <RaisedButton className={'question-write-button'} onClick={this.handleClickWriteQuestion}>Write Question</RaisedButton>
         {' '}
         <RaisedButton className={'information-write-button'} disabled>Write Information</RaisedButton>
@@ -41,7 +36,7 @@ class IndexBox extends React.Component {
         <RaisedButton className={'post-list-button'} onClick={this.handleClickPostList}>Post List</RaisedButton>
         {' '}
         <RaisedButton className={'search-button'} disabled>Search</RaisedButton>
-      </Paper>
+      </div>
     )
   }
 }

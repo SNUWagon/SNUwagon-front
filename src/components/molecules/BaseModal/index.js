@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react'
 import styled, { css } from 'styled-components'
 import ReactModal from 'react-modal'
 import { font, palette } from 'styled-theme'
-import Button from '../../../components/atoms/Button'
+import Button from '../../../components/atoms/BaseButton'
 
 const overlayStyles = css`
   position: fixed;
