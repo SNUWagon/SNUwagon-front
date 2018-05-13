@@ -6,7 +6,14 @@ const PostListPage = () => {
   return (
     <div>
       <TitleBar />
-      <PostListTable />
+      <div
+        style={{
+          margin: 'auto',
+          width: '50%',
+        }}
+      >
+        <PostListTable />
+      </div>
     </div>
   )
 }
