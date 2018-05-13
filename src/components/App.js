@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react'
 import { injectGlobal, ThemeProvider } from 'styled-components'
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 
 import theme from './themes/default'
 
@@ -12,7 +13,9 @@ injectGlobal`
 const App = ({ children }) => {
   return (
     <ThemeProvider theme={theme}>
-      {children}
+      <MuiThemeProvider>
+        {children}
+      </MuiThemeProvider>
     </ThemeProvider>
   )
 }

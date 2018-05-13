@@ -37,10 +37,17 @@ export const deleteQuestionPost = (postId) => {
   }
 }
 
-export const updateQuestionPost = (postId, resolved) => {
+export const updateQuestionPost = (postId, title, content, due, bounty, author, resolved, selected, tags) => {
   return {
     type: UPDATE_QUESTION_POST,
     postId,
+    title,
+    content,
+    due,
+    bounty,
+    author,
     resolved,
+    selected,
+    tags,
   }
 }

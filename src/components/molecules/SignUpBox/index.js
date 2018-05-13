@@ -11,6 +11,7 @@ const SignInDiv = styled.div`
   width: 310px;
   background: white;
   border-radius: 3px;
+  text-align: center;
 `
 
 const ButtonP = styled.p`
@@ -37,6 +38,7 @@ const SignUpBox = ({ onClickSignUp, onClickBack }) => {
 
   return (
     <SignInDiv>
+      <h1>Sign Up</h1>
       <Input
         className={'email-input'} placeholder={'Email Address'}
         onChange={node => { email = node.target }}

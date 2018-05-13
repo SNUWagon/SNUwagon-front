@@ -1,6 +1,7 @@
 export const CHANGE_ROUTE = 'CHANGE_ROUTE'
 export const SIGN_IN = 'SIGN_IN'
 export const SIGN_UP = 'SIGN_UP'
+export const SIGN_OUT = 'SIGN_OUT'
 export const GET_USER_PROFILE = 'GET_USER_PROFILE'
 export const UPDATE_USER_PROFILE = 'UPDATE_USER_PROFILE'
 
@@ -26,6 +27,12 @@ export const signUp = (email, username, password) => {
     email,
     username,
     password,
+  }
+}
+
+export const signOut = () => {
+  return {
+    type: SIGN_OUT,
   }
 }
 

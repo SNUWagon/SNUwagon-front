@@ -3,11 +3,9 @@ import Question from '../components/molecules/Question'
 import { changeRoute } from '../store/question/actions'
 
 const mapStateToProps = (state, ownProps) => {
-  const questionById = state.question.filter(
-    q => (q.postId === parseInt(ownProps.id, 10))
-  )
   return {
-    questionstate: questionById,
+    question: state.question,
+    questionId: ownProps.id,
   }
 }
 

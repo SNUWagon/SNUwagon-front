@@ -25,6 +25,13 @@ describe('user actions', () => {
     expect(actions.signUp(email, username, password)).toEqual(expectedAction)
   })
 
+  it('should create an action to sign up', () => {
+    const expectedAction = {
+      type: actions.SIGN_OUT,
+    }
+    expect(actions.signOut()).toEqual(expectedAction)
+  })
+
   it('should create an action to change route', () => {
     const route = '/'
     const expectedAction = {
