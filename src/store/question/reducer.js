@@ -35,9 +35,9 @@ const questionReducer = (state = initialState, action) => {
         title: action.title,
         content: action.content,
         due: action.due,
-        resolved: action.resolved,
         bounty: action.bounty,
         author: action.author,
+        resolved: action.resolved,
         selected: action.selected,
         tags: action.tags,
       })
