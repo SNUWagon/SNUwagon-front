@@ -20,7 +20,8 @@ const Question = ({ onClickAnswer, onClickDelete, ...props }) => {
     onClickDelete('')
   }
 
-  // TODO: delete button only available to author
+  const isOwner = (q.author === props.user.profile.userId)
+
   return (
     <Wrapper>
       <p>Question(test)</p>
@@ -30,11 +31,13 @@ const Question = ({ onClickAnswer, onClickDelete, ...props }) => {
       <p>bounty: {q.bounty}</p>
       <p>author: {q.author}</p>
       <p>resolved: {q.resolved}</p>
-
-      <Button className={'delete-button'} type={'submit'} onClick={onClickDeleteButton}>Delete</Button>
-      {'  '}
-      <Button className={'answer-button'} type={'submit'} onClick={onClickAnswerButton}>Answer</Button>
-
+      <div>
+        {isOwner ? (
+          <Button className={'delete-button'} type={'submit'} onClick={onClickDeleteButton}>Delete</Button>
+        ) : (
+          <Button className={'answer-button'} type={'submit'} onClick={onClickAnswerButton}>Answer</Button>
+        )}
+      </div>
     </Wrapper>
   )
 }
@@ -51,6 +54,7 @@ Question.propTypes = {
   onClickAnswer: PropTypes.func,
   onClickDelete: PropTypes.func,
   question: PropTypes.object,
+  user: PropTypes.object,
 }
 
 export default Question
