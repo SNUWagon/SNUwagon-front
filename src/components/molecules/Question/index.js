@@ -20,7 +20,7 @@ const Question = ({ onClickAnswer, onClickDelete, ...props }) => {
     onClickDelete('')
   }
 
-  const isOwner = (q.author === props.user.profile.userId)
+  const isOwner = (q.author === props.user.profile.username)
 
   return (
     <Wrapper>
