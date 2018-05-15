@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import Question from '../components/molecules/Question'
-import { changeRoute } from '../store/question/actions'
+import { changeRoute, deleteQuestionPost } from '../store/question/actions'
 
 const mapStateToProps = (state, ownProps) => {
   return {
@@ -17,8 +17,8 @@ const mapDispatchToProps = (dispatch) => {
       // answer import 해서 post
       dispatch(changeRoute(route))
     },
-    onClickDelete: (route) => {
-      dispatch(changeRoute(route))
+    onClickDelete: (postId) => {
+      dispatch(deleteQuestionPost(postId))
     },
   }
 }

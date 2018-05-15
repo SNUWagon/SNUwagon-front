@@ -16,8 +16,7 @@ const Question = ({ onClickAnswer, onClickDelete, ...props }) => {
   }
 
   const onClickDeleteButton = () => {
-    // if successful, redirect to main page.
-    onClickDelete('')
+    onClickDelete(q.postId)
   }
 
   const isOwner = (q.author === props.user.profile.username)
