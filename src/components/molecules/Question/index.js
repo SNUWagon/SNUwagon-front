@@ -1,18 +1,24 @@
 import React, { PropTypes } from 'react'
-import styled from 'styled-components'
-import { font, palette } from 'styled-theme'
-import Button from '../../atoms/Button'
+import { Card, CardActions, CardHeader, CardMedia, CardTitle, CardText } from 'material-ui/Card'
+import * as colors from 'material-ui/styles/colors'
+import RaisedButton from 'material-ui/RaisedButton'
+import Input from '../../atoms/BaseInput'
 
-const Wrapper = styled.div`
-  font-family: ${font('primary')};
-  color: ${palette('grayscale', 0)};
-`
+const style = {
+  width: 800,
+  margin: 30,
+  textAlign: 'center',
+  display: 'inline-block',
+  padding: '20px 20px 20px 20px',
+}
 
 const Question = ({ onClickAnswer, onClickDelete, ...props }) => {
   const q = props.question
+  let answer
 
   const onClickAnswerButton = () => {
-    onClickAnswer('')
+    if (answer) console.log(answer.value)
+    // onClickAnswer('')
   }
 
   const onClickDeleteButton = () => {
@@ -22,22 +28,44 @@ const Question = ({ onClickAnswer, onClickDelete, ...props }) => {
   const isOwner = (q.author === props.user.profile.username)
 
   return (
-    <Wrapper>
-      <p>Question(test)</p>
-      <p>Title: {q.title}</p>
-      <p>Content: {q.content}</p>
-      <p>Due: {q.due}</p>
-      <p>bounty: {q.bounty}</p>
-      <p>author: {q.author}</p>
-      <p>resolved: {q.resolved}</p>
-      <div>
-        {isOwner ? (
-          <Button className={'delete-button'} type={'submit'} onClick={onClickDeleteButton}>Delete</Button>
-        ) : (
-          <Button className={'answer-button'} type={'submit'} onClick={onClickAnswerButton}>Answer</Button>
-        )}
-      </div>
-    </Wrapper>
+    <div style={{ textAlign: 'center', margin: '40px 0px' }}>
+      <Card style={style}>
+        <CardTitle title={q.title} titleStyle={{ fontSize: 30, color: colors.indigo500 }} />
+        <CardText>
+          <br />
+          <div style={{ fontSize: 20, textAlign: 'right' }}>
+            Author: {q.author}
+          </div>
+          <br />
+          <div style={{ fontSize: 20, textAlign: 'left' }} >
+            Due: {q.due}
+            <br />
+            Bounty: {q.bounty}
+            <br />
+            Resolved: {q.resolved}
+            <br /><br /><br />
+            {q.content}
+          </div>
+        </CardText>
+        <CardActions actAsExpander>
+          {isOwner ? (
+            <RaisedButton className={'delete-button'} type={'submit'} onClick={onClickDeleteButton}>Delete</RaisedButton>
+          ) : (
+            <RaisedButton className={'answer-button'} type={'submit'} onClick={onClickAnswerButton}>Answer</RaisedButton>
+          )}
+        </CardActions>
+        <CardText expandable>
+          <Input
+            style={{ textAlign: 'left' }}
+            fullWidth
+            className={'answer'} floatingLabelText="Answer Contents"
+            multiLine rows={3}
+            floatingLabelFixed
+            onChange={node => { answer = node.target }}
+          />
+        </CardText>
+      </Card>
+    </div>
   )
 }
 
