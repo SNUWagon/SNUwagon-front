@@ -2,7 +2,7 @@ import { connect } from 'react-redux'
 import ProfileHeader from '../components/molecules/ProfileHeader'
 import { changeRoute } from '../store/user/actions'
 
-const mapStateToProps = (state) => {
+export const mapStateToProps = (state) => {
   return {
     username: state.user.profile.username,
     userId: state.user.profile.userId,
@@ -11,7 +11,7 @@ const mapStateToProps = (state) => {
 }
 
 
-const mapDispatchToProps = (dispatch) => {
+export const mapDispatchToProps = (dispatch) => {
   return {
     onClickWriteQuestion: (route) => {
       dispatch(changeRoute(route))

@@ -1,4 +1,4 @@
-const req = require.context('.', false, /^((?!index).)*\.js$/)
+const req = require.context('.', true, /^((?!index).)*\.js$/)
 
 req.keys().forEach((key) => {
   const containerName = key.replace(/^\.\/([^.]+)\.js$/, '$1')

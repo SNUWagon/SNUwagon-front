@@ -3,14 +3,14 @@ import { connect } from 'react-redux'
 import QuestionWrite from '../components/molecules/QuestionWrite'
 import { writeQuestionPost, changeRoute } from '../store/question/actions'
 
-const mapStateToProps = (state) => {
+export const mapStateToProps = (state) => {
   return {
     state,
   }
 }
 
 
-const mapDispatchToProps = (dispatch) => {
+export const mapDispatchToProps = (dispatch) => {
   return {
     onClickWriteQuestion: (title, content, due, bounty, author) => {
       // TODO: tags
