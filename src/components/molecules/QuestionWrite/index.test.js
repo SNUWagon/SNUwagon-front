@@ -43,7 +43,7 @@ it('handles click submit question button', () => {
 
   wrapper.find('.title-input').simulate('change', { target: { value: 'title' } })
   wrapper.find('.content-input').simulate('change', { target: { value: 'content' } })
-  wrapper.find('.due-input').simulate('change', { target: { value: '0001-01-01T01:01:00Z' } })
+  wrapper.find('.due-input').simulate('change', { date: '0001-01-01T01:01:00Z' })
   wrapper.find('.bounty-input').simulate('change', { target: { value: 1 } })
   wrapper.find('.write-question-button').simulate('click')
   expect(props.onClickWriteQuestion).toHaveBeenCalled()

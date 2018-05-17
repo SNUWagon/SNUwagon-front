@@ -64,7 +64,7 @@ const QuestionWrite = ({ onClickBack, onClickWriteQuestion, state }) => {
           className={'bounty-input'} hintText={'Bounty'}
           onChange={node => { bounty = node.target }} type={'number'} pattern={'d+'} min={'1'} step={'1'}
         />
-        <CustomDatePicker handleChange={date => { due = date }} />
+        <CustomDatePicker className={'due-input'} onChange={date => { due = date }} />
         <br />
         <RaisedButton className={'back-button'} type={'submit'} onClick={onClickBackButton}>Back</RaisedButton>
         {'   '}

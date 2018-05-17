@@ -156,6 +156,7 @@ it('handles click answer button for other person\'s question', () => {
     onClickAnswer: jest.fn(),
   }
   const wrapper = wrap(props)
+  wrapper.find('.answer').simulate('change', { target: { value: 'answer' } })
   wrapper.find('.answer-button').simulate('click')
   expect(props.onClickAnswer).toHaveBeenCalled()
 })

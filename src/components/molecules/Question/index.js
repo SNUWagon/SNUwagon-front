@@ -17,8 +17,10 @@ const Question = ({ onClickAnswer, onClickDelete, ...props }) => {
   let answer
 
   const onClickAnswerButton = () => {
-    if (answer) console.log(answer.value)
-    // onClickAnswer('')
+    if (answer) {
+      console.log(answer.value)
+      onClickAnswer('')
+    }
   }
 
   const onClickDeleteButton = () => {
