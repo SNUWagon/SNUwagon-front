@@ -17,7 +17,7 @@ export default class CustomDatePicker extends React.Component {
     this.setState({
       due: date,
     })
-    this.props.handleChange(date)
+    this.props.onChange(date)
   }
 
   render() {
@@ -36,4 +36,5 @@ export default class CustomDatePicker extends React.Component {
 
 CustomDatePicker.propTypes = {
   handleChange: PropTypes.func,
+  onChange: PropTypes.func,
 }
