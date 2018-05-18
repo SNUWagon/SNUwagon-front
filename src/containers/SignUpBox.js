@@ -2,12 +2,12 @@ import { connect } from 'react-redux'
 import SignUpBox from '../components/molecules/SignUpBox'
 import { signUp, changeRoute } from '../store/user/actions'
 
-const mapStateToProps = () => {
+export const mapStateToProps = () => {
   return {}
 }
 
 
-const mapDispatchToProps = (dispatch) => {
+export const mapDispatchToProps = (dispatch) => {
   return {
     onClickSignUp: (email, username, password) => {
       dispatch(signUp(email, username, password))
