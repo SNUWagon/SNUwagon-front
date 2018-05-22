@@ -8,6 +8,7 @@ import SignUpPage from './components/pages/SignUpPage'
 import QuestionWritePage from './components/pages/QuestionWritePage'
 import QuestionPage from './components/pages/QuestionPage'
 import PostListPage from './components/pages/PostListPage'
+import SearchPage from './components/pages/SearchPage'
 
 const routes = (
   <Route path="/" component={App}>
@@ -17,6 +18,7 @@ const routes = (
     <Route path="question" component={QuestionWritePage} />
     <Route path="question/:id" component={QuestionPage} />
     <Route path="list" component={PostListPage} />
+    <Route path="search" component={SearchPage} />
   </Route>
 )
 

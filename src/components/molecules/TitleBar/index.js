@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react'
 import * as colors from 'material-ui/styles/colors'
 import AppBar from 'material-ui/AppBar'
+import Avatar from 'material-ui/Avatar'
 import FlatButton from 'material-ui/FlatButton'
 import { connect } from 'react-redux'
 import { changeRoute, signOut, getUserProfile } from '../../../store/user/actions'
@@ -22,27 +23,42 @@ class TitleBar extends React.Component {
   }
 
   render() {
+    const style = {
+      div: {
+        display: 'flex',
+        alignItems: 'center',
+      },
+    }
+
     const profiles = (
-      <div>
+      <div style={style.div}>
         <FlatButton style={{ color: 'white' }}>{ this.props.profile.username }</FlatButton>
         <FlatButton style={{ color: 'white' }}>{ this.props.profile.credit }</FlatButton>
         <FlatButton style={{ color: 'white' }}>Sign out</FlatButton>
       </div>
     )
 
+    const title = (
+      <div style={style.div}>
+        <Avatar
+          src={'/title.png'}
+        />
+        {'SNUwagon'}
+      </div>
+    )
+
+
     return (
       <AppBar
-        title={'SNUwagon'}
+        // title={'SNUwagon'}
+        title={title}
         showMenuIconButton={false}
         iconElementRight={this.props.logged === true ? profiles : <FlatButton>Sign in</FlatButton>}
         onRightIconButtonClick={this.onClickRightIconButton}
         onTitleClick={this.props.onClickTitle}
-        titleStyle={{
-          textAlign: 'center',
-          fontSize: '40',
-        }}
         style={{
           backgroundColor: colors.indigo500,
+          cursor: 'pointer',
         }}
       />
     )
@@ -59,7 +75,7 @@ TitleBar.propTypes = {
   reverse: PropTypes.bool,
 }
 
-const mapStateToProps = (state) => {
+export const mapStateToProps = (state) => {
   return {
     logged: state.user.login,
     profile: state.user.profile,
@@ -67,7 +83,7 @@ const mapStateToProps = (state) => {
 }
 
 
-const mapDispatchToProps = (dispatch) => {
+export const mapDispatchToProps = (dispatch) => {
   return {
     onClickTitle: () => {
       dispatch(changeRoute('/'))
