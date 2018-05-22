@@ -34,5 +34,6 @@ describe('SearchBox', () => {
     mapDispatchToProps(dispatch).tagSearch()
     // expect(dispatch.mock.calls[1][0]).toEqual(expect.objectContaining({ type: actions.CHANGE_ROUTE }))
     mapDispatchToProps(dispatch).changeRoute()
+    mapDispatchToProps(dispatch).resetSearchResult()
   })
 })

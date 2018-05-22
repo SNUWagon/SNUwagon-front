@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react'
 import AutoComplete from 'material-ui/AutoComplete'
 import Button from '../../atoms/BaseButton'
 
-const SearchInput = ({ titleSearch, tagSearch, tagList }) => {
+const SearchInput = ({ titleSearch, tagSearch, tagList, searched }) => {
   let searchQuery = ''
 
   const updateQuery = (value) => {
@@ -11,6 +11,8 @@ const SearchInput = ({ titleSearch, tagSearch, tagList }) => {
 
   const onClickSearch = () => {
     if (searchQuery.length > 0) {
+      searched()
+
       if (searchQuery.startsWith('#')) {
         tagSearch(searchQuery)
       } else {
@@ -50,6 +52,7 @@ SearchInput.propTypes = {
   titleSearch: PropTypes.func,
   tagSearch: PropTypes.func,
   tagList: PropTypes.array,
+  searched: PropTypes.func,
 }
 
 export default SearchInput
