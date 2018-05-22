@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import BaseModal from '../../components/molecules/BaseModal'
 import { updateSignInModal } from '../../store/display/actions'
 
-const mapStateToProps = (state) => {
+export const mapStateToProps = (state) => {
   return {
     modalState: state.display.isSignInModalOpened,
     content: state.display.signInModalContent,
@@ -11,7 +11,7 @@ const mapStateToProps = (state) => {
 }
 
 
-const mapDispatchToProps = (dispatch) => {
+export const mapDispatchToProps = (dispatch) => {
   return {
     onClose: (content) => {
       dispatch(updateSignInModal(false, content))
