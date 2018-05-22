@@ -3,7 +3,7 @@ import { TableRow, TableRowColumn } from 'material-ui/Table'
 
 const SearchCell = ({ items, onClick }) => {
   return (
-    <TableRow className={'search-list-row-cell'} onCellClick={onClick}>
+    <TableRow className={'search-list-row-cell'} onCellClick={onClick} style={{ cursor: 'pointer' }}>
       {Object.keys(items).map(key => {
         return <TableRowColumn key={items[key]}>{items[key]}</TableRowColumn>
       })}
