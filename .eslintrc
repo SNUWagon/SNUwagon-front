@@ -43,6 +43,6 @@
     "react/forbid-prop-types": 0,
     "react/no-unused-prop-types": 0,
     "react/jsx-filename-extension": [2, {"extensions": [".js", ".jsx"]}],
-    "no-unused-vars-rest/no-unused-vars": [1, {"ignoreDestructuredVarsWithRest": true}]
+    "no-unused-vars-rest/no-unused-vars": [0, {"ignoreDestructuredVarsWithRest": true}]
   }
 }
