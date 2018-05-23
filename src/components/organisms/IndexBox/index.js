@@ -1,48 +1,43 @@
 import React, { PropTypes } from 'react'
-import * as colors from 'material-ui/styles/colors'
-import RaisedButton from 'material-ui/RaisedButton'
-import Paper from 'material-ui/Paper'
-import Chip from 'material-ui/Chip'
-import Avatar from 'material-ui/Avatar'
 import { connect } from 'react-redux'
+import Paper from 'material-ui/Paper'
+import IndexButtons from '../../../components/molecules/IndexButtons'
+import IndexTable from '../../../components/molecules/IndexTable'
 import { changeRoute } from '../../../store/user/actions'
+import { updateModal } from '../../../store/display/actions'
+import { getInformationList, getQuestionList } from '../../../store/list/actions'
 
+const style = {
+  width: 800,
+  margin: 'auto',
+  textAlign: 'center',
+  display: 'inline-block',
+  padding: '20px 20px 20px 20px',
+}
 
 class IndexBox extends React.Component {
-  constructor(props) {
-    super(props)
 
-    this.handleClickWriteQuestion = this.handleClickWriteQuestion.bind(this)
-    this.handleClickPostList = this.handleClickPostList.bind(this)
-    this.handleClickSearch = this.handleClickSearch.bind(this)
-  }
-
-  handleClickWriteQuestion() {
-    if (this.props.logged === true) {
-      this.props.changeRoute('/question')
-    } else {
-      // show modal
-    }
-  }
-
-  handleClickPostList() {
-    this.props.changeRoute('/list')
-  }
-
-  handleClickSearch() {
-    this.props.changeRoute('/search')
+  componentDidMount() {
+    this.props.loadPostList()
   }
 
   render() {
     return (
-      <div>
-        <RaisedButton className={'question-write-button'} onClick={this.handleClickWriteQuestion}>Write Question</RaisedButton>
-        {' '}
-        <RaisedButton className={'information-write-button'} disabled>Write Information</RaisedButton>
-        {' '}
-        <RaisedButton className={'post-list-button'} onClick={this.handleClickPostList}>Post List</RaisedButton>
-        {' '}
-        <RaisedButton className={'search-button'} onClick={this.handleClickSearch}>Search</RaisedButton>
+      <div style={{ textAlign: 'center', margin: '40px 300px' }}>
+        <Paper style={{ style }}>
+          <IndexButtons
+            logged={this.props.logged}
+            onNotLoggedIn={this.props.openModal}
+            changeRoute={this.props.changeRoute}
+          />
+          <IndexTable
+            logged={this.props.logged}
+            onNotLoggedIn={this.props.openModal}
+            questionList={this.props.questionList}
+            informationList={this.props.informationList}
+            changeRoute={this.props.changeRoute}
+          />
+        </Paper>
       </div>
     )
   }
@@ -50,20 +45,33 @@ class IndexBox extends React.Component {
 
 IndexBox.propTypes = {
   logged: PropTypes.bool,
+  questionList: PropTypes.array,
+  informationList: PropTypes.array,
   changeRoute: PropTypes.func,
+  openModal: PropTypes.func,
+  loadPostList: PropTypes.func,
 }
 
-const mapStateToProps = (state) => {
+export const mapStateToProps = (state) => {
   return {
     logged: state.user.login,
+    questionList: state.list.questionList,
+    informationList: state.list.informationList,
   }
 }
 
 
-const mapDispatchToProps = (dispatch) => {
+export const mapDispatchToProps = (dispatch) => {
   return {
     changeRoute: (route) => {
       dispatch(changeRoute(route))
+    },
+    openModal: () => {
+      dispatch(updateModal(true, 'Sign in first'))
+    },
+    loadPostList: () => {
+      dispatch(getQuestionList())
+      dispatch(getInformationList())
     },
   }
 }
