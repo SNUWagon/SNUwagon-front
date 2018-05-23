@@ -2,6 +2,8 @@ import React, { PropTypes } from 'react'
 import * as colors from 'material-ui/styles/colors'
 import RaisedButton from 'material-ui/RaisedButton'
 import Paper from 'material-ui/Paper'
+import Chip from 'material-ui/Chip'
+import Avatar from 'material-ui/Avatar'
 import { connect } from 'react-redux'
 import { changeRoute } from '../../../store/user/actions'
 
