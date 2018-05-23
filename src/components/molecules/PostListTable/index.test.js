@@ -9,7 +9,10 @@ const mockStore = configureStore([])
 
 it('renders', () => {
   const initialState = {
-
+    list: {
+      questionList: [],
+      informationList: [],
+    },
   }
   const store = mockStore(initialState)
 
