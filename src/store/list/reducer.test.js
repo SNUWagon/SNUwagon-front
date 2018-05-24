@@ -7,7 +7,7 @@ describe('user reducer', () => {
     expect(listReducer(undefined, {})).toEqual(initialState)
   })
 
-  it('should handle update post list', () => {
+  it('should handle update question list', () => {
     const postList = [
       {
         title: 'test',
@@ -17,9 +17,29 @@ describe('user reducer', () => {
       },
     ]
 
-    expect(listReducer(initialState, actions.updatePostList(postList)))
-      .toEqual([
-        ...postList,
-      ])
+    expect(listReducer(initialState, actions.updateQuestionList(postList)))
+      .toEqual(Object.assign({}, initialState, {
+        questionList: [
+          ...postList,
+        ],
+      }))
+  })
+
+  it('should handle update information list', () => {
+    const postList = [
+      {
+        title: 'test',
+        id: 1,
+        due: 'due',
+        created: 'time',
+      },
+    ]
+
+    expect(listReducer(initialState, actions.updateInformationList(postList)))
+      .toEqual(Object.assign({}, initialState, {
+        informationList: [
+          ...postList,
+        ],
+      }))
   })
 })

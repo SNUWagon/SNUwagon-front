@@ -6,19 +6,35 @@ import * as actions from './actions'
 const baseUrl = ''
 const listUrl = `${baseUrl}/list`
 
-function* handleGetPostList() {
-  // TODO: need to be fixed to list/all
-  const response = yield call(api.get, `${listUrl}/questions`)
+function* handleGetPostList(type) {
+  let url = `${listUrl}`
+  let action
+
+  switch (type) {
+    case 'question':
+      url = `${url}/questions`
+      action = actions.updateQuestionList
+      break
+    case 'information':
+      url = `${url}/informations`
+      action = actions.updateInformationList
+      break
+    default:
+      return
+  }
+
+  const response = yield call(api.get, url)
 
   if (response.success === true) {
-    yield put(actions.updatePostList(response.data.map(
+    yield put(action(response.data.map(
       (data) => {
         return {
-          id: data.id,
-          title: data.title,
-          created: data.created,
-          due: data.due,
-          type: 'question',
+          ...data,
+          // id: data.id,
+          // title: data.title,
+          // created: data.created,
+          // due: data.due,
+          type,
         }
       }
     )))
@@ -28,13 +44,21 @@ function* handleGetPostList() {
 
 /* watcher functions */
 
-function* watchGetPostList() {
+function* watchGetQuestionList() {
   while (true) {
-    yield take(actions.GET_POST_LIST)
-    yield call(handleGetPostList)
+    yield take(actions.GET_QUESTION_LIST)
+    yield call(handleGetPostList, 'question')
+  }
+}
+
+function* watchGetInformationList() {
+  while (true) {
+    yield take(actions.GET_INFORMATION_LIST)
+    yield call(handleGetPostList, 'information')
   }
 }
 
 export default function* () {
-  yield fork(watchGetPostList)
+  yield fork(watchGetQuestionList)
+  yield fork(watchGetInformationList)
 }

@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { Table, TableBody, TableHeader, TableHeaderColumn, TableRow } from 'material-ui/Table'
 import PostListCell from '../../../components/atoms/PostListCell'
 import { changeRoute } from '../../../store/user/actions'
-import { getPostList } from '../../../store/list/actions'
+import { getQuestionList, getInformationList } from '../../../store/list/actions'
 
 class PostListTable extends React.Component {
   constructor(props) {
@@ -39,7 +39,7 @@ class PostListTable extends React.Component {
           </TableRow>
         </TableHeader>
         <TableBody>
-          { this.props.postList.map((row) => (
+          { this.props.questionList.map((row) => (
             <PostListCell
               key={row.id}
               type={row.type}
@@ -56,7 +56,8 @@ class PostListTable extends React.Component {
 }
 
 PostListTable.propTypes = {
-  postList: PropTypes.array,
+  questionList: PropTypes.array,
+  informationList: PropTypes.array,
   loadPostList: PropTypes.func,
   changeRoute: PropTypes.func,
 }
@@ -64,7 +65,8 @@ PostListTable.propTypes = {
 
 const mapStateToProps = (state) => {
   return {
-    postList: state.list,
+    questionList: state.list.questionList,
+    informationList: state.list.informationList,
   }
 }
 
@@ -75,7 +77,8 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(changeRoute(route))
     },
     loadPostList: () => {
-      dispatch(getPostList())
+      dispatch(getQuestionList())
+      dispatch(getInformationList())
     },
   }
 }

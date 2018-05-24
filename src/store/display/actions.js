@@ -1,5 +1,14 @@
 export const UPDATE_SIGN_IN_MODAL = 'UPDATE_SIGN_IN_MODAL'
 export const UPDATE_SIGN_UP_MODAL = 'UPDATE_SIGN_UP_MODAL'
+export const UPDATE_MODAL = 'UPDATE_MODAL'
+
+export const updateModal = (modalState, content) => {
+  return {
+    type: UPDATE_MODAL,
+    modalState,
+    content,
+  }
+}
 
 export const updateSignInModal = (modalState, content) => {
   return {
