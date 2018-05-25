@@ -73,6 +73,7 @@ class SearchBox extends React.Component {
       <div>
         <div style={styles.input}>
           <SearchInput
+            className={'search-input'}
             titleSearch={this.props.titleSearch}
             tagSearch={this.props.tagSearch}
             tagList={this.props.tagList.map((tag) => (`#${tag}`))}
@@ -95,6 +96,7 @@ class SearchBox extends React.Component {
                   changeRoute={this.props.changeRoute}
                 />
                 <Pagination
+                  className={'question-list-pagination'}
                   styleRoot={{
                     textAlign: 'center',
                   }}
@@ -116,6 +118,7 @@ class SearchBox extends React.Component {
                   changeRoute={this.props.changeRoute}
                 />
                 <Pagination
+                  className={'information-list-pagination'}
                   styleRoot={{
                     textAlign: 'center',
                   }}

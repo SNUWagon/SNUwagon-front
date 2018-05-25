@@ -16,7 +16,7 @@ describe('SearchBox', () => {
 
     const props = {
       store,
-      tagList: [],
+      tagList: ['tag'],
       questionList: [],
       informationList: [],
       titleSearch: jest.fn(),
@@ -24,7 +24,10 @@ describe('SearchBox', () => {
       changeRoute: jest.fn(),
     }
 
-    wrap(props)
+    const wrapper = wrap(props)
+    wrapper.find('.search-input').props().searched()
+    wrapper.find('.question-list-pagination').props().onChange()
+    wrapper.find('.information-list-pagination').props().onChange()
   })
 
   it('proper dispatch is set', () => {

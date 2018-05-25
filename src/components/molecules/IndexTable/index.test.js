@@ -81,14 +81,14 @@ describe('Index Buttons', () => {
           id: 1,
           bounty: 1,
           title: 'title',
-          tags: [],
+          tags: ['tag'],
         },
       ],
       informationList: [
         {
           id: 1,
           title: 'title',
-          tags: [],
+          tags: ['tag'],
         },
       ],
       onNotLoggedIn: jest.fn(),
