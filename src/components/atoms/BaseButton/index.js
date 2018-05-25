@@ -10,7 +10,7 @@ const Button = (props) => {
         color: '#FFFFFF',
       }}
       // label={props.children}
-      backgroundColor={colors.indigo200}
+      backgroundColor={colors.indigo300}
       {...props}
     />
   )

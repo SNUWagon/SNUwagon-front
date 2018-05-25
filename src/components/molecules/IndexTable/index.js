@@ -11,7 +11,7 @@ const styles = {
     margin: 20,
   },
   tag: {
-    color: colors.blueGrey400,
+    color: colors.indigoA200,
   },
   wrapper: {
     margin: '30px 0',
