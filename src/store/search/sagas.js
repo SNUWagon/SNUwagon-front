@@ -53,7 +53,7 @@ export function* handleSearch(postType, searchType, query) {
 export function* handleGetTagList() {
   const response = yield call(api.get, `${listUrl}/tags`)
   if (response.success === true) {
-    yield put(actions.updateTagList(response.data))
+    yield put(actions.updateTagList(response.data.tags))
   }
 }
 
