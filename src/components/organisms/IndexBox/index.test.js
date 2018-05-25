@@ -5,6 +5,7 @@ import IndexBox, { mapDispatchToProps, mapStateToProps } from '.'
 import * as userActions from '../../../store/user/actions'
 import * as displayActions from '../../../store/display/actions'
 import * as listActions from '../../../store/list/actions'
+import * as searchActions from '../../../store/search/actions'
 
 const wrap = (props = {}) => shallow(<IndexBox {...props} />)
 
@@ -50,6 +51,9 @@ describe('IndexBox', () => {
     expect(dispatch.mock.calls[1][0]).toEqual(expect.objectContaining({ type: displayActions.UPDATE_MODAL }))
     mapDispatchToProps(dispatch).loadPostList()
     expect(dispatch.mock.calls[2][0]).toEqual(expect.objectContaining({ type: listActions.GET_QUESTION_LIST }))
+    expect(dispatch.mock.calls[3][0]).toEqual(expect.objectContaining({ type: listActions.GET_INFORMATION_LIST }))
+    mapDispatchToProps(dispatch).loadTagList()
+    expect(dispatch.mock.calls[4][0]).toEqual(expect.objectContaining({ type: searchActions.GET_TAG_LIST }))
   })
 })
 
