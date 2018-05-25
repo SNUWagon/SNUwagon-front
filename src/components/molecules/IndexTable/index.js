@@ -4,11 +4,16 @@ import Chip from 'material-ui/Chip'
 import Divider from 'material-ui/Divider'
 import Subheader from 'material-ui/Subheader'
 import * as colors from 'material-ui/styles/colors'
+import ActionInfo from 'material-ui/svg-icons/action/info'
+import ActionHelp from 'material-ui/svg-icons/action/help'
 import _ from 'lodash'
 
 const styles = {
   chip: {
     margin: 20,
+  },
+  label: {
+    fontSize: 18,
   },
   tag: {
     color: colors.indigoA200,
@@ -53,14 +58,8 @@ const IndexTable = ({ logged, questionList, informationList, onNotLoggedIn, chan
           key={question.id}
           onClick={() => onClickQuestionChip(question.id)}
           style={styles.chip}
+          labelStyle={styles.label}
         >
-          <Avatar
-            size={32}
-            color={colors.darkWhite}
-            backgroundColor={colors.indigo200}
-          >
-            {question.bounty}
-          </Avatar>
           {question.title}
           <span style={styles.tag}>{displayTags(question.tags)}</span>
         </Chip>
