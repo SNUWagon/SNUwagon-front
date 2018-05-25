@@ -1,25 +1,40 @@
 import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
 import Paper from 'material-ui/Paper'
+import Divider from 'material-ui/Divider'
 import { Tabs, Tab } from 'material-ui/Tabs'
 import * as colors from 'material-ui/styles/colors'
 import Pagination from 'material-ui-pagination'
 import SearchInput from '../../../components/molecules/SearchInput'
 import SearchTable from '../../../components/molecules/SearchTable'
+import PostList from '../../../components/molecules/PostList'
 import { searchQuestionWithTitle, searchQuestionWithTag,
          searchInformationWithTitle, searchInformationWithTag,
          updateQuestionSearchResult, updateInformationSearchResult } from '../../../store/search/actions'
 import { changeRoute } from '../../../store/user/actions'
 
-
-const style = {
-  width: 800,
-  margin: 'auto',
-  textAlign: 'center',
-  display: 'inline-block',
-  padding: '20px 20px 20px 20px',
+const styles = {
+  grid: {
+    margin: '40px 300px',
+    display: 'grid',
+    gridTemplateColumns: '1fr 1fr',
+    gridColumnGap: '30',
+  },
+  paper: {
+    width: 500,
+    margin: 'auto',
+    textAlign: 'center',
+    display: 'inline-block',
+    padding: '20px 20px 20px 20px',
+  },
+  input: {
+    textAlign: 'center',
+    margin: '40px 300px',
+  },
+  header: {
+    textAlign: 'center',
+  },
 }
-
 
 class SearchBox extends React.Component {
 
@@ -27,8 +42,6 @@ class SearchBox extends React.Component {
     super(props)
 
     this.postPerPage = 5
-    this.questionColumns = ['id', 'title', 'author', 'bounty', 'due']
-    this.informationColumns = ['id', 'title', 'author', 'due']
 
     this.state = {
       showSearchResult: false,
@@ -57,63 +70,67 @@ class SearchBox extends React.Component {
 
   render() {
     return (
-      <div style={{ textAlign: 'center', margin: '40px 300px' }}>
-        <Paper style={{ style }}>
+      <div>
+        <div style={styles.input}>
           <SearchInput
             titleSearch={this.props.titleSearch}
             tagSearch={this.props.tagSearch}
-            tagList={this.props.tagList}
+            tagList={this.props.tagList.map((tag) => (`#${tag}`))}
             searched={() => this.setState({ showSearchResult: true })}
           />
-          {
-            this.state.showSearchResult ?
-              <Tabs
-                tabItemContainerStyle={{
-                  backgroundColor: colors.indigo500,
-                }}
-              >
-                <Tab label={'Question'}>
-                  <SearchTable
-                    postList={this.props.questionList.slice(
-                      ((this.state.questionCurrentPage - 1) * this.postPerPage),
-                      (this.state.questionCurrentPage * this.postPerPage),
-                    )}
-                    type={'question'}
-                    columns={this.questionColumns.slice(1)}
-                    changeRoute={this.props.changeRoute}
-                  />
-                  <Pagination
-                    styleRoot={{
-                      textAlign: 'center',
-                    }}
-                    total={this.state.questionTotalPage}
-                    current={this.state.questionCurrentPage}
-                    display={10}
-                    onChange={questionCurrentPage => this.setState({ questionCurrentPage })}
-                  />
-                </Tab>
-                <Tab label={'Information'}>
-                  <SearchTable
-                    postList={this.props.informationList}
-                    type={'information'}
-                    columns={this.informationColumns.slice(1)}
-                    changeRoute={this.props.changeRoute}
-                  />
-                  <Pagination
-                    styleRoot={{
-                      textAlign: 'center',
-                    }}
-                    total={this.state.informationTotalPage}
-                    current={this.state.informationCurrentPage}
-                    display={10}
-                    onChange={informationCurrentPage => this.setState({ informationCurrentPage })}
-                  />
-                </Tab>
-              </Tabs>
-              :
+        </div>
+        {
+          this.state.showSearchResult ?
+            <div style={styles.grid}>
+              <Paper style={styles.paper} zDepth={2}>
+                <h3 style={styles.header}>Questions</h3>
+                <Divider />
+                <PostList
+                  className={'question-list'}
+                  postList={this.props.questionList.slice(
+                    ((this.state.questionCurrentPage - 1) * this.postPerPage),
+                    (this.state.questionCurrentPage * this.postPerPage),
+                  )}
+                  type={'question'}
+                  changeRoute={this.props.changeRoute}
+                />
+                <Pagination
+                  styleRoot={{
+                    textAlign: 'center',
+                  }}
+                  total={this.state.questionTotalPage}
+                  current={this.state.questionCurrentPage}
+                  display={10}
+                  onChange={questionCurrentPage => this.setState({ questionCurrentPage })}
+                />
+              </Paper>
+              <Paper style={styles.paper} zDepth={2}>
+                <h3 style={styles.header}>Information</h3>
+                <Divider />
+                <PostList
+                  postList={this.props.informationList.slice(
+                    ((this.state.informationCurrentPage - 1) * this.postPerPage),
+                    (this.state.informationCurrentPage * this.postPerPage),
+                  )}
+                  type={'information'}
+                  changeRoute={this.props.changeRoute}
+                />
+                <Pagination
+                  styleRoot={{
+                    textAlign: 'center',
+                  }}
+                  total={this.state.informationTotalPage}
+                  current={this.state.informationCurrentPage}
+                  display={10}
+                  onChange={informationCurrentPage => this.setState({ informationCurrentPage })}
+                />
+              </Paper>
+            </div>
+            :
+            <div style={styles.input}>
               <p>Search Something!</p>
-          }
-        </Paper>
+            </div>
+        }
       </div>
     )
   }
@@ -159,4 +176,5 @@ export const mapDispatchToProps = (dispatch) => {
   }
 }
 
+export const SearchBoxShallow = SearchBox
 export default connect(mapStateToProps, mapDispatchToProps)(SearchBox)

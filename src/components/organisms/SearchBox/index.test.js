@@ -1,10 +1,10 @@
 import React, { PropTypes } from 'react'
 import { shallow } from 'enzyme'
 import configureStore from 'redux-mock-store'
-import SearchBox, { mapStateToProps, mapDispatchToProps } from '.'
+import { SearchBoxShallow, mapStateToProps, mapDispatchToProps } from '.'
 import * as actions from '../../../store/search/actions'
 
-const wrap = (props = {}) => shallow(<SearchBox {...props} />)
+const wrap = (props = {}) => shallow(<SearchBoxShallow {...props} />)
 const mockStore = configureStore([])
 
 describe('SearchBox', () => {
