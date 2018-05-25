@@ -6,6 +6,7 @@ import IndexTable from '../../../components/molecules/IndexTable'
 import { changeRoute } from '../../../store/user/actions'
 import { updateModal } from '../../../store/display/actions'
 import { getInformationList, getQuestionList } from '../../../store/list/actions'
+import { getTagList } from '../../../store/search/actions'
 
 const style = {
   width: 800,
@@ -19,6 +20,7 @@ class IndexBox extends React.Component {
 
   componentDidMount() {
     this.props.loadPostList()
+    this.props.loadTagList()
   }
 
   render() {
@@ -50,6 +52,7 @@ IndexBox.propTypes = {
   changeRoute: PropTypes.func,
   openModal: PropTypes.func,
   loadPostList: PropTypes.func,
+  loadTagList: PropTypes.func,
 }
 
 export const mapStateToProps = (state) => {
@@ -73,6 +76,9 @@ export const mapDispatchToProps = (dispatch) => {
       dispatch(getQuestionList())
       dispatch(getInformationList())
     },
+    loadTagList: () => {
+      dispatch(getTagList())
+    }
   }
 }
 

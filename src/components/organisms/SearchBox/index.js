@@ -62,7 +62,7 @@ class SearchBox extends React.Component {
           <SearchInput
             titleSearch={this.props.titleSearch}
             tagSearch={this.props.tagSearch}
-            tagList={this.props.tagList}
+            tagList={this.props.tagList.map(tag => (`#${tag}`))}
             searched={() => this.setState({ showSearchResult: true })}
           />
           {
