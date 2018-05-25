@@ -43,9 +43,6 @@ const IndexTable = ({ logged, questionList, informationList, onNotLoggedIn, chan
     }, '')
   }
 
-  // TODO: This is for test, after tag API is implemented, must be removed
-  const tags = ['testtag1', 'testtag2']
-
   return (
     <div style={styles.wrapper}>
       <Divider />
@@ -65,8 +62,7 @@ const IndexTable = ({ logged, questionList, informationList, onNotLoggedIn, chan
             {question.bounty}
           </Avatar>
           {question.title}
-          {/* <span style={styles.tag}>{displayTags(question.tags)}</span> */}
-          <span style={styles.tag}>{displayTags(tags)}</span>
+          <span style={styles.tag}>{displayTags(question.tags)}</span>
         </Chip>
       ))}
       <Divider />
@@ -80,8 +76,7 @@ const IndexTable = ({ logged, questionList, informationList, onNotLoggedIn, chan
           style={styles.chip}
         >
           {information.title}
-          {/* <span style={styles.tag}>{displayTags(information.tags)}</span> */}
-          <span style={styles.tag}>{displayTags(tags)}</span>
+          <span style={styles.tag}>{displayTags(information.tags)}</span>
         </Chip>
       ))}
     </div>

@@ -25,12 +25,14 @@ describe('Index Buttons', () => {
           id: 1,
           bounty: 1,
           title: 'title',
+          tags: [],
         },
       ],
       informationList: [
         {
           id: 1,
           title: 'title',
+          tags: [],
         },
       ],
       onNotLoggedIn: jest.fn(),
@@ -50,12 +52,14 @@ describe('Index Buttons', () => {
           id: 1,
           bounty: 1,
           title: 'title',
+          tags: [],
         },
       ],
       informationList: [
         {
           id: 1,
           title: 'title',
+          tags: [],
         },
       ],
       onNotLoggedIn: jest.fn(),
@@ -77,12 +81,14 @@ describe('Index Buttons', () => {
           id: 1,
           bounty: 1,
           title: 'title',
+          tags: [],
         },
       ],
       informationList: [
         {
           id: 1,
           title: 'title',
+          tags: [],
         },
       ],
       onNotLoggedIn: jest.fn(),
