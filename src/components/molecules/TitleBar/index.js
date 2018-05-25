@@ -100,4 +100,5 @@ export const mapDispatchToProps = (dispatch) => {
   }
 }
 
+export const TitleBarShallow = TitleBar
 export default connect(mapStateToProps, mapDispatchToProps)(TitleBar)

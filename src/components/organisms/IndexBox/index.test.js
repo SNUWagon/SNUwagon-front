@@ -35,6 +35,7 @@ describe('IndexBox', () => {
       changeRoute: jest.fn(),
       openModal: jest.fn(),
     }
+
     wrap(props)
   })
 
