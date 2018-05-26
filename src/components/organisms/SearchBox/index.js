@@ -12,6 +12,7 @@ import { searchQuestionWithTitle, searchQuestionWithTag,
          searchInformationWithTitle, searchInformationWithTag,
          updateQuestionSearchResult, updateInformationSearchResult } from '../../../store/search/actions'
 import { changeRoute } from '../../../store/user/actions'
+import { updateModal } from '../../../store/display/actions'
 
 const styles = {
   grid: {
@@ -88,12 +89,14 @@ class SearchBox extends React.Component {
                 <Divider />
                 <PostList
                   className={'question-list'}
+                  login={this.props.login}
                   postList={this.props.questionList.slice(
                     ((this.state.questionCurrentPage - 1) * this.postPerPage),
                     (this.state.questionCurrentPage * this.postPerPage),
                   )}
                   type={'question'}
                   changeRoute={this.props.changeRoute}
+                  showFailModal={this.props.showFailModal}
                 />
                 <Pagination
                   className={'question-list-pagination'}
@@ -110,12 +113,15 @@ class SearchBox extends React.Component {
                 <h3 style={styles.header}>Information</h3>
                 <Divider />
                 <PostList
+                  className={'information-list'}
+                  login={this.props.login}
                   postList={this.props.informationList.slice(
                     ((this.state.informationCurrentPage - 1) * this.postPerPage),
                     (this.state.informationCurrentPage * this.postPerPage),
                   )}
                   type={'information'}
                   changeRoute={this.props.changeRoute}
+                  showFailModal={this.props.showFailModal}
                 />
                 <Pagination
                   className={'information-list-pagination'}
@@ -140,6 +146,7 @@ class SearchBox extends React.Component {
 }
 
 SearchBox.propTypes = {
+  login: PropTypes.bool,
   tagList: PropTypes.array,
   questionList: PropTypes.array,
   informationList: PropTypes.array,
@@ -147,11 +154,13 @@ SearchBox.propTypes = {
   tagSearch: PropTypes.func,
   changeRoute: PropTypes.func,
   resetSearchResult: PropTypes.func,
+  showFailModal: PropTypes.func,
 }
 
 
 export const mapStateToProps = (state) => {
   return {
+    login: state.user.login,
     tagList: state.search.tagList,
     questionList: state.search.questionSearchResult,
     informationList: state.search.informationSearchResult,
@@ -175,6 +184,9 @@ export const mapDispatchToProps = (dispatch) => {
     resetSearchResult: () => {
       dispatch(updateQuestionSearchResult([]))
       dispatch(updateInformationSearchResult([]))
+    },
+    showFailModal: () => {
+      dispatch(updateModal(true, 'Sign in first'))
     },
   }
 }

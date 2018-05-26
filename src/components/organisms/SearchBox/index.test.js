@@ -10,6 +10,7 @@ const mockStore = configureStore([])
 describe('SearchBox', () => {
   it('renders', () => {
     const initialState = {
+      user: {},
       search: {},
     }
     const store = mockStore(initialState)
@@ -38,5 +39,6 @@ describe('SearchBox', () => {
     // expect(dispatch.mock.calls[1][0]).toEqual(expect.objectContaining({ type: actions.CHANGE_ROUTE }))
     mapDispatchToProps(dispatch).changeRoute()
     mapDispatchToProps(dispatch).resetSearchResult()
+    mapDispatchToProps(dispatch).showFailModal()
   })
 })

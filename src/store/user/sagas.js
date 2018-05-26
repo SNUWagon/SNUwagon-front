@@ -29,6 +29,7 @@ export function* handleSignUp(email, username, password) {
   const response = yield call(api.post, `${authUrl}/signup`, data)
   if (response.success === true) {
     yield put(actions.changeRoute('/signin'))
+    yield put(displayActions.updateSnackbar(true, 'Sign up successful, Now you can sign in!'))
   } else {
     yield put(displayActions.updateSignUpModal(true, 'Duplicate Email or Username exists'))
   }

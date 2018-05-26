@@ -5,6 +5,7 @@ import configureStore from 'redux-mock-store'
 import { PostListBoxShallow, mapStateToProps, mapDispatchToProps } from '.'
 import * as listActions from '../../../store/list/actions'
 import * as userActions from '../../../store/user/actions'
+import * as displayActions from '../../../store/display/actions'
 
 const wrap = (props = {}) => shallow(<PostListBoxShallow {...props} />)
 
@@ -13,6 +14,7 @@ const mockStore = configureStore([])
 describe('PostListBox', () => {
   it('renders', () => {
     const initialState = {
+      user: {},
       list: {
         questionList: [],
         informationList: [],
@@ -33,7 +35,7 @@ describe('PostListBox', () => {
   })
 
   it('proper state is set', () => {
-    expect(Object.keys(mapStateToProps({ list: { questionList: [], informationList: [] } })))
+    expect(Object.keys(mapStateToProps({ user: {}, list: { questionList: [], informationList: [] } })))
       .toEqual(expect.arrayContaining(['questionList', 'informationList']))
   })
 
@@ -43,5 +45,8 @@ describe('PostListBox', () => {
     expect(dispatch.mock.calls[0][0]).toEqual(expect.objectContaining({ type: userActions.CHANGE_ROUTE }))
     mapDispatchToProps(dispatch).loadPostList()
     expect(dispatch.mock.calls[1][0]).toEqual(expect.objectContaining({ type: listActions.GET_QUESTION_LIST }))
+    expect(dispatch.mock.calls[2][0]).toEqual(expect.objectContaining({ type: listActions.GET_INFORMATION_LIST }))
+    mapDispatchToProps(dispatch).showFailModal()
+    expect(dispatch.mock.calls[3][0]).toEqual(expect.objectContaining({ type: displayActions.UPDATE_MODAL }))
   })
 })

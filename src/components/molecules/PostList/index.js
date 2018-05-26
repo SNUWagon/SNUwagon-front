@@ -16,6 +16,10 @@ class PostList extends React.Component {
   }
 
   onCellClick(id) {
+    if (this.props.login === false) {
+      this.props.showFailModal(true, 'Sign in first')
+      return
+    }
     if (this.props.type === 'question') {
       this.props.changeRoute(`/question/${id}`)
     } else if (this.props.type === 'information') {
@@ -73,9 +77,11 @@ class PostList extends React.Component {
 }
 
 PostList.propTypes = {
+  login: PropTypes.bool,
   postList: PropTypes.array,
   type: PropTypes.string,
   changeRoute: PropTypes.func,
+  showFailModal: PropTypes.func,
 }
 
 export default PostList
