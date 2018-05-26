@@ -1,6 +1,18 @@
 import * as actions from './actions'
 
 describe('display actions', () => {
+  it('shold create action to update snackbar', () => {
+    const snackbarState = true
+    const content = 'content'
+    const expectedAction = {
+      type: actions.UPDATE_SNACKBAR,
+      snackbarState,
+      content,
+    }
+
+    expect(actions.updateSnackbar(snackbarState, content)).toEqual(expectedAction)
+  })
+
   it('should create action to update sign in modal', () => {
     const modalState = true
     const content = 'content'
