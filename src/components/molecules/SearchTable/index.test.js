@@ -29,4 +29,19 @@ describe('SearchTable', () => {
     wrapper.find('.search-cell').simulate('click')
     expect(props.changeRoute).toHaveBeenCalled()
   })
+
+  it('handle cell click2', () => {
+    const props = {
+      postList: [{
+        id: 1,
+      }],
+      type: 'information',
+      columns: ['test', 'test2'],
+      changeRoute: jest.fn(),
+    }
+
+    const wrapper = wrap(props)
+    wrapper.find('.search-cell').simulate('click')
+    expect(props.changeRoute).toHaveBeenCalled()
+  })
 })

@@ -1,6 +1,5 @@
 import React from 'react'
-import { SignInBox } from 'containers'
-import { mapStateToProps, mapDispatchToProps } from 'containers/SignInBox'
+import { mapStateToProps, mapDispatchToProps } from './SignInBox'
 
 describe('SignInBoxContainer', () => {
   it('mapStateToProps', () => {
