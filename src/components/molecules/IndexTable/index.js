@@ -4,14 +4,19 @@ import Chip from 'material-ui/Chip'
 import Divider from 'material-ui/Divider'
 import Subheader from 'material-ui/Subheader'
 import * as colors from 'material-ui/styles/colors'
+import ActionInfo from 'material-ui/svg-icons/action/info'
+import ActionHelp from 'material-ui/svg-icons/action/help'
 import _ from 'lodash'
 
 const styles = {
   chip: {
     margin: 20,
   },
+  label: {
+    fontSize: 18,
+  },
   tag: {
-    color: colors.blueGrey400,
+    color: colors.indigoA200,
   },
   wrapper: {
     margin: '30px 0',
@@ -43,9 +48,6 @@ const IndexTable = ({ logged, questionList, informationList, onNotLoggedIn, chan
     }, '')
   }
 
-  // TODO: This is for test, after tag API is implemented, must be removed
-  const tags = ['testtag1', 'testtag2']
-
   return (
     <div style={styles.wrapper}>
       <Divider />
@@ -56,17 +58,10 @@ const IndexTable = ({ logged, questionList, informationList, onNotLoggedIn, chan
           key={question.id}
           onClick={() => onClickQuestionChip(question.id)}
           style={styles.chip}
+          labelStyle={styles.label}
         >
-          <Avatar
-            size={32}
-            color={colors.darkWhite}
-            backgroundColor={colors.indigo200}
-          >
-            {question.bounty}
-          </Avatar>
           {question.title}
-          {/* <span style={styles.tag}>{displayTags(question.tags)}</span> */}
-          <span style={styles.tag}>{displayTags(tags)}</span>
+          <span style={styles.tag}>{displayTags(question.tags)}</span>
         </Chip>
       ))}
       <Divider />
@@ -80,8 +75,7 @@ const IndexTable = ({ logged, questionList, informationList, onNotLoggedIn, chan
           style={styles.chip}
         >
           {information.title}
-          {/* <span style={styles.tag}>{displayTags(information.tags)}</span> */}
-          <span style={styles.tag}>{displayTags(tags)}</span>
+          <span style={styles.tag}>{displayTags(information.tags)}</span>
         </Chip>
       ))}
     </div>

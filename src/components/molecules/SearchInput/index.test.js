@@ -14,10 +14,17 @@ describe('SearchInput', () => {
       titleSearch: jest.fn(),
       tagSearch: jest.fn(),
       tagList: [],
+      searched: jest.fn(),
     }
     const wrapper = wrap(props)
-    wrapper.find('.search-input').simulate('change', { searchText: 'test' })
+    wrapper.find('.search-input').props().onUpdateInput('asdf')
     wrapper.find('.search-button').simulate('click')
-    // expect(props.titleSearch).toHaveBeenCalled()
+    expect(props.titleSearch).toHaveBeenCalled()
+    expect(wrapper.find('.search-input').props().filter('asdf', 'asdf')).toBe(false)
+
+    wrapper.find('.search-input').props().onUpdateInput('#asdf')
+    wrapper.find('.search-button').simulate('click')
+    expect(props.tagSearch).toHaveBeenCalled()
+    expect(wrapper.find('.search-input').props().filter('asdf', 'asdf')).toBe(true)
   })
 })

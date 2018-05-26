@@ -1,10 +1,10 @@
 import React, { PropTypes } from 'react'
 import { shallow } from 'enzyme'
 import configureStore from 'redux-mock-store'
-import TitleBar, { mapStateToProps, mapDispatchToProps } from '.'
+import { TitleBarShallow, mapStateToProps, mapDispatchToProps } from '.'
 import * as actions from '../../../store/user/actions'
 
-const wrap = (props = {}) => shallow(<TitleBar {...props} />)
+const wrap = (props = {}) => shallow(<TitleBarShallow {...props} />)
 const mockStore = configureStore([])
 
 describe('TitleBar', () => {
