@@ -54,7 +54,9 @@ class PostList extends React.Component {
     return (
       <List>
         { this.props.postList.map((post) => (
-          <div>
+          <div
+            key={post.id + post.title}
+          >
             <PostListElement
               key={post.id}
               className={'post-list-element'}
