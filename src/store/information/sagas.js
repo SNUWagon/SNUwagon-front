@@ -38,10 +38,9 @@ export function* handleGetInformationPost(postId) {
 
 export function* handlePurchaseInformationPost(postId) {
   const data = {}
-  const response = yield call(api.patch, `${informationUrl}/${postId}`, data)
-  console.log(response)
+  const response = yield call(api.put, `${informationUrl}/${postId}`, data)
   if (response.success === true) {
-    // console.log(response)
+    yield put(actions.getInformationPost(postId))
   }
 }
 
