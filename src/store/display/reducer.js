@@ -3,6 +3,11 @@ import * as actions from './actions'
 
 const displayReducer = (state = initialState, action) => {
   switch (action.type) {
+    case actions.UPDATE_MODAL:
+      return Object.assign({}, state, {
+        isModalOpened: action.modalState,
+        modalContent: action.content,
+      })
     case actions.UPDATE_SIGN_IN_MODAL:
       return Object.assign({}, state, {
         isSignInModalOpened: action.modalState,

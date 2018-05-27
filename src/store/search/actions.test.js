@@ -68,6 +68,6 @@ describe('search actions', () => {
       type: actions.UPDATE_TAG_LIST,
       tagList,
     }
-    expect(actions.updateTagList()).toEqual(expectedAction)
+    expect(actions.updateTagList(tagList)).toEqual(expectedAction)
   })
 })

@@ -17,7 +17,9 @@ const searchReducer = (state = initialState, action) => {
       })
     case actions.UPDATE_TAG_LIST:
       return Object.assign({}, state, {
-        tagList: action.tagList,
+        tagList: [
+          ...action.tagList,
+        ],
       })
     default:
       return state

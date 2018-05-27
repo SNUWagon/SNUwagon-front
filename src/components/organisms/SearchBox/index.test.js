@@ -1,10 +1,10 @@
 import React, { PropTypes } from 'react'
 import { shallow } from 'enzyme'
 import configureStore from 'redux-mock-store'
-import SearchBox, { mapStateToProps, mapDispatchToProps } from '.'
+import { SearchBoxShallow, mapStateToProps, mapDispatchToProps } from '.'
 import * as actions from '../../../store/search/actions'
 
-const wrap = (props = {}) => shallow(<SearchBox {...props} />)
+const wrap = (props = {}) => shallow(<SearchBoxShallow {...props} />)
 const mockStore = configureStore([])
 
 describe('SearchBox', () => {
@@ -16,7 +16,7 @@ describe('SearchBox', () => {
 
     const props = {
       store,
-      tagList: [],
+      tagList: ['tag'],
       questionList: [],
       informationList: [],
       titleSearch: jest.fn(),
@@ -24,7 +24,10 @@ describe('SearchBox', () => {
       changeRoute: jest.fn(),
     }
 
-    wrap(props)
+    const wrapper = wrap(props)
+    wrapper.find('.search-input').props().searched()
+    wrapper.find('.question-list-pagination').props().onChange()
+    wrapper.find('.information-list-pagination').props().onChange()
   })
 
   it('proper dispatch is set', () => {

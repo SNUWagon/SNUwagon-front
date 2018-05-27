@@ -14,7 +14,7 @@ const SearchInput = ({ titleSearch, tagSearch, tagList, searched }) => {
       searched()
 
       if (searchQuery.startsWith('#')) {
-        tagSearch(searchQuery)
+        tagSearch(searchQuery.slice(1, searchQuery.length))
       } else {
         titleSearch(searchQuery)
       }
