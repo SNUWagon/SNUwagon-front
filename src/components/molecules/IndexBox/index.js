@@ -11,6 +11,7 @@ class IndexBox extends React.Component {
     super(props)
 
     this.handleClickWriteQuestion = this.handleClickWriteQuestion.bind(this)
+    this.handleClickWriteInformation = this.handleClickWriteInformation.bind(this)
     this.handleClickPostList = this.handleClickPostList.bind(this)
     this.handleClickSearch = this.handleClickSearch.bind(this)
   }
@@ -18,6 +19,14 @@ class IndexBox extends React.Component {
   handleClickWriteQuestion() {
     if (this.props.logged === true) {
       this.props.changeRoute('/question')
+    } else {
+      // show modal
+    }
+  }
+
+  handleClickWriteInformation() {
+    if (this.props.logged === true) {
+      this.props.changeRoute('/information')
     } else {
       // show modal
     }
@@ -36,7 +45,7 @@ class IndexBox extends React.Component {
       <div>
         <RaisedButton className={'question-write-button'} onClick={this.handleClickWriteQuestion}>Write Question</RaisedButton>
         {' '}
-        <RaisedButton className={'information-write-button'} disabled>Write Information</RaisedButton>
+        <RaisedButton className={'information-write-button'} onClick={this.handleClickWriteInformation}>Write Information</RaisedButton>
         {' '}
         <RaisedButton className={'post-list-button'} onClick={this.handleClickPostList}>Post List</RaisedButton>
         {' '}
