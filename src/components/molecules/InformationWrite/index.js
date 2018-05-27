@@ -31,7 +31,7 @@ const InformationWrite = ({ onClickBack, onClickWriteInformation, state }) => {
 
   const onClickWriteInformationButton = () => {
     if (title && content && due && sponsorCredit) {
-      if (hiddenExist) {
+      if (hiddenExist && hiddenContent !== undefined && hiddenContentCost !== undefined) {
         hiddenContent = hiddenContent.value
         hiddenContentCost = hiddenContentCost.value
         hiddenBought = true
@@ -77,7 +77,7 @@ const InformationWrite = ({ onClickBack, onClickWriteInformation, state }) => {
         <CardText expandable>
           <Input
             style={{ textAlign: 'left', width: 500 }}
-            className={'hidden-content'} floatingLabelText="Hidden Contents"
+            className={'hidden-content-input'} floatingLabelText="Hidden Contents"
             multiLine rows={2}
             floatingLabelFixed
             onChange={node => { hiddenContent = node.target }}
