@@ -3,11 +3,13 @@ import { connect } from 'react-redux'
 import TitleBar from '../../../components/molecules/TitleBar'
 import Question from '../../../containers/Question'
 import { getQuestionPost } from '../../../store/question/actions'
+import { getQuestionAnswer } from '../../../store/answer/actions'
 
 class QuestionPage extends React.Component {
 
   componentDidMount() {
     this.props.loadQuestion(this.props.params.id)
+    this.props.loadAnswer(this.props.params.id)
   }
 
   render() {
@@ -25,6 +27,7 @@ class QuestionPage extends React.Component {
 QuestionPage.propTypes = {
   params: PropTypes.object,
   loadQuestion: PropTypes.func,
+  loadAnswer: PropTypes.func,
 }
 
 const mapStateToProps = (state) => {
@@ -39,6 +42,9 @@ const mapDispatchToProps = (dispatch) => {
   return {
     loadQuestion: (postId) => {
       dispatch(getQuestionPost(postId))
+    },
+    loadAnswer: (postId) => {
+      dispatch(getQuestionAnswer(postId))
     },
   }
 }

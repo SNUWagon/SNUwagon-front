@@ -69,4 +69,17 @@ describe('question actions', () => {
     }
     expect(actions.updateQuestionPost(postId, title, content, due, bounty, author, resolved, selected, tags)).toEqual(expectedAction)
   })
+
+  it('should create an action to answer a question', () => {
+    const answer = 'answer'
+    const author = 1
+    const qid = 2
+    const expectedAction = {
+      type: actions.ANSWER_QUESTION_POST,
+      answer,
+      author,
+      qid,
+    }
+    expect(actions.answerQuestionPost(answer, author, qid)).toEqual(expectedAction)
+  })
 })
