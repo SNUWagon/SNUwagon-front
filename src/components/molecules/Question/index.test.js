@@ -28,6 +28,11 @@ it('renders', () => {
       selected: undefined,
       tags: undefined,
     },
+    answer: {
+      id: undefined,
+      content: undefined,
+      author: undefined,
+    },
   }
   const store = mockStore(initialState)
 
@@ -52,6 +57,11 @@ it('renders', () => {
       selected: 2,
       tags: 'tags',
     },
+    answer: [{
+      id: 1,
+      content: 'answer',
+      author: 'aaa',
+    }],
     onClickDelete: jest.fn(),
     onClickAnswer: jest.fn(),
   }
@@ -102,6 +112,18 @@ it('handles click delete button for author\'s question', () => {
       selected: 2,
       tags: 'tags',
     },
+    answer: [
+      {
+        id: 1,
+        content: 'answer',
+        author: 'author',
+      },
+      {
+        id: 2,
+        content: 'answer2',
+        author: 'author2',
+      },
+    ],
     onClickDelete: jest.fn(),
   }
   const wrapper = wrap(props)
@@ -153,6 +175,18 @@ it('handles click answer button for other person\'s question', () => {
       selected: 2,
       tags: 'tags',
     },
+    answer: [
+      {
+        id: 1,
+        content: 'answer',
+        author: 'author',
+      },
+      {
+        id: 2,
+        content: 'answer2',
+        author: 'author2',
+      },
+    ],
     onClickAnswer: jest.fn(),
   }
   const wrapper = wrap(props)
@@ -160,4 +194,3 @@ it('handles click answer button for other person\'s question', () => {
   wrapper.find('.answer-button').simulate('click')
   expect(props.onClickAnswer).toHaveBeenCalled()
 })
-

@@ -20,7 +20,7 @@ describe('QuestionContainer', () => {
   it('mapDispatchToProps', () => {
     const dispatch = jest.fn()
     mapDispatchToProps(dispatch).onClickAnswer()
-    expect(dispatch.mock.calls[0][0]).toEqual({ type: 'CHANGE_ROUTE' })
+    expect(dispatch.mock.calls[0][0]).toEqual({ type: 'ANSWER_QUESTION_POST' })
     mapDispatchToProps(dispatch).onClickDelete()
     expect(dispatch.mock.calls[1][0]).toEqual({ type: 'DELETE_QUESTION_POST' })
   })
