@@ -8,6 +8,24 @@ describe('display reducer', () => {
       .toEqual(initialState)
   })
 
+  it('should handle update base modal', () => {
+    const modalState = true
+    const content = 'content'
+    expect(displayReducer({}, actions.updateModal(modalState, content)).isModalOpened)
+      .toBe(modalState)
+    expect(displayReducer({}, actions.updateModal(modalState, content)).modalContent)
+      .toBe(content)
+  })
+
+  it('should handle update snackbar', () => {
+    const snackbarState = true
+    const content = 'content'
+    expect(displayReducer({}, actions.updateSnackbar(snackbarState, content)).snackbarState)
+      .toBe(snackbarState)
+    expect(displayReducer({}, actions.updateSnackbar(snackbarState, content)).snackbarContent)
+      .toBe(content)
+  })
+
   it('should handle update sign in modal', () => {
     const modalState = true
     const content = 'content'

@@ -42,7 +42,7 @@ export function* handleSearch(postType, searchType, query) {
         yield put(actions.updateQuestionSearchResult(response.data))
         break
       case 'information':
-        yield put(actions.updateQuestionSearchResult(response.data))
+        yield put(actions.updateInformationSearchResult(response.data))
         break
       default:
         break
