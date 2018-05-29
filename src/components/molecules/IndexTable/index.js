@@ -73,6 +73,7 @@ const IndexTable = ({ logged, questionList, informationList, onNotLoggedIn, chan
           key={information.id}
           onClick={() => onClickInformationChip(information.id)}
           style={styles.chip}
+          labelStyle={styles.label}
         >
           {information.title}
           <span style={styles.tag}>{displayTags(information.tags)}</span>
