@@ -1,9 +1,9 @@
 import React from 'react'
 import { shallow, render } from 'enzyme'
 import configureStore from 'redux-mock-store'
-import Answer from '.'
+import { AnswerShallow, mapStateToProps, mapDispatchToProps } from '.'
 
-const wrap = (props = {}) => shallow(<Answer {...props} />)
+const wrap = (props = {}) => shallow(<AnswerShallow {...props} />)
 const mockStore = configureStore([])
 
 const initialState = {
@@ -53,33 +53,33 @@ describe('Answer', () => {
     wrap(props)
   })
 
-  // it('handles click select button', () => {
-  //   const props = {
-  //     store,
-  //     username: 'author',
-  //     question: {
-  //       postId: 1,
-  //       title: 'title',
-  //       content: 'content',
-  //       due: '0001-01-01T01:01:00Z',
-  //       bounty: 1,
-  //       author: 'author',
-  //       resolved: false,
-  //       selected: undefined,
-  //       tags: 'tags',
-  //     },
-  //     answer: {
-  //       id: 1,
-  //       content: 'answer',
-  //       author: 'aaa',
-  //     },
-  //     onClickSelect: jest.fn(),
-  //   }
-  //   const wrapper = wrap(props)
-  //   expect(wrapper.find('select-answer-button').exists()).toEqual(true)
-  //   wrapper.find('.select-button').simulate('click')
-  //   expect(props.onClickSelect).toHaveBeenCalled()
-  // })
+  it('handles click select button', () => {
+    const props = {
+      store,
+      username: 'author',
+      question: {
+        postId: 1,
+        title: 'title',
+        content: 'content',
+        due: '0001-01-01T01:01:00Z',
+        bounty: 1,
+        author: 'author',
+        resolved: false,
+        selected: undefined,
+        tags: 'tags',
+      },
+      answer: {
+        id: 1,
+        content: 'answer',
+        author: 'aaa',
+      },
+      onClickSelect: jest.fn(),
+    }
+    const wrapper = wrap(props)
+    // expect(wrapper.find('.select-button').exists()).toEqual(true)
+    wrapper.find('.select-button').simulate('click')
+    expect(props.onClickSelect).toHaveBeenCalled()
+  })
 
   it('does not render select button if not owner', () => {
     const props = {
@@ -131,5 +131,15 @@ describe('Answer', () => {
     }
     const wrapper = wrap(props)
     expect(wrapper.find('.select-button').exists()).toEqual(false)
+  })
+
+  it('mapStateToProps', () => {
+    expect(mapStateToProps()).toEqual({})
+  })
+
+  it('mapDispatchToProps', () => {
+    const dispatch = jest.fn()
+    mapDispatchToProps(dispatch).onClickSelect()
+    expect(dispatch.mock.calls[0][0]).toEqual({ type: 'SELECT_QUESTION_ANSWER' })
   })
 })

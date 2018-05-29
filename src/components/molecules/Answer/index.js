@@ -36,7 +36,7 @@ class Answer extends React.Component {
           </CardText>
           <CardActions>
             {isOwner && !this.props.question.resolved ? (
-              <RaisedButton className={'select-answer-button'} type={'submit'} onClick={this.onClickSelectButton}>Select</RaisedButton>
+              <RaisedButton className={'select-button'} type={'submit'} onClick={this.onClickSelectButton}>Select</RaisedButton>
             ) : ('')}
           </CardActions>
         </Card>
@@ -53,10 +53,8 @@ Answer.propTypes = {
   username: PropTypes.string,
 }
 
-export const mapStateToProps = (state) => {
-  return {
-    user: state.user,
-  }
+export const mapStateToProps = () => {
+  return {}
 }
 
 export const mapDispatchToProps = (dispatch) => {
@@ -67,4 +65,5 @@ export const mapDispatchToProps = (dispatch) => {
   }
 }
 
+export const AnswerShallow = Answer
 export default connect(mapStateToProps, mapDispatchToProps)(Answer)
