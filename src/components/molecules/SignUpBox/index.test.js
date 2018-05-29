@@ -18,6 +18,7 @@ it('handle click sign up button', () => {
     onClickSignUp: jest.fn(),
   }
   const wrapper = wrap(props)
+  wrapper.find('.email-input').props().onChange({ target: undefined })
   wrapper.find('.email-input').simulate('change', { target: { value: 'email@email.com' } })
   wrapper.find('.username-input').simulate('change', { target: { value: 'user' } })
   wrapper.find('.password-input').simulate('change', { target: { value: 'pass' } })
