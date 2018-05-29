@@ -1,6 +1,5 @@
 import React from 'react'
-import { Question } from 'containers'
-import { mapStateToProps, mapDispatchToProps } from 'containers/Question'
+import { mapStateToProps, mapDispatchToProps } from './Question'
 
 const initialState = {
   user: undefined,

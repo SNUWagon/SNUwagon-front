@@ -1,6 +1,5 @@
 import React from 'react'
-import { InformationWrite } from 'containers'
-import { mapStateToProps, mapDispatchToProps } from 'containers/InformationWrite'
+import { mapStateToProps, mapDispatchToProps } from './InformationWrite'
 
 const initialState = {
   information: undefined,

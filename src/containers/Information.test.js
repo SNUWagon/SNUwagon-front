@@ -1,6 +1,5 @@
 import React from 'react'
-import { Information } from 'containers'
-import { mapStateToProps, mapDispatchToProps } from 'containers/Information'
+import { mapStateToProps, mapDispatchToProps } from './Information'
 
 const initialState = {
   user: undefined,
