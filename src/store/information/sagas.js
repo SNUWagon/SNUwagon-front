@@ -2,6 +2,7 @@ import { take, call, fork, put } from 'redux-saga/effects'
 import { push } from 'react-router-redux'
 import api from 'services/api'
 import * as actions from './actions'
+import * as userActions from '../user/actions'
 
 const baseUrl = ''
 const informationUrl = `${baseUrl}/posts/information`
@@ -41,6 +42,7 @@ export function* handlePurchaseInformationPost(postId) {
   const response = yield call(api.put, `${informationUrl}/${postId}`, data)
   if (response.success === true) {
     yield put(actions.getInformationPost(postId))
+    yield put(userActions.getUserProfile())
   }
 }
 
