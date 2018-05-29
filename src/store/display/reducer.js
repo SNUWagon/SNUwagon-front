@@ -8,6 +8,11 @@ const displayReducer = (state = initialState, action) => {
         isModalOpened: action.modalState,
         modalContent: action.content,
       })
+    case actions.UPDATE_SNACKBAR:
+      return Object.assign({}, state, {
+        snackbarState: action.snackbarState,
+        snackbarContent: action.content,
+      })
     case actions.UPDATE_SIGN_IN_MODAL:
       return Object.assign({}, state, {
         isSignInModalOpened: action.modalState,

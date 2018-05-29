@@ -18,8 +18,9 @@ export function* handleSignIn(username, password) {
   if (response.success === true) {
     yield put(actions.getUserProfile())
     yield put(actions.changeRoute('/'))
+    yield put(displayActions.updateSnackbar(true, 'Hello :)'))
   } else {
-    yield put(displayActions.updateSignInModal(true, 'Username 또는 password가 잘못되었습니다'))
+    yield put(displayActions.updateSignInModal(true, 'Please check Username/Password'))
   }
 }
 
@@ -28,8 +29,9 @@ export function* handleSignUp(email, username, password) {
   const response = yield call(api.post, `${authUrl}/signup`, data)
   if (response.success === true) {
     yield put(actions.changeRoute('/signin'))
+    yield put(displayActions.updateSnackbar(true, 'Sign up successful, Now you can sign in!'))
   } else {
-    yield put(displayActions.updateSignUpModal(true, '중복된 email 또는 username이 존재합니다.'))
+    yield put(displayActions.updateSignUpModal(true, 'Duplicate Email or Username exists'))
   }
 }
 
@@ -41,6 +43,7 @@ export function* handleSignOut() {
       undefined,
       undefined,
     ))
+    yield put(displayActions.updateSnackbar(true, 'See ya!'))
   }
 }
 

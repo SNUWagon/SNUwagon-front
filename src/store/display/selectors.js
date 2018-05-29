@@ -5,4 +5,6 @@ export const initialState = {
   signInModalContent: '',
   isSignUpModalOpened: false,
   signUpModalContent: '',
+  snackbarState: false,
+  snackbarContent: '',
 }

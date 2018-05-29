@@ -8,6 +8,7 @@ import Pagination from 'material-ui-pagination'
 import PostList from '../../../components/molecules/PostList'
 import { changeRoute } from '../../../store/user/actions'
 import { getQuestionList, getInformationList } from '../../../store/list/actions'
+import { updateModal } from '../../../store/display/actions'
 
 const styles = {
   grid: {
@@ -67,12 +68,14 @@ class PostListBox extends React.Component {
           <Divider />
           <PostList
             className={'question-list'}
+            login={this.props.login}
             postList={this.props.questionList.slice(
               ((this.state.questionCurrentPage - 1) * this.postPerPage),
               (this.state.questionCurrentPage * this.postPerPage),
             )}
             type={'question'}
             changeRoute={this.props.changeRoute}
+            showFailModal={this.props.showFailModal}
           />
           <Pagination
             styleRoot={{
@@ -88,12 +91,15 @@ class PostListBox extends React.Component {
           <h3 style={styles.header}>Information</h3>
           <Divider />
           <PostList
+            className={'information-list'}
+            login={this.props.login}
             postList={this.props.informationList.slice(
               ((this.state.informationCurrentPage - 1) * this.postPerPage),
               (this.state.informationCurrentPage * this.postPerPage),
             )}
             type={'information'}
             changeRoute={this.props.changeRoute}
+            showFailModal={this.props.showFailModal}
           />
           <Pagination
             styleRoot={{
@@ -111,15 +117,18 @@ class PostListBox extends React.Component {
 }
 
 PostListBox.propTypes = {
+  login: PropTypes.bool,
   questionList: PropTypes.array,
   informationList: PropTypes.array,
   changeRoute: PropTypes.func,
   loadPostList: PropTypes.func,
+  showFailModal: PropTypes.func,
 }
 
 
 export const mapStateToProps = (state) => {
   return {
+    login: state.user.login,
     questionList: state.list.questionList,
     informationList: state.list.informationList,
   }
@@ -131,9 +140,12 @@ export const mapDispatchToProps = (dispatch) => {
     changeRoute: (route) => {
       dispatch(changeRoute(route))
     },
-    loadPostList: (route) => {
+    loadPostList: () => {
       dispatch(getQuestionList())
       dispatch(getInformationList())
+    },
+    showFailModal: () => {
+      dispatch(updateModal(true, 'Sign in first'))
     },
   }
 }
