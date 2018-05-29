@@ -30,7 +30,7 @@ QuestionPage.propTypes = {
   loadAnswer: PropTypes.func,
 }
 
-const mapStateToProps = (state) => {
+export const mapStateToProps = (state) => {
   return {
     logged: state.user.login,
     profile: state.user.profile,
@@ -38,7 +38,7 @@ const mapStateToProps = (state) => {
 }
 
 
-const mapDispatchToProps = (dispatch) => {
+export const mapDispatchToProps = (dispatch) => {
   return {
     loadQuestion: (postId) => {
       dispatch(getQuestionPost(postId))
@@ -49,4 +49,5 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
+export const QuestionPageShallow = QuestionPage
 export default connect(mapStateToProps, mapDispatchToProps)(QuestionPage)
