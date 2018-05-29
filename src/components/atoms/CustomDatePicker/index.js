@@ -2,6 +2,8 @@ import React, { PropTypes } from 'react'
 import DatePicker from 'material-ui/DatePicker'
 
 const today = new Date()
+const maxDay = new Date()
+maxDay.setDate(today.getDate() + 10)
 
 export default class CustomDatePicker extends React.Component {
 
@@ -28,6 +30,7 @@ export default class CustomDatePicker extends React.Component {
         hintText="Select Due Date"
         value={this.state.due}
         minDate={today}
+        maxDate={maxDay}
         onChange={this.handleChange}
       />
     )
