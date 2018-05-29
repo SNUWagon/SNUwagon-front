@@ -86,7 +86,7 @@ class SignUpBox extends React.Component {
           {this.isAllInputValid() === true ?
             <Button className={'sign-up-button'} type={'submit'} onClick={this.onClickSignUpButton}>Sign Up</Button>
             :
-            <Button className={'sign-up-button-disabled'} disabled>Sign Up</Button>
+            <Button className={'sign-up-button-disabled'} type={'submit'} onClick={this.onClickSignUpButton} disabled>Sign Up</Button>
           }
         </ButtonP>
       </Paper>
