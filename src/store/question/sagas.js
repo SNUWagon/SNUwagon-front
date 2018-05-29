@@ -2,9 +2,11 @@ import { take, call, fork, put } from 'redux-saga/effects'
 import { push } from 'react-router-redux'
 import api from 'services/api'
 import * as actions from './actions'
+import { updateQuestionAnswer } from '../answer/actions'
 
 const baseUrl = ''
 const questionUrl = `${baseUrl}/posts/question`
+const answerUrl = `${baseUrl}/posts/answer`
 
 export function* handleChangeRoute(newRoute) {
   yield put(push(newRoute))
@@ -33,7 +35,6 @@ export function* handleGetQuestionPost(postId) {
       response.data.selected,
       response.data.tags,
     ))
-    // TODO: retrieve all answers
   }
 }
 
@@ -41,6 +42,21 @@ export function* handleDeleteQuestionPost(postId) {
   const response = yield call(api.delete, `${questionUrl}/${postId}`)
   if (response.success === true) {
     yield put(actions.changeRoute('/'))
+  }
+}
+
+export function* handleAnswerQuestionPost(answer, author, qid) {
+  const data = { content: answer, username: author, qid }
+  const response = yield call(api.post, `${answerUrl}`, data)
+  if (response.success === true) {
+    const resp = yield call(api.get, `${answerUrl}/${qid}`)
+    yield put(updateQuestionAnswer(resp.data.map(
+      (data) => {
+        return {
+          ...data,
+        }
+      }
+    )))
   }
 }
 
@@ -73,9 +89,17 @@ function* watchDeleteQuestionPost() {
   }
 }
 
+function* watchAnswerQuestionPost() {
+  while (true) {
+    const { answer, author, qid } = yield take(actions.ANSWER_QUESTION_POST)
+    yield call(handleAnswerQuestionPost, answer, author, qid)
+  }
+}
+
 export default function* () {
   yield fork(watchChangeRoute)
   yield fork(watchWriteQuestionPost)
   yield fork(watchGetQuestionPost)
   yield fork(watchDeleteQuestionPost)
+  yield fork(watchAnswerQuestionPost)
 }

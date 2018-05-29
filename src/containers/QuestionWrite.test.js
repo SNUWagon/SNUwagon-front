@@ -1,6 +1,5 @@
 import React from 'react'
-import { QuestionWrite } from 'containers'
-import { mapStateToProps, mapDispatchToProps } from 'containers/QuestionWrite'
+import { mapStateToProps, mapDispatchToProps } from './QuestionWrite'
 
 const initialState = {
   question: undefined,

@@ -30,7 +30,7 @@ const InformationWrite = ({ onClickBack, onClickWriteInformation, state }) => {
   }
 
   const onClickWriteInformationButton = () => {
-    if (title && content && due && sponsorCredit) {
+    if (title && content && due) {
       if (hiddenExist && hiddenContent !== undefined && hiddenContentCost !== undefined) {
         hiddenContent = hiddenContent.value
         hiddenContentCost = hiddenContentCost.value
@@ -40,11 +40,12 @@ const InformationWrite = ({ onClickBack, onClickWriteInformation, state }) => {
         hiddenContentCost = 0
         hiddenBought = false
       }
-      onClickWriteInformation(title.value, content.value, hiddenExist, hiddenContent, hiddenContentCost, hiddenBought, due, state.user.profile.username, sponsorCredit.value, tags)
-      title.value = ''
-      content.value = ''
-      due = ''
-      sponsorCredit.value = ''
+      if (sponsorCredit === undefined) {
+        sponsorCredit = 0
+      } else {
+        sponsorCredit = sponsorCredit.value
+      }
+      onClickWriteInformation(title.value, content.value, hiddenExist, hiddenContent, hiddenContentCost, hiddenBought, due, state.user.profile.username, sponsorCredit, tags)
     }
   }
 
@@ -90,7 +91,7 @@ const InformationWrite = ({ onClickBack, onClickWriteInformation, state }) => {
         </CardText>
         <Input
           className={'sponsor-credit-input'} hintText={'Sponsor Credit'}
-          onChange={node => { sponsorCredit = node.target }} type={'number'} pattern={'d+'} min={'1'} step={'1'}
+          onChange={node => { sponsorCredit = node.target }} type={'number'} pattern={'d+'} min={'0'} step={'1'}
         />
         <CustomDatePicker className={'due-input'} onChange={date => { due = date }} />
         <br />

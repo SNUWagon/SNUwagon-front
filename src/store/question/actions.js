@@ -3,6 +3,7 @@ export const WRITE_QUESTION_POST = 'WRITE_QUESTION_POST'
 export const GET_QUESTION_POST = 'GET_QUESTION_POST'
 export const DELETE_QUESTION_POST = 'DELETE_QUESTION_POST'
 export const UPDATE_QUESTION_POST = 'UPDATE_QUESTION_POST'
+export const ANSWER_QUESTION_POST = 'ANSWER_QUESTION_POST'
 
 export const changeRoute = (route) => {
   return {
@@ -49,5 +50,14 @@ export const updateQuestionPost = (postId, title, content, due, bounty, author, 
     resolved,
     selected,
     tags,
+  }
+}
+
+export const answerQuestionPost = (answer, author, qid) => {
+  return {
+    type: ANSWER_QUESTION_POST,
+    answer,
+    author,
+    qid,
   }
 }
