@@ -7,6 +7,7 @@ describe('question actions', () => {
     const due = '0001-01-01T01:01:00Z'
     const bounty = 1
     const author = 'authorname'
+    const tags = ['a', 'b']
     const expectedAction = {
       type: actions.WRITE_QUESTION_POST,
       title,
@@ -14,8 +15,9 @@ describe('question actions', () => {
       due,
       bounty,
       author,
+      tags,
     }
-    expect(actions.writeQuestionPost(title, content, due, bounty, author)).toEqual(expectedAction)
+    expect(actions.writeQuestionPost(title, content, due, bounty, author, tags)).toEqual(expectedAction)
   })
 
   it('should create an action to get a question post', () => {

@@ -12,8 +12,7 @@ export const changeRoute = (route) => {
   }
 }
 
-export const writeQuestionPost = (title, content, due, bounty, author) => {
-  // TODO: tags
+export const writeQuestionPost = (title, content, due, bounty, author, tags) => {
   return {
     type: WRITE_QUESTION_POST,
     title,
@@ -21,6 +20,7 @@ export const writeQuestionPost = (title, content, due, bounty, author) => {
     due,
     bounty,
     author,
+    tags,
   }
 }
 

@@ -55,7 +55,7 @@ it('renders', () => {
       author: 'user',
       resolved: false,
       selected: 2,
-      tags: 'tags',
+      tags: ['tag1', 'tag2'],
     },
     answer: [{
       id: 1,
@@ -110,7 +110,7 @@ it('handles click delete button for author\'s question', () => {
       author: 'user',
       resolved: false,
       selected: 2,
-      tags: 'tags',
+      tags: ['tag1', 'tag2'],
     },
     answer: [
       {
@@ -173,7 +173,7 @@ it('handles click answer button for other person\'s question', () => {
       author: 'diffuser',
       resolved: false,
       selected: 2,
-      tags: 'tags',
+      tags: ['tag1', 'tag2'],
     },
     answer: [
       {

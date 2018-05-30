@@ -7,5 +7,5 @@ export const initialState = {
   author: undefined,
   resolved: undefined,
   selected: undefined,
-  tags: undefined,
+  tags: [],
 }

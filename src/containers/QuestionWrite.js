@@ -12,9 +12,8 @@ export const mapStateToProps = (state) => {
 
 export const mapDispatchToProps = (dispatch) => {
   return {
-    onClickWriteQuestion: (title, content, due, bounty, author) => {
-      // TODO: tags
-      dispatch(writeQuestionPost(title, content, due, bounty, author))
+    onClickWriteQuestion: (title, content, due, bounty, author, tags) => {
+      dispatch(writeQuestionPost(title, content, due, bounty, author, tags))
     },
     onClickBack: (route) => {
       dispatch(changeRoute(route))

@@ -7,7 +7,7 @@ import CustomDatePicker from '../../atoms/CustomDatePicker'
 import TagSelector from '../../molecules/TagSelector'
 
 const style = {
-  height: 500,
+  height: 600,
   width: 800,
   margin: 30,
   textAlign: 'center',
@@ -22,6 +22,7 @@ const QuestionWrite = ({ onClickBack, onClickWriteQuestion, state }) => {
   let content
   let due
   let bounty
+  let tags = []
 
   const onClickBackButton = () => {
     onClickBack('')
@@ -29,12 +30,12 @@ const QuestionWrite = ({ onClickBack, onClickWriteQuestion, state }) => {
 
   const onClickWriteQuestionButton = () => {
     if (title && content && due && bounty) {
-      // tags
-      onClickWriteQuestion(title.value, content.value, due, bounty.value, state.user.profile.username)
+      onClickWriteQuestion(title.value, content.value, due, bounty.value, state.user.profile.username, tags)
       title.value = ''
       content.value = ''
       due = ''
       bounty.value = ''
+      tags = ''
     }
   }
 
@@ -61,7 +62,7 @@ const QuestionWrite = ({ onClickBack, onClickWriteQuestion, state }) => {
           onChange={node => { content = node.target }} type={'textarea'}
         />
         <br />
-        <TagSelector tagList={['#a', '#b']} onUpdate={(tags) => { console.log(tags) }} />
+        <TagSelector className={'tag-input'} tagList={state.search.tagList} onUpdate={(tag) => { tags = tag }} />
         <br />
         <Input
           className={'bounty-input'} hintText={'Bounty'}
