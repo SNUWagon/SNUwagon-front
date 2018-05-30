@@ -60,4 +60,23 @@ describe('user actions', () => {
     }
     expect(actions.updateUserProfile(userId, username, credit)).toEqual(expectedAction)
   })
+
+  it('should create an action to get new push notification', () => {
+    const expectedAction = {
+      type: actions.GET_NEW_PUSH_NOTIFICATION,
+      update: true,
+    }
+    expect(actions.getNewPushNotification(true)).toEqual(expectedAction)
+  })
+
+  it('should create an action to get profile', () => {
+    const message = 'asdf'
+    const options = {}
+    const expectedAction = {
+      type: actions.SHOW_NOTIFICATION,
+      message,
+      options,
+    }
+    expect(actions.showNotification(message, options)).toEqual(expectedAction)
+  })
 })

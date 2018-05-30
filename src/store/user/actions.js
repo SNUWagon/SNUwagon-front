@@ -4,6 +4,8 @@ export const SIGN_UP = 'SIGN_UP'
 export const SIGN_OUT = 'SIGN_OUT'
 export const GET_USER_PROFILE = 'GET_USER_PROFILE'
 export const UPDATE_USER_PROFILE = 'UPDATE_USER_PROFILE'
+export const SHOW_NOTIFICATION = 'SHOW_NOTIFICATION'
+export const GET_NEW_PUSH_NOTIFICATION = 'GET_NEW_PUSH_NOTIFICATION'
 
 export const changeRoute = (route) => {
   return {
@@ -48,5 +50,20 @@ export const updateUserProfile = (userId, username, credit) => {
     userId,
     username,
     credit,
+  }
+}
+
+export const getNewPushNotification = (update = true) => {
+  return {
+    type: GET_NEW_PUSH_NOTIFICATION,
+    update,
+  }
+}
+
+export const showNotification = (message, options) => {
+  return {
+    type: SHOW_NOTIFICATION,
+    message,
+    options,
   }
 }
