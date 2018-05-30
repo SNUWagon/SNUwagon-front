@@ -17,48 +17,81 @@ const ButtonP = styled.p`
   text-align: center;
 `
 
-const SignUpBox = ({ onClickSignUp, onClickBack }) => {
-  let email
-  let username
-  let password
+class SignUpBox extends React.Component {
+  constructor(props) {
+    super(props)
 
-  const onClickSignUpButton = () => {
-    if (email && username && password) {
-      onClickSignUp(email.value, username.value, password.value)
-      email.value = ''
-      username.value = ''
-      password.value = ''
+    this.state = {
+      email: undefined,
+      username: undefined,
+      password: undefined,
+      isEmailValid: false,
+    }
+
+    this.onClickSignUpButton = this.onClickSignUpButton.bind(this)
+    this.onClickBackButton = this.onClickBackButton.bind(this)
+    this.checkEmailFormat = this.checkEmailFormat.bind(this)
+    this.isAllInputValid = this.isAllInputValid.bind(this)
+  }
+
+  onClickSignUpButton() {
+    if (this.state.email && this.state.username && this.state.password) {
+      this.props.onClickSignUp(this.state.email.value, this.state.username.value, this.state.password.value)
+      this.state.email.value = ''
+      this.state.username.value = ''
+      this.state.password.value = ''
     }
   }
 
-  const onClickBackButton = () => {
-    onClickBack('/signin')
+  onClickBackButton() {
+    this.props.onClickBack('/signin')
   }
 
-  return (
-    <Paper style={style} zDepth={3}>
-      <h1>Sign Up</h1>
-      <Input
-        className={'email-input'} placeholder={'Email Address'}
-        onChange={node => { email = node.target }}
-      />
-      <br />
-      <Input
-        className={'username-input'} placeholder={'Username'}
-        onChange={node => { username = node.target }}
-      />
-      <br />
-      <Input
-        className={'password-input'} placeholder={'Password'} type={'password'}
-        onChange={node => { password = node.target }}
-      />
-      <ButtonP>
-        <Button className={'back-button'} type={'submit'} onClick={onClickBackButton}>Back</Button>
-        {'  '}
-        <Button className={'sign-up-button'} type={'submit'} onClick={onClickSignUpButton}>Sign Up</Button>
-      </ButtonP>
-    </Paper>
-  )
+  isAllInputValid() {
+    return this.state.email && this.state.username && this.state.password && this.state.isEmailValid === true
+  }
+
+  checkEmailFormat() {
+    if (!this.state.email) return
+
+    const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@snu\.ac\.kr$/
+    this.setState({ isEmailValid: emailRegex.test(String(this.state.email.value).toLowerCase()) })
+  }
+
+  render() {
+    return (
+      <Paper style={style} zDepth={3}>
+        <h1>Sign Up</h1>
+        <Input
+          className={'email-input'} placeholder={'Email Address'}
+          onChange={node => {
+            this.setState({ email: node.target })
+            this.checkEmailFormat()
+          }}
+          errorText={!this.state.isEmailValid && this.state.email ? 'Only SNU mail is available' : ''}
+        />
+        <br />
+        <Input
+          className={'username-input'} placeholder={'Username'}
+          onChange={node => this.setState({ username: node.target })}
+        />
+        <br />
+        <Input
+          className={'password-input'} placeholder={'Password'} type={'password'}
+          onChange={node => this.setState({ password: node.target })}
+        />
+        <ButtonP>
+          <Button className={'back-button'} type={'submit'} onClick={this.onClickBackButton}>Back</Button>
+          {'  '}
+          {this.isAllInputValid() === true ?
+            <Button className={'sign-up-button'} type={'submit'} onClick={this.onClickSignUpButton}>Sign Up</Button>
+            :
+            <Button className={'sign-up-button-disabled'} type={'submit'} onClick={this.onClickSignUpButton} disabled>Sign Up</Button>
+          }
+        </ButtonP>
+      </Paper>
+    )
+  }
 }
 
 SignUpBox.propTypes = {

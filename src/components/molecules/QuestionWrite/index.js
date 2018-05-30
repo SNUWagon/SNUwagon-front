@@ -4,6 +4,7 @@ import * as colors from 'material-ui/styles/colors'
 import RaisedButton from 'material-ui/RaisedButton'
 import Input from '../../atoms/BaseInput'
 import CustomDatePicker from '../../atoms/CustomDatePicker'
+import TagSelector from '../../molecules/TagSelector'
 
 const style = {
   height: 500,
@@ -59,6 +60,8 @@ const QuestionWrite = ({ onClickBack, onClickWriteQuestion, state }) => {
           className={'content-input'}
           onChange={node => { content = node.target }} type={'textarea'}
         />
+        <br />
+        <TagSelector tagList={['#a', '#b']} onUpdate={(tags) => { console.log(tags) }} />
         <br />
         <Input
           className={'bounty-input'} hintText={'Bounty'}

@@ -20,7 +20,7 @@ export function* handleSignIn(username, password) {
     yield put(actions.changeRoute('/'))
     yield put(displayActions.updateSnackbar(true, 'Hello :)'))
   } else {
-    yield put(displayActions.updateSignInModal(true, 'Please check Username/Password'))
+    yield put(displayActions.updateSignInModal(true, response.message))
   }
 }
 
@@ -29,7 +29,7 @@ export function* handleSignUp(email, username, password) {
   const response = yield call(api.post, `${authUrl}/signup`, data)
   if (response.success === true) {
     yield put(actions.changeRoute('/signin'))
-    yield put(displayActions.updateSnackbar(true, 'Sign up successful, Now you can sign in!'))
+    yield put(displayActions.updateSnackbar(true, `Activation link is sent to ${email}!`))
   } else {
     yield put(displayActions.updateSignUpModal(true, 'Duplicate Email or Username exists'))
   }

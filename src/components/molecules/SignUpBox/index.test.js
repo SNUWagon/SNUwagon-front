@@ -18,11 +18,15 @@ it('handle click sign up button', () => {
     onClickSignUp: jest.fn(),
   }
   const wrapper = wrap(props)
-  wrapper.find('.email-input').simulate('change', { target: { value: 'email@email.com' } })
+  wrapper.find('.email-input').props().onChange({ target: undefined })
+  wrapper.find('.email-input').simulate('change', { target: { value: 'email@gmail.ac.kr' } })
   wrapper.find('.username-input').simulate('change', { target: { value: 'user' } })
   wrapper.find('.password-input').simulate('change', { target: { value: 'pass' } })
-  wrapper.find('.sign-up-button').simulate('click')
+  wrapper.find('.sign-up-button-disabled').simulate('click')
   expect(props.onClickSignUp).toHaveBeenCalled()
+  wrapper.find('.email-input').simulate('change', { target: { value: 'email@snu.ac.kr' } })
+  wrapper.find('.username-input').simulate('change', { target: { value: 'user' } })
+  wrapper.find('.password-input').simulate('change', { target: { value: 'pass' } })
 })
 
 it('handle click back button', () => {
