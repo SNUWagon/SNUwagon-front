@@ -66,13 +66,26 @@ export function* handleGetUserProfile() {
       response.data.credit,
     ))
   }
+
+  if (!loadNotification) {
+    loadNotification = setInterval(() => { store.dispatch(actions.getNewPushNotification()) }, loadNotificationInterval)
+    yield put(actions.getNewsfeed())
+  }
 }
 
 export function* handleGetNewPushNotification(update) {
   const response = yield call(api.get, `${baseUrl}/notifications`)
-  if (update === false) return
 
   if (response.success === true) {
+    if (response.data.length > 0) {
+      yield put(actions.getNewsfeed())
+    }
+
+    if (update === false) {
+      yield put(actions.getNewsfeed())
+      return
+    }
+
     for (let i = 0; i < response.data.length; i += 1) {
       const noti = response.data[i]
       const options = {
@@ -123,6 +136,22 @@ export function* handleShowNotification(message, options) {
     yield setTimeout(() => {
       notification.close.bind(notification)
     }, 3000)
+  }
+}
+
+export function* handleGetNewsfeed() {
+  const response = yield call(api.get, `${baseUrl}/newsfeed`)
+  if (response.success === true) {
+    yield put(actions.updateNewsfeed(response.data))
+  }
+}
+
+export function* handleResolveNewsfeed(nid) {
+  const data = { nid }
+  const response = yield call(api.put, `${baseUrl}/newsfeed`, data)
+
+  if (response.success === true) {
+    yield put(actions.getNewsfeed())
   }
 }
 
@@ -177,6 +206,20 @@ function* watchShowNotification() {
   }
 }
 
+function* watchGetNewsfeed() {
+  while (true) {
+    yield take(actions.GET_NEWSFEED)
+    yield call(handleGetNewsfeed)
+  }
+}
+
+function* resolveNewsfeed() {
+  while (true) {
+    const { nid } = yield take(actions.RESOLVE_NEWSFEED)
+    yield call(handleResolveNewsfeed, nid)
+  }
+}
+
 export default function* () {
   yield fork(watchSignIn)
   yield fork(watchSignUp)
@@ -185,4 +228,6 @@ export default function* () {
   yield fork(watchGetUserProfile)
   yield fork(watchShowNotification)
   yield fork(watchGetNewPushNotification)
+  yield fork(watchGetNewsfeed)
+  yield fork(resolveNewsfeed)
 }

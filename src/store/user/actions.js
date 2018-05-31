@@ -6,6 +6,9 @@ export const GET_USER_PROFILE = 'GET_USER_PROFILE'
 export const UPDATE_USER_PROFILE = 'UPDATE_USER_PROFILE'
 export const SHOW_NOTIFICATION = 'SHOW_NOTIFICATION'
 export const GET_NEW_PUSH_NOTIFICATION = 'GET_NEW_PUSH_NOTIFICATION'
+export const GET_NEWSFEED = 'GET_NEWSFEED'
+export const UPDATE_NEWSFEED = 'UPDATE_NEWSFEED'
+export const RESOLVE_NEWSFEED = 'RESOLVE_NEWSFEED'
 
 export const changeRoute = (route) => {
   return {
@@ -65,5 +68,25 @@ export const showNotification = (message, options) => {
     type: SHOW_NOTIFICATION,
     message,
     options,
+  }
+}
+
+export const getNewsfeed = () => {
+  return {
+    type: GET_NEWSFEED,
+  }
+}
+
+export const resolveNewsfeed = (nid) => {
+  return {
+    type: RESOLVE_NEWSFEED,
+    nid,
+  }
+}
+
+export const updateNewsfeed = (newsfeed) => {
+  return {
+    type: UPDATE_NEWSFEED,
+    newsfeed,
   }
 }

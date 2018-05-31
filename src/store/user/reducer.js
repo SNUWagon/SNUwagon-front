@@ -12,6 +12,10 @@ const userReducer = (state = initialState, action) => {
           credit: action.credit,
         },
       })
+    case actions.UPDATE_NEWSFEED:
+      return Object.assign({}, state, {
+        newsfeed: action.newsfeed,
+      })
     default:
       return state
   }

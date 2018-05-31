@@ -21,4 +21,12 @@ describe('user reducer', () => {
         },
       })
   })
+
+  it('should handle update newsfeed', () => {
+    const newsfeed = []
+    expect(userReducer({}, actions.updateNewsfeed(newsfeed)))
+      .toEqual({
+        newsfeed,
+      })
+  })
 })
