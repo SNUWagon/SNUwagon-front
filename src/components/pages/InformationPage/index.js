@@ -10,6 +10,10 @@ class InformationPage extends React.Component {
     this.props.loadInformation(this.props.params.id)
   }
 
+  componentDidUpdate() {
+    this.props.loadInformation(this.props.params.id)
+  }
+
   render() {
     const informationId = this.props.params.id
 

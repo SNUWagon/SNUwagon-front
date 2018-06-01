@@ -5,4 +5,5 @@ export const initialState = {
     username: undefined,
     credit: undefined,
   },
+  newsfeed: [],
 }

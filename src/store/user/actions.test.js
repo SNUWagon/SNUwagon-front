@@ -60,4 +60,48 @@ describe('user actions', () => {
     }
     expect(actions.updateUserProfile(userId, username, credit)).toEqual(expectedAction)
   })
+
+  it('should create an action to get new push notification', () => {
+    const expectedAction = {
+      type: actions.GET_NEW_PUSH_NOTIFICATION,
+      update: true,
+    }
+    expect(actions.getNewPushNotification(true)).toEqual(expectedAction)
+  })
+
+  it('should create an action to get newsfeed', () => {
+    const expectedAction = {
+      type: actions.GET_NEWSFEED,
+    }
+    expect(actions.getNewsfeed()).toEqual(expectedAction)
+  })
+
+  it('should create an action to update newsfeed', () => {
+    const newsfeed = []
+    const expectedAction = {
+      type: actions.UPDATE_NEWSFEED,
+      newsfeed,
+    }
+    expect(actions.updateNewsfeed(newsfeed)).toEqual(expectedAction)
+  })
+
+  it('should create an action to resolve newsfeed', () => {
+    const nid = 1
+    const expectedAction = {
+      type: actions.RESOLVE_NEWSFEED,
+      nid,
+    }
+    expect(actions.resolveNewsfeed(nid)).toEqual(expectedAction)
+  })
+
+  it('should create an action to get profile', () => {
+    const message = 'asdf'
+    const options = {}
+    const expectedAction = {
+      type: actions.SHOW_NOTIFICATION,
+      message,
+      options,
+    }
+    expect(actions.showNotification(message, options)).toEqual(expectedAction)
+  })
 })

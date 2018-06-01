@@ -8,7 +8,7 @@ const config = {
   test: {},
   development: {},
   production: {
-    apiUrl: 'https://jsonplaceholder.typicode.com',
+    apiUrl: '/api',
   },
 }
 

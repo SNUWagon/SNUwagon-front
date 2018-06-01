@@ -12,6 +12,11 @@ class QuestionPage extends React.Component {
     this.props.loadAnswer(this.props.params.id)
   }
 
+  componentDidUpdate() {
+    this.props.loadQuestion(this.props.params.id)
+    this.props.loadAnswer(this.props.params.id)
+  }
+
   render() {
     const questionId = this.props.params.id
 

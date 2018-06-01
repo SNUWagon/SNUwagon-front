@@ -14,8 +14,8 @@ export const mapStateToProps = (state) => {
 
 export const mapDispatchToProps = (dispatch) => {
   return {
-    onClose: (content) => {
-      dispatch(updateSnackbar(false, content))
+    onClose: () => {
+      dispatch(updateSnackbar(false, ''))
     },
   }
 }
