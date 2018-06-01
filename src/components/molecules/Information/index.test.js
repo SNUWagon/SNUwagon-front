@@ -54,7 +54,7 @@ it('renders', () => {
       due: '0001-01-01T01:01:00Z',
       author: 'user',
       sponsorCredit: 5,
-      tags: 'tags',
+      tags: ['tag1', 'tag2'],
     },
     // onClickPurchase: jest.fn(),
   }
@@ -107,7 +107,7 @@ it('handles click purchase button for unbought question', () => {
       due: '0001-01-01T01:01:00Z',
       author: 'notuser',
       sponsorCredit: 5,
-      tags: 'tags',
+      tags: ['tag1', 'tag2'],
     },
     onClickPurchase: jest.fn(),
   }

@@ -4,9 +4,9 @@ import * as colors from 'material-ui/styles/colors'
 import RaisedButton from 'material-ui/RaisedButton'
 import Input from '../../atoms/BaseInput'
 import CustomDatePicker from '../../atoms/CustomDatePicker'
+import TagSelector from '../../molecules/TagSelector'
 
 const style = {
-  height: 650,
   width: 800,
   margin: 30,
   textAlign: 'center',
@@ -89,6 +89,7 @@ const InformationWrite = ({ onClickBack, onClickWriteInformation, state }) => {
             onChange={node => { hiddenContentCost = node.target }} type={'number'} pattern={'d+'} min={'0'} step={'1'}
           />
         </CardText>
+        <TagSelector className={'tag-input'} tagList={state.search.tagList} onUpdate={(tag) => { tags = tag }} />
         <Input
           className={'sponsor-credit-input'} hintText={'Sponsor Credit'}
           onChange={node => { sponsorCredit = node.target }} type={'number'} pattern={'d+'} min={'0'} step={'1'}

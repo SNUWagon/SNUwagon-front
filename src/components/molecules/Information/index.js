@@ -23,7 +23,10 @@ const Information = ({ onClickPurchase, ...props }) => {
   return (
     <div style={{ textAlign: 'center', margin: '40px 0px' }}>
       <Card style={style}>
-        <CardTitle title={i.title} titleStyle={{ fontSize: 30, color: colors.indigo500 }} />
+        <CardTitle title={i.title} titleStyle={{ fontSize: 30, color: colors.indigo500 }} style={{ padding: '16px 0px 0px 0px' }} />
+        <CardText style={{ fontSize: 14, color: colors.indigo200, padding: '0px' }} >
+          {i.tags.map((tag) => `#${tag}\xa0\xa0\xa0`)}
+        </CardText>
         <CardText>
           <br />
           <div style={{ fontSize: 20, textAlign: 'right' }}>
