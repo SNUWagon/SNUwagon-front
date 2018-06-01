@@ -7,7 +7,6 @@ import CustomDatePicker from '../../atoms/CustomDatePicker'
 import TagSelector from '../../molecules/TagSelector'
 
 const style = {
-  height: 600,
   width: 800,
   margin: 30,
   textAlign: 'center',
@@ -16,8 +15,6 @@ const style = {
 }
 
 const QuestionWrite = ({ onClickBack, onClickWriteQuestion, state }) => {
-  // state contains both user and question list
-
   let title
   let content
   let due
