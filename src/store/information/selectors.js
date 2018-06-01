@@ -9,5 +9,5 @@ export const initialState = {
   due: undefined,
   author: undefined,
   sponsorCredit: undefined,
-  tags: undefined,
+  tags: [],
 }

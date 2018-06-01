@@ -12,7 +12,7 @@ export function* handleChangeRoute(newRoute) {
 }
 
 export function* handleWriteInformationPost(title, content, hiddenExist, hiddenContent, hiddenContentCost, hiddenBought, due, author, sponsorCredit, tags) {
-  const data = { title, content, username: author, tag: tags, hidden_content_cost: hiddenContentCost, hidden_exist: hiddenExist, hidden_content: hiddenContent, hidden_bought: hiddenBought, due, sponsor_credit: sponsorCredit }
+  const data = { title, content, username: author, tags, hidden_content_cost: hiddenContentCost, hidden_exist: hiddenExist, hidden_content: hiddenContent, hidden_bought: hiddenBought, due, sponsor_credit: sponsorCredit }
   const response = yield call(api.post, `${informationUrl}`, data)
   if (response.success === true) {
     yield put(actions.changeRoute(`/information/${response.data.id}`))

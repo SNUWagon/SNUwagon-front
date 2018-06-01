@@ -12,9 +12,8 @@ export function* handleChangeRoute(newRoute) {
   yield put(push(newRoute))
 }
 
-export function* handleWriteQuestionPost(title, content, due, bounty, author) {
-  // TODO: tags
-  const data = { title, content, username: author, due, bounty, question_type: 'private' }
+export function* handleWriteQuestionPost(title, content, due, bounty, author, tags) {
+  const data = { title, content, username: author, due, bounty, question_type: 'private', tags }
   const response = yield call(api.post, `${questionUrl}`, data)
   if (response.success === true) {
     yield put(actions.changeRoute(`/question/${response.data.id}`))

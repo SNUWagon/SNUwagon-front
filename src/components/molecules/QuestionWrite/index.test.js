@@ -5,26 +5,34 @@ import QuestionWrite from '.'
 
 const wrap = (props = {}) => shallow(<QuestionWrite {...props} />)
 const mockStore = configureStore([])
+const initialState = {
+  user: {
+    login: true,
+    profile: {
+      username: 'user',
+      userId: 1,
+      credit: 1,
+    },
+  },
+  search: {
+    tagList: [],
+  },
+}
+const store = mockStore(initialState)
 
 it('renders', () => {
   wrap({
+    state: {
+      search: {
+        tagList: [],
+      },
+    },
     onClickWriteQuestion: () => {},
     onClickBack: () => {},
   })
 })
 
 it('handles click submit question button', () => {
-  const initialState = {
-    user: {
-      login: true,
-      profile: {
-        username: 'user',
-        userId: 1,
-        credit: 1,
-      },
-    },
-  }
-  const store = mockStore(initialState)
   const props = {
     store,
     state: {
@@ -35,6 +43,9 @@ it('handles click submit question button', () => {
           userId: 1,
           credit: 1,
         },
+      },
+      search: {
+        tagList: [],
       },
     },
     onClickWriteQuestion: jest.fn(),
@@ -49,8 +60,69 @@ it('handles click submit question button', () => {
   expect(props.onClickWriteQuestion).toHaveBeenCalled()
 })
 
+it('handles click submit question button with tags', () => {
+  const props = {
+    store,
+    state: {
+      user: {
+        login: true,
+        profile: {
+          username: 'user',
+          userId: 1,
+          credit: 1,
+        },
+      },
+      search: {
+        tagList: [],
+      },
+    },
+    onClickWriteQuestion: jest.fn(),
+  }
+  const wrapper = wrap(props)
+
+  wrapper.find('.title-input').simulate('change', { target: { value: 'title' } })
+  wrapper.find('.content-input').simulate('change', { target: { value: 'content' } })
+  wrapper.find('.due-input').simulate('change', { date: '0001-01-01T01:01:00Z' })
+  wrapper.find('.bounty-input').simulate('change', { target: { value: 1 } })
+  wrapper.find('.write-question-button').simulate('click')
+  wrapper.find('.tag-input').simulate('update', { tag: ['tag1', 'tag2'] })
+  expect(props.onClickWriteQuestion).toHaveBeenCalled()
+})
+
+it('does not handle submit question button if not all required fields are filled', () => {
+  const props = {
+    store,
+    state: {
+      user: {
+        login: true,
+        profile: {
+          username: 'user',
+          userId: 1,
+          credit: 1,
+        },
+      },
+      search: {
+        tagList: [],
+      },
+    },
+    onClickWriteQuestion: jest.fn(),
+  }
+  const wrapper = wrap(props)
+
+  wrapper.find('.title-input').simulate('change', { target: { value: 'title' } })
+  wrapper.find('.content-input').simulate('change', { target: { value: 'content' } })
+  wrapper.find('.due-input').simulate('change', { date: '0001-01-01T01:01:00Z' })
+  wrapper.find('.write-question-button').simulate('click')
+  expect(props.onClickWriteQuestion).not.toHaveBeenCalled()
+})
+
 it('handles click back button', () => {
   const props = {
+    state: {
+      search: {
+        tagList: [],
+      },
+    },
     onClickBack: jest.fn(),
   }
   const wrapper = wrap(props)

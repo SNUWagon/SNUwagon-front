@@ -34,7 +34,10 @@ const Question = ({ onClickAnswer, onClickDelete, ...props }) => {
   return (
     <div style={{ textAlign: 'center', margin: '40px 0px' }}>
       <Card style={style}>
-        <CardTitle title={q.title} titleStyle={{ fontSize: 30, color: colors.indigo500 }} />
+        <CardTitle title={q.title} titleStyle={{ fontSize: 30, color: colors.indigo500 }} style={{ padding: '16px 0px 0px 0px' }} />
+        <CardText style={{ fontSize: 14, color: colors.indigo200, padding: '0px' }} >
+          {q.tags.map((tag) => `#${tag}\xa0\xa0\xa0`)}
+        </CardText>
         <CardText>
           <br />
           <div style={{ fontSize: 20, textAlign: 'right' }}>
@@ -49,6 +52,7 @@ const Question = ({ onClickAnswer, onClickDelete, ...props }) => {
             Resolved: {resolved}
             <br /><br /><br />
             {q.content}
+            <br /><br />
           </div>
         </CardText>
         <CardText style={{ textAlign: 'left' }}> Selected Answer: {selected} </CardText>

@@ -5,26 +5,31 @@ import InformationWrite from '.'
 
 const wrap = (props = {}) => shallow(<InformationWrite {...props} />)
 const mockStore = configureStore([])
+const initialState = {
+  user: {
+    login: true,
+    profile: {
+      username: 'user',
+      userId: 1,
+      credit: 10,
+    },
+  },
+}
+const store = mockStore(initialState)
 
 it('renders', () => {
   wrap({
     onClickWriteInformation: () => {},
     onClickBack: () => {},
+    state: {
+      search: {
+        tagList: ['tag1', 'tag2'],
+      },
+    },
   })
 })
 
 it('handles click submit information button with hidden contents', () => {
-  const initialState = {
-    user: {
-      login: true,
-      profile: {
-        username: 'user',
-        userId: 1,
-        credit: 10,
-      },
-    },
-  }
-  const store = mockStore(initialState)
   const props = {
     store,
     state: {
@@ -35,6 +40,9 @@ it('handles click submit information button with hidden contents', () => {
           userId: 1,
           credit: 10,
         },
+      },
+      search: {
+        tagList: ['tag1', 'tag2'],
       },
     },
     onClickWriteInformation: jest.fn(),
@@ -52,17 +60,6 @@ it('handles click submit information button with hidden contents', () => {
 })
 
 it('handles click submit information button without hidden contents', () => {
-  const initialState = {
-    user: {
-      login: true,
-      profile: {
-        username: 'user',
-        userId: 1,
-        credit: 10,
-      },
-    },
-  }
-  const store = mockStore(initialState)
   const props = {
     store,
     state: {
@@ -73,6 +70,9 @@ it('handles click submit information button without hidden contents', () => {
           userId: 1,
           credit: 10,
         },
+      },
+      search: {
+        tagList: ['tag1', 'tag2'],
       },
     },
     onClickWriteInformation: jest.fn(),
@@ -88,17 +88,6 @@ it('handles click submit information button without hidden contents', () => {
 })
 
 it('handles click submit information button without sponsor credit', () => {
-  const initialState = {
-    user: {
-      login: true,
-      profile: {
-        username: 'user',
-        userId: 1,
-        credit: 10,
-      },
-    },
-  }
-  const store = mockStore(initialState)
   const props = {
     store,
     state: {
@@ -109,6 +98,9 @@ it('handles click submit information button without sponsor credit', () => {
           userId: 1,
           credit: 10,
         },
+      },
+      search: {
+        tagList: ['tag1', 'tag2'],
       },
     },
     onClickWriteInformation: jest.fn(),
@@ -122,9 +114,68 @@ it('handles click submit information button without sponsor credit', () => {
   expect(props.onClickWriteInformation).toHaveBeenCalled()
 })
 
+it('handles click submit information button with tags', () => {
+  const props = {
+    store,
+    state: {
+      user: {
+        login: true,
+        profile: {
+          username: 'user',
+          userId: 1,
+          credit: 10,
+        },
+      },
+      search: {
+        tagList: ['tag1', 'tag2'],
+      },
+    },
+    onClickWriteInformation: jest.fn(),
+  }
+  const wrapper = wrap(props)
+
+  wrapper.find('.title-input').simulate('change', { target: { value: 'title' } })
+  wrapper.find('.content-input').simulate('change', { target: { value: 'content' } })
+  wrapper.find('.due-input').simulate('change', { date: '0001-01-01T01:01:00Z' })
+  wrapper.find('.tag-input').simulate('update', { tag: ['t1', 't2'] })
+  wrapper.find('.write-information-button').simulate('click')
+  expect(props.onClickWriteInformation).toHaveBeenCalled()
+})
+
+it('does not write information without all mandatory fields filled', () => {
+  const props = {
+    store,
+    state: {
+      user: {
+        login: true,
+        profile: {
+          username: 'user',
+          userId: 1,
+          credit: 10,
+        },
+      },
+      search: {
+        tagList: ['tag1', 'tag2'],
+      },
+    },
+    onClickWriteInformation: jest.fn(),
+  }
+  const wrapper = wrap(props)
+
+  wrapper.find('.title-input').simulate('change', { target: { value: 'title' } })
+  wrapper.find('.due-input').simulate('change', { date: '0001-01-01T01:01:00Z' })
+  wrapper.find('.write-information-button').simulate('click')
+  expect(props.onClickWriteInformation).not.toHaveBeenCalled()
+})
+
 it('handles click back button', () => {
   const props = {
     onClickBack: jest.fn(),
+    state: {
+      search: {
+        tagList: ['tag1', 'tag2'],
+      },
+    },
   }
   const wrapper = wrap(props)
   wrapper.find('.back-button').simulate('click')
