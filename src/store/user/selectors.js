@@ -6,4 +6,5 @@ export const initialState = {
     credit: undefined,
   },
   newsfeed: [],
+  watchTags: [],
 }

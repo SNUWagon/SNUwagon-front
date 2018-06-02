@@ -105,4 +105,13 @@ describe('user actions', () => {
     }
     expect(actions.showNotification(message, options)).toEqual(expectedAction)
   })
+
+  it('should create an action to post watch tags', () => {
+    const tags = []
+    const expectedAction = {
+      type: actions.POST_WATCH_TAGS,
+      tags,
+    }
+    expect(actions.postWatchTags(tags)).toEqual(expectedAction)
+  })
 })

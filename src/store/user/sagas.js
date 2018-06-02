@@ -68,6 +68,7 @@ export function* handleGetUserProfile() {
       response.data.id,
       response.data.username,
       response.data.credit,
+      response.data.watch_tags,
     ))
   }
 
@@ -108,6 +109,14 @@ export function* handleGetNewPushNotification(update) {
           break
         case 'INFORMATION_BOUGHT':
           options.tag = `/information/${noti.content_id}`
+          yield put(actions.showNotification('SNUwagon', options))
+          break
+        case 'NEW_INFORMATION_ABOUT_TAG':
+          options.tag = `/information/${noti.content_id}`
+          yield put(actions.showNotification('SNUwagon', options))
+          break
+        case 'NEW_QUESTION_ABOUT_TAG':
+          options.tag = `/question/${noti.content_id}`
           yield put(actions.showNotification('SNUwagon', options))
           break
         default:
@@ -158,6 +167,18 @@ export function* handleResolveNewsfeed(nid) {
 
   if (response.success === true) {
     yield put(actions.getNewsfeed())
+  }
+}
+
+export function* handlePostWatchTags(tags) {
+  const data = { tags }
+  const response = yield call(api.post, `${baseUrl}/watchtags`, data)
+
+  if (response.success === true) {
+    yield put(displayActions.updateSnackbar(true, 'Tag notification successfully updated!'))
+    yield put(actions.getUserProfile())
+  } else {
+    yield put(displayActions.updateModal(true, response.message))
   }
 }
 
@@ -219,10 +240,17 @@ function* watchGetNewsfeed() {
   }
 }
 
-function* resolveNewsfeed() {
+function* watchResolveNewsfeed() {
   while (true) {
     const { nid } = yield take(actions.RESOLVE_NEWSFEED)
     yield call(handleResolveNewsfeed, nid)
+  }
+}
+
+function* watchPostWatchTags() {
+  while (true) {
+    const { tags } = yield take(actions.POST_WATCH_TAGS)
+    yield call(handlePostWatchTags, tags)
   }
 }
 
@@ -235,5 +263,6 @@ export default function* () {
   yield fork(watchShowNotification)
   yield fork(watchGetNewPushNotification)
   yield fork(watchGetNewsfeed)
-  yield fork(resolveNewsfeed)
+  yield fork(watchResolveNewsfeed)
+  yield fork(watchPostWatchTags)
 }
