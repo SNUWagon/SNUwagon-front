@@ -133,8 +133,10 @@ export function* handleShowNotification(message, options) {
       store.dispatch(actions.changeRoute(event.target.tag))
     }
 
+    notification.close.bind(notification)
+
     yield setTimeout(() => {
-      notification.close.bind(notification)
+      notification.close()
     }, 3000)
   }
 }
