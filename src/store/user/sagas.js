@@ -4,6 +4,7 @@ import api from 'services/api'
 import { store } from '../../index'
 import * as actions from './actions'
 import * as displayActions from '../display/actions'
+import * as searchActions from '../search/actions'
 
 const baseUrl = ''
 const authUrl = `${baseUrl}/auth`
@@ -24,6 +25,7 @@ export function* handleSignIn(username, password) {
     yield put(actions.changeRoute('/'))
     yield put(displayActions.updateSnackbar(true, 'Hello :)'))
     yield put(actions.getNewPushNotification(false))
+    yield put(searchActions.getTagList())
     loadNotification = setInterval(() => { store.dispatch(actions.getNewPushNotification()) }, loadNotificationInterval)
   } else {
     yield put(displayActions.updateSignInModal(true, response.message))

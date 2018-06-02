@@ -16,7 +16,8 @@ const styles = {
     fontSize: 18,
   },
   tag: {
-    color: colors.indigoA200,
+    color: colors.amber700,
+    fontSize: 14,
   },
   wrapper: {
     margin: '30px 0',

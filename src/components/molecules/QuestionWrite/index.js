@@ -59,7 +59,7 @@ const QuestionWrite = ({ onClickBack, onClickWriteQuestion, state }) => {
           onChange={node => { content = node.target }} type={'textarea'}
         />
         <br />
-        <TagSelector className={'tag-input'} tagList={state.search.tagList} onUpdate={(tag) => { tags = tag }} />
+        <TagSelector className={'tag-input'} tagList={state.search.tagList.map(tag => `#${tag}`)} onUpdate={(tag) => { tags = tag }} />
         <br />
         <Input
           className={'bounty-input'} hintText={'Bounty'}
