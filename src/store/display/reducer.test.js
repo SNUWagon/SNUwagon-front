@@ -35,12 +35,18 @@ describe('display reducer', () => {
       .toBe(content)
   })
 
-  it('should handle update siup in modal', () => {
+  it('should handle update sign up in modal', () => {
     const modalState = true
     const content = 'content'
     expect(displayReducer({}, actions.updateSignUpModal(modalState, content)).isSignUpModalOpened)
       .toBe(modalState)
     expect(displayReducer({}, actions.updateSignUpModal(modalState, content)).signUpModalContent)
       .toBe(content)
+  })
+
+  it('should handle update loading modal', () => {
+    const modalState = true
+    expect(displayReducer({}, actions.updateLoadingModal(modalState)).loadingState)
+      .toBe(modalState)
   })
 })

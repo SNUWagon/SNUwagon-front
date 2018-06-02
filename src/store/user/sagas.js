@@ -32,7 +32,9 @@ export function* handleSignIn(username, password) {
 
 export function* handleSignUp(email, username, password) {
   const data = { email, username, password }
+  yield put(displayActions.updateLoadingModal(true))
   const response = yield call(api.post, `${authUrl}/signup`, data)
+  yield put(displayActions.updateLoadingModal(false))
   if (response.success === true) {
     yield put(actions.changeRoute('/signin'))
     yield put(displayActions.updateSnackbar(true, `Activation link is sent to ${email}!`))

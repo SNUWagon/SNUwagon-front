@@ -67,6 +67,7 @@ describe('user actions', () => {
       update: true,
     }
     expect(actions.getNewPushNotification(true)).toEqual(expectedAction)
+    expect(actions.getNewPushNotification()).toEqual(expectedAction)
   })
 
   it('should create an action to get newsfeed', () => {

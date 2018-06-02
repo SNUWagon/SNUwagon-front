@@ -34,4 +34,13 @@ describe('display actions', () => {
     }
     expect(actions.updateSignUpModal(modalState, content)).toEqual(expectedAction)
   })
+
+  it('should create action to update loading modal', () => {
+    const modalState = true
+    const expectedAction = {
+      type: actions.UPDATE_LOADING_MODAL,
+      modalState,
+    }
+    expect(actions.updateLoadingModal(modalState)).toEqual(expectedAction)
+  })
 })
