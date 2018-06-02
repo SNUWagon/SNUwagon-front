@@ -10,8 +10,10 @@ const NewsfeedElement = ({ onClose, changeRoute, message, type, contentId }) => 
     switch (type.toUpperCase()) {
       case 'NEW_ANSWER':
       case 'ANSWER_SELECTED':
+      case 'NEW_QUESTION_ABOUT_TAG':
         changeRoute(`/question/${contentId}`)
         break
+      case 'NEW_INFORMATION_ABOUT_TAG':
       case 'INFORMATION_BOUGHT':
         changeRoute(`/information/${contentId}`)
         break

@@ -18,6 +18,10 @@ describe('TitleBar', () => {
           credit: 1,
         },
         newsfeed: [],
+        watchTags: [],
+      },
+      search: {
+        tagList: [],
       },
     }
     const store = mockStore(initialState)
@@ -37,12 +41,14 @@ describe('TitleBar', () => {
       newsfeed: [
         {},
       ],
+      watchTags: [],
+      tagList: [],
     }
     wrap(props)
   })
 
   it('proper state is set', () => {
-    expect(Object.keys(mapStateToProps({ user: {} }))).toEqual(expect.arrayContaining(['logged', 'profile']))
+    expect(Object.keys(mapStateToProps({ user: {}, search: {} }))).toEqual(expect.arrayContaining(['logged', 'profile']))
   })
 
   it('proper dispatch is set', () => {
@@ -71,6 +77,10 @@ describe('TitleBar', () => {
           credit: 1,
         },
         newsfeed: [],
+        watchTags: [],
+      },
+      search: {
+        tagList: [],
       },
     }
     const store = mockStore(initialState)
@@ -92,6 +102,8 @@ describe('TitleBar', () => {
       newsfeed: [
         {},
       ],
+      watchTags: [],
+      tagList: [],
     }
 
     const wrapper = wrap(props)
@@ -109,6 +121,10 @@ describe('TitleBar', () => {
           credit: 1,
         },
         newsfeed: [],
+        watchTags: [],
+      },
+      search: {
+        tagList: [],
       },
     }
     const store = mockStore(initialState)
@@ -130,6 +146,8 @@ describe('TitleBar', () => {
       newsfeed: [
         {},
       ],
+      watchTags: [],
+      tagList: [],
     }
 
     const wrapper = wrap(props)

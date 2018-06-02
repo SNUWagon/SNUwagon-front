@@ -6,7 +6,7 @@ import * as colors from 'material-ui/styles/colors'
 
 const styles = {
   chipsDiv: {
-    width: 800,
+    width: '90%',
     display: 'flex',
   },
   chip: {
@@ -25,10 +25,11 @@ class TagSelector extends React.Component {
 
     this.state = {
       input: '',
-      tags: [],
+      tags: props.haveDefaultTagList ? props.defaultTagList : [],
     }
 
     this.maxTags = 5
+    this.hintText = props.hintText || `search tag(#), maximum ${this.maxTags} tags are available`
 
     this.updateInput = this.updateInput.bind(this)
     this.saveInput = this.saveInput.bind(this)
@@ -98,7 +99,7 @@ class TagSelector extends React.Component {
         <AutoComplete
           fullWidth
           className={'tag-input'}
-          hintText={`search tag(#), maximum ${this.maxTags} tags are available`}
+          hintText={this.hintText}
           dataSource={this.props.tagList}
           onUpdateInput={this.updateInput}
           onNewRequest={this.resetInput}
@@ -114,6 +115,9 @@ class TagSelector extends React.Component {
 
 TagSelector.propTypes = {
   tagList: PropTypes.array,
+  haveDefaultTagList: PropTypes.bool,
+  hintText: PropTypes.string,
+  defaultTagList: PropTypes.array,
   onUpdate: PropTypes.func,
 }
 
