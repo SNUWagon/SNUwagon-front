@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react'
 import MenuItem from 'material-ui/MenuItem'
 import IconButton from 'material-ui/IconButton'
+import FlatButton from 'material-ui/FlatButton'
 import Cancel from 'material-ui/svg-icons/navigation/cancel'
 import * as colors from 'material-ui/styles/colors'
 
@@ -38,11 +39,18 @@ const NewsfeedElement = ({ onClose, changeRoute, message, type, contentId }) => 
     </div>
   )
 
+  const messageBlock = (
+    <FlatButton
+      onClick={handleNewsfeedClick}
+    >
+      {message}
+    </FlatButton>
+  )
+
   return (
     <MenuItem
-      primaryText={message}
+      primaryText={messageBlock}
       rightIcon={closeIcon}
-      onClick={handleNewsfeedClick}
     />
   )
 }
