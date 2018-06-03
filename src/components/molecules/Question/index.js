@@ -30,13 +30,19 @@ const Question = ({ onClickAnswer, onClickDelete, ...props }) => {
     onClickDelete(q.postId)
   }
 
+  const displayTags = (tags) => {
+    return tags.reduce((accum, value) => {
+      return `${accum} #${value}`
+    }, '')
+  }
+
   const isOwner = (q.author === props.user.profile.username)
   return (
     <div style={{ textAlign: 'center', margin: '40px 0px' }}>
       <Card style={style}>
         <CardTitle title={q.title} titleStyle={{ fontSize: 30, color: colors.indigo500 }} style={{ padding: '16px 0px 0px 0px' }} />
         <CardText style={{ fontSize: 14, color: colors.indigo200, padding: '0px' }} >
-          {q.tags.map((tag) => `#${tag}\xa0\xa0\xa0`)}
+          {displayTags(q.tags)}
         </CardText>
         <CardText>
           <br />
