@@ -1,7 +1,8 @@
 import React, { PropTypes } from 'react'
 import { Card, CardActions, CardHeader, CardMedia, CardTitle, CardText } from 'material-ui/Card'
 import * as colors from 'material-ui/styles/colors'
-import RaisedButton from 'material-ui/RaisedButton'
+// import RaisedButton from 'material-ui/RaisedButton'
+import Button from '../../../components/atoms/BaseButton'
 import Input from '../../atoms/BaseInput'
 import Answer from '../Answer'
 
@@ -16,7 +17,8 @@ const style = {
 const Question = ({ onClickAnswer, onClickDelete, ...props }) => {
   const q = props.question
   const a = props.answer
-  const selected = (a !== undefined && q.resolved) ? a.find(x => x.id === q.selected).content : 'No answers selected yet.'
+  const selectedId = (a !== undefined && q.resolved) ? a.find(x => x.id === q.selected).id : undefined
+
   let answer
   const resolved = (q.resolved !== undefined) ? q.resolved.toString() : ''
   const onClickAnswerButton = () => {
@@ -36,38 +38,46 @@ const Question = ({ onClickAnswer, onClickDelete, ...props }) => {
     }, '')
   }
 
+  const formatDue = (due) => {
+    const d = new Date(due)
+    return d.toLocaleString()
+  }
+
   const isOwner = (q.author === props.user.profile.username)
   return (
     <div style={{ textAlign: 'center', margin: '40px 0px' }}>
       <Card style={style}>
         <CardTitle title={q.title} titleStyle={{ fontSize: 30, color: colors.indigo500 }} style={{ padding: '16px 0px 0px 0px' }} />
-        <CardText style={{ fontSize: 14, color: colors.indigo200, padding: '0px' }} >
+        <CardText style={{ fontSize: 16, color: colors.orange800, padding: '0px' }} >
           {displayTags(q.tags)}
         </CardText>
+        <CardText style={{ fontSize: 14, color: colors.grey500, padding: '10px' }} >
+          {'~'}{formatDue(q.due)}
+        </CardText>
         <CardText>
-          <br />
-          <div style={{ fontSize: 20, textAlign: 'right' }}>
-            Author: {q.author}
-          </div>
-          <br />
-          <div style={{ fontSize: 20, textAlign: 'left' }} >
-            Due: {q.due}
-            <br />
-            Bounty: {q.bounty}
-            <br />
-            Resolved: {resolved}
-            <br /><br /><br />
+          <div style={{ fontSize: 20, textAlign: 'center', padding: '20px' }} >
             {q.content}
             <br /><br />
           </div>
         </CardText>
-        <CardText style={{ textAlign: 'left' }}> Selected Answer: {selected} </CardText>
         {isOwner ? (
-          <RaisedButton className={'delete-button'} type={'submit'} onClick={onClickDeleteButton}>Delete</RaisedButton>
+          <Button className={'delete-button'} type={'submit'} onClick={onClickDeleteButton}>Delete</Button>
           ) : ('')}
+        {(!isOwner && q.resolved) ? (
+          <CardText style={{ fontSize: 16, color: colors.orange600, padding: '10px' }} >
+            {'Sorry! This question is already finished!'}
+          </CardText>
+        ) : ('')}
+        {(!isOwner && !q.resolved) ? (
+          <CardText style={{ fontSize: 16, textAlign: 'center', color: colors.indigo400 }}>
+            {'Write an answer and get '}
+            <span style={{ fontSize: 24, color: colors.orange700 }}>{q.bounty}</span>
+            {' credit'}
+          </CardText>
+        ) : ('')}
         {(!isOwner && !q.resolved) ? (
           <CardActions actAsExpander>
-            <RaisedButton className={'answer-button'} type={'submit'} onClick={onClickAnswerButton}>Answer</RaisedButton>
+            <Button className={'answer-button'} type={'submit'} onClick={onClickAnswerButton}>Answer</Button>
           </CardActions>
           ) : ('')}
         <CardText expandable={!q.resolved}>
@@ -88,6 +98,7 @@ const Question = ({ onClickAnswer, onClickDelete, ...props }) => {
               username={props.user.profile.username}
               question={q}
               answer={questionAnswer}
+              selected={questionAnswer.id === selectedId}
             />
           )}
         </CardText>

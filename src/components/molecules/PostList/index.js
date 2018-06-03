@@ -34,8 +34,8 @@ class PostList extends React.Component {
       icon = (
         <Avatar
           size={32}
-          color={colors.darkWhite}
-          backgroundColor={colors.indigo200}
+          color={colors.grey900}
+          backgroundColor={colors.blueGrey100}
           style={{
             display: 'flex',
             alignItems: 'center',
