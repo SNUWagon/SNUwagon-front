@@ -11,6 +11,7 @@ const userReducer = (state = initialState, action) => {
           username: action.username,
           credit: action.credit,
         },
+        watchTags: action.watchTags,
       })
     case actions.UPDATE_NEWSFEED:
       return Object.assign({}, state, {

@@ -89,7 +89,7 @@ const InformationWrite = ({ onClickBack, onClickWriteInformation, state }) => {
             onChange={node => { hiddenContentCost = node.target }} type={'number'} pattern={'d+'} min={'0'} step={'1'}
           />
         </CardText>
-        <TagSelector className={'tag-input'} tagList={state.search.tagList} onUpdate={(tag) => { tags = tag }} />
+        <TagSelector className={'tag-input'} tagList={state.search.tagList.map(tag => `#${tag}`)} onUpdate={(tag) => { tags = tag }} />
         <Input
           className={'sponsor-credit-input'} hintText={'Sponsor Credit'}
           onChange={node => { sponsorCredit = node.target }} type={'number'} pattern={'d+'} min={'0'} step={'1'}

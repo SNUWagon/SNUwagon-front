@@ -4,6 +4,7 @@ import api from 'services/api'
 import { store } from '../../index'
 import * as actions from './actions'
 import * as displayActions from '../display/actions'
+import * as searchActions from '../search/actions'
 
 const baseUrl = ''
 const authUrl = `${baseUrl}/auth`
@@ -24,6 +25,7 @@ export function* handleSignIn(username, password) {
     yield put(actions.changeRoute('/'))
     yield put(displayActions.updateSnackbar(true, 'Hello :)'))
     yield put(actions.getNewPushNotification(false))
+    yield put(searchActions.getTagList())
     loadNotification = setInterval(() => { store.dispatch(actions.getNewPushNotification()) }, loadNotificationInterval)
   } else {
     yield put(displayActions.updateSignInModal(true, response.message))
@@ -32,7 +34,9 @@ export function* handleSignIn(username, password) {
 
 export function* handleSignUp(email, username, password) {
   const data = { email, username, password }
+  yield put(displayActions.updateLoadingModal(true))
   const response = yield call(api.post, `${authUrl}/signup`, data)
+  yield put(displayActions.updateLoadingModal(false))
   if (response.success === true) {
     yield put(actions.changeRoute('/signin'))
     yield put(displayActions.updateSnackbar(true, `Activation link is sent to ${email}!`))
@@ -64,6 +68,7 @@ export function* handleGetUserProfile() {
       response.data.id,
       response.data.username,
       response.data.credit,
+      response.data.watch_tags,
     ))
   }
 
@@ -106,6 +111,14 @@ export function* handleGetNewPushNotification(update) {
           options.tag = `/information/${noti.content_id}`
           yield put(actions.showNotification('SNUwagon', options))
           break
+        case 'NEW_INFORMATION_ABOUT_TAG':
+          options.tag = `/information/${noti.content_id}`
+          yield put(actions.showNotification('SNUwagon', options))
+          break
+        case 'NEW_QUESTION_ABOUT_TAG':
+          options.tag = `/question/${noti.content_id}`
+          yield put(actions.showNotification('SNUwagon', options))
+          break
         default:
           break
       }
@@ -133,8 +146,10 @@ export function* handleShowNotification(message, options) {
       store.dispatch(actions.changeRoute(event.target.tag))
     }
 
+    notification.close.bind(notification)
+
     yield setTimeout(() => {
-      notification.close.bind(notification)
+      notification.close()
     }, 3000)
   }
 }
@@ -152,6 +167,18 @@ export function* handleResolveNewsfeed(nid) {
 
   if (response.success === true) {
     yield put(actions.getNewsfeed())
+  }
+}
+
+export function* handlePostWatchTags(tags) {
+  const data = { tags }
+  const response = yield call(api.post, `${baseUrl}/watchtags`, data)
+
+  if (response.success === true) {
+    yield put(displayActions.updateSnackbar(true, 'Tag notification successfully updated!'))
+    yield put(actions.getUserProfile())
+  } else {
+    yield put(displayActions.updateModal(true, response.message))
   }
 }
 
@@ -213,10 +240,17 @@ function* watchGetNewsfeed() {
   }
 }
 
-function* resolveNewsfeed() {
+function* watchResolveNewsfeed() {
   while (true) {
     const { nid } = yield take(actions.RESOLVE_NEWSFEED)
     yield call(handleResolveNewsfeed, nid)
+  }
+}
+
+function* watchPostWatchTags() {
+  while (true) {
+    const { tags } = yield take(actions.POST_WATCH_TAGS)
+    yield call(handlePostWatchTags, tags)
   }
 }
 
@@ -229,5 +263,6 @@ export default function* () {
   yield fork(watchShowNotification)
   yield fork(watchGetNewPushNotification)
   yield fork(watchGetNewsfeed)
-  yield fork(resolveNewsfeed)
+  yield fork(watchResolveNewsfeed)
+  yield fork(watchPostWatchTags)
 }

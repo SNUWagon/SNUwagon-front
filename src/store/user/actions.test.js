@@ -67,6 +67,7 @@ describe('user actions', () => {
       update: true,
     }
     expect(actions.getNewPushNotification(true)).toEqual(expectedAction)
+    expect(actions.getNewPushNotification()).toEqual(expectedAction)
   })
 
   it('should create an action to get newsfeed', () => {
@@ -103,5 +104,14 @@ describe('user actions', () => {
       options,
     }
     expect(actions.showNotification(message, options)).toEqual(expectedAction)
+  })
+
+  it('should create an action to post watch tags', () => {
+    const tags = []
+    const expectedAction = {
+      type: actions.POST_WATCH_TAGS,
+      tags,
+    }
+    expect(actions.postWatchTags(tags)).toEqual(expectedAction)
   })
 })

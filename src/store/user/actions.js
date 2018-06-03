@@ -9,6 +9,7 @@ export const GET_NEW_PUSH_NOTIFICATION = 'GET_NEW_PUSH_NOTIFICATION'
 export const GET_NEWSFEED = 'GET_NEWSFEED'
 export const UPDATE_NEWSFEED = 'UPDATE_NEWSFEED'
 export const RESOLVE_NEWSFEED = 'RESOLVE_NEWSFEED'
+export const POST_WATCH_TAGS = 'POST_WATCH_TAGS'
 
 export const changeRoute = (route) => {
   return {
@@ -47,12 +48,13 @@ export const getUserProfile = () => {
   }
 }
 
-export const updateUserProfile = (userId, username, credit) => {
+export const updateUserProfile = (userId, username, credit, watchTags) => {
   return {
     type: UPDATE_USER_PROFILE,
     userId,
     username,
     credit,
+    watchTags,
   }
 }
 
@@ -88,5 +90,12 @@ export const updateNewsfeed = (newsfeed) => {
   return {
     type: UPDATE_NEWSFEED,
     newsfeed,
+  }
+}
+
+export const postWatchTags = (tags) => {
+  return {
+    type: POST_WATCH_TAGS,
+    tags,
   }
 }

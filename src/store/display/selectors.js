@@ -7,4 +7,5 @@ export const initialState = {
   signUpModalContent: '',
   snackbarState: false,
   snackbarContent: '',
+  loadingState: false,
 }

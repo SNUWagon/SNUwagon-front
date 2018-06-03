@@ -15,7 +15,7 @@ describe('newsfeedelement', () => {
     }
 
     const wrapper = wrap(props)
-    wrapper.simulate('click')
+    wrapper.node.props.primaryText.props.onClick()
   })
 
   it('calls method on NEW_ANSWER type', () => {
@@ -28,7 +28,7 @@ describe('newsfeedelement', () => {
     }
 
     const wrapper = wrap(props)
-    wrapper.simulate('click')
+    wrapper.node.props.primaryText.props.onClick()
     expect(props.changeRoute).toHaveBeenCalled()
   })
 
@@ -42,7 +42,7 @@ describe('newsfeedelement', () => {
     }
 
     const wrapper = wrap(props)
-    wrapper.simulate('click')
+    wrapper.node.props.primaryText.props.onClick()
     expect(props.changeRoute).toHaveBeenCalled()
   })
 })
