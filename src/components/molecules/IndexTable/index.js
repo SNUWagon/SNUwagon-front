@@ -14,9 +14,10 @@ const styles = {
   },
   label: {
     fontSize: 18,
+    color: colors.indigo500,
   },
   tag: {
-    color: colors.amber700,
+    color: colors.orange800,
     fontSize: 14,
   },
   wrapper: {

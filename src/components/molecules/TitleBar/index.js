@@ -99,6 +99,11 @@ class TitleBar extends React.Component {
         alignItems: 'center',
         fontSize: 20,
       },
+      title: {
+        display: 'flex',
+        alignItems: 'center',
+        fontSize: 24,
+      },
       badge_inline: {
         color: colors.white,
         backgroundColor: colors.pink200,
@@ -127,6 +132,7 @@ class TitleBar extends React.Component {
           style={style.badge}
         >
           <IconButton
+            style={{ height: 24 }}
             iconStyle={{ color: colors.white }}
             onClick={this.handleNewsfeedOpen}
           >
@@ -189,12 +195,14 @@ class TitleBar extends React.Component {
       <FlatButton
         className={'sign-in-button'}
         onClick={this.handleSignIn}
+        style={{ color: 'white' }}
       >Sign in</FlatButton>
     )
 
     const title = (
-      <div style={style.div}>
+      <div style={style.title}>
         <Avatar
+          backgroundColor={'#FFFFFF00'}
           src={'/title.png'}
         />
         {'SNUwagon'}

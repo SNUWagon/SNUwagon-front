@@ -34,7 +34,7 @@ const PostListElement = ({ onClick, type, title, due, tags, rightIcon }) => {
       primaryText={title}
       secondaryText={
         <p>
-          <span style={{ color: colors.indigoA200 }}>{formatTags(tags)}</span><br />
+          <span style={{ color: colors.orange800 }}>{formatTags(tags)}</span><br />
           ~{formatDue(due)}
         </p>
       }
