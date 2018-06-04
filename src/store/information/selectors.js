@@ -10,4 +10,5 @@ export const initialState = {
   author: undefined,
   sponsorCredit: undefined,
   tags: [],
+  created: undefined,
 }

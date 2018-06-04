@@ -33,6 +33,7 @@ export function* handleGetInformationPost(postId) {
       response.data.due,
       response.data.author,
       response.data.tags,
+      response.data.created,
     ))
   }
 }

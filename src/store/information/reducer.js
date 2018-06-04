@@ -15,6 +15,7 @@ const informationReducer = (state = initialState, action) => {
         due: action.due,
         author: action.author,
         tags: action.tags,
+        created: action.created,
       })
     default:
       return state
