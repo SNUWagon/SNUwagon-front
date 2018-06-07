@@ -1,9 +1,9 @@
 import React from 'react'
 import { shallow } from 'enzyme'
 import configureStore from 'redux-mock-store'
-import QuestionWrite from '.'
+import { QuestionWriteShallow, mapStateToProps, mapDispatchToProps } from '.'
 
-const wrap = (props = {}) => shallow(<QuestionWrite {...props} />)
+const wrap = (props = {}) => shallow(<QuestionWriteShallow {...props} />)
 const mockStore = configureStore([])
 const initialState = {
   user: {
@@ -73,7 +73,7 @@ it('handles click submit question button with tags', () => {
         },
       },
       search: {
-        tagList: [],
+        tagList: ['tag1', 'tag2'],
       },
     },
     onClickWriteQuestion: jest.fn(),
@@ -106,6 +106,7 @@ it('does not handle submit question button if not all required fields are filled
       },
     },
     onClickWriteQuestion: jest.fn(),
+    showFailModal: jest.fn(),
   }
   const wrapper = wrap(props)
 
@@ -114,6 +115,7 @@ it('does not handle submit question button if not all required fields are filled
   wrapper.find('.due-input').simulate('change', { date: '0001-01-01T01:01:00Z' })
   wrapper.find('.write-question-button').simulate('click')
   expect(props.onClickWriteQuestion).not.toHaveBeenCalled()
+  expect(props.showFailModal).toHaveBeenCalled()
 })
 
 it('handles click back button', () => {
@@ -128,4 +130,14 @@ it('handles click back button', () => {
   const wrapper = wrap(props)
   wrapper.find('.back-button').simulate('click')
   expect(props.onClickBack).toHaveBeenCalled()
+})
+
+it('mapStateToProps', () => {
+  expect(mapStateToProps()).toEqual({})
+})
+
+it('mapDispatchToProps', () => {
+  const dispatch = jest.fn()
+  mapDispatchToProps(dispatch).showFailModal()
+  expect(dispatch.mock.calls[0][0]).toEqual({ type: 'UPDATE_MODAL', modalState: true, content: 'Please fill in all required fields.' })
 })

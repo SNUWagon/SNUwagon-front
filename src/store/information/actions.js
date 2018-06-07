@@ -34,7 +34,7 @@ export const getInformationPost = (postId) => {
   }
 }
 
-export const updateInformationPost = (postId, title, content, hiddenExist, hiddenContent, hiddenContentCost, hiddenBought, due, author, tags) => {
+export const updateInformationPost = (postId, title, content, hiddenExist, hiddenContent, hiddenContentCost, hiddenBought, due, author, tags, created) => {
   return {
     type: UPDATE_INFORMATION_POST,
     postId,
@@ -47,6 +47,7 @@ export const updateInformationPost = (postId, title, content, hiddenExist, hidde
     due,
     author,
     tags,
+    created,
   }
 }
 

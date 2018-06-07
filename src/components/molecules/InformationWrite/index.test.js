@@ -1,9 +1,9 @@
 import React from 'react'
 import { shallow } from 'enzyme'
 import configureStore from 'redux-mock-store'
-import InformationWrite from '.'
+import { InformationWriteShallow, mapStateToProps, mapDispatchToProps } from '.'
 
-const wrap = (props = {}) => shallow(<InformationWrite {...props} />)
+const wrap = (props = {}) => shallow(<InformationWriteShallow {...props} />)
 const mockStore = configureStore([])
 const initialState = {
   user: {
@@ -159,6 +159,7 @@ it('does not write information without all mandatory fields filled', () => {
       },
     },
     onClickWriteInformation: jest.fn(),
+    showFailModal: jest.fn(),
   }
   const wrapper = wrap(props)
 
@@ -166,6 +167,72 @@ it('does not write information without all mandatory fields filled', () => {
   wrapper.find('.due-input').simulate('change', { date: '0001-01-01T01:01:00Z' })
   wrapper.find('.write-information-button').simulate('click')
   expect(props.onClickWriteInformation).not.toHaveBeenCalled()
+  expect(props.showFailModal).toHaveBeenCalled()
+})
+
+it('does not write information when hidden content is filled without cost', () => {
+  const props = {
+    store,
+    state: {
+      user: {
+        login: true,
+        profile: {
+          username: 'user',
+          userId: 1,
+          credit: 10,
+        },
+      },
+      search: {
+        tagList: ['tag1', 'tag2'],
+      },
+    },
+    onClickWriteInformation: jest.fn(),
+    showFailModal: jest.fn(),
+  }
+  const wrapper = wrap(props)
+
+  wrapper.find('.title-input').simulate('change', { target: { value: 'title' } })
+  wrapper.find('.content-input').simulate('change', { target: { value: 'content' } })
+  wrapper.find('.due-input').simulate('change', { date: '0001-01-01T01:01:00Z' })
+  wrapper.find('.hidden-content-button').simulate('click')
+  wrapper.find('.hidden-content-input').simulate('change', { target: { value: 'hidden' } })
+  wrapper.find('.write-information-button').simulate('click')
+  expect(props.onClickWriteInformation).not.toHaveBeenCalled()
+  expect(props.showFailModal).toHaveBeenCalled()
+  wrapper.find('.hidden-content-cost-input').simulate('change', { target: { value: 1 } })
+  wrapper.find('.write-information-button').simulate('click')
+  expect(props.onClickWriteInformation).toHaveBeenCalled()
+})
+
+it('does not write information when hidden content does not exist but hidden content cost is filled', () => {
+  const props = {
+    store,
+    state: {
+      user: {
+        login: true,
+        profile: {
+          username: 'user',
+          userId: 1,
+          credit: 10,
+        },
+      },
+      search: {
+        tagList: ['tag1', 'tag2'],
+      },
+    },
+    onClickWriteInformation: jest.fn(),
+    showFailModal: jest.fn(),
+  }
+  const wrapper = wrap(props)
+
+  wrapper.find('.title-input').simulate('change', { target: { value: 'title' } })
+  wrapper.find('.content-input').simulate('change', { target: { value: 'content' } })
+  wrapper.find('.due-input').simulate('change', { date: '0001-01-01T01:01:00Z' })
+  wrapper.find('.hidden-content-button').simulate('click')
+  wrapper.find('.hidden-content-cost-input').simulate('change', { target: { value: 1 } })
+  wrapper.find('.write-information-button').simulate('click')
+  expect(props.onClickWriteInformation).not.toHaveBeenCalled()
+  expect(props.showFailModal).toHaveBeenCalled()
 })
 
 it('handles click back button', () => {
@@ -180,4 +247,14 @@ it('handles click back button', () => {
   const wrapper = wrap(props)
   wrapper.find('.back-button').simulate('click')
   expect(props.onClickBack).toHaveBeenCalled()
+})
+
+it('mapStateToProps', () => {
+  expect(mapStateToProps()).toEqual({})
+})
+
+it('mapDispatchToProps', () => {
+  const dispatch = jest.fn()
+  mapDispatchToProps(dispatch).showFailModal()
+  expect(dispatch.mock.calls[0][0]).toEqual({ type: 'UPDATE_MODAL', modalState: true, content: 'Please fill in all required fields.' })
 })

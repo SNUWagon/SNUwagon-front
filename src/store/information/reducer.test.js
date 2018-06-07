@@ -17,8 +17,9 @@ describe('information reducer', () => {
     const hiddenBought = true
     const due = '0001-01-01T01:01:00Z'
     const author = 'authorname'
-    const tags = 'tag'
-    expect(informationReducer({}, actions.updateInformationPost(postId, title, content, hiddenExist, hiddenContent, hiddenContentCost, hiddenBought, due, author, tags)))
+    const tags = ['tag']
+    const created = '0002-01-01T01:01:00Z'
+    expect(informationReducer({}, actions.updateInformationPost(postId, title, content, hiddenExist, hiddenContent, hiddenContentCost, hiddenBought, due, author, tags, created)))
       .toEqual({
         postId,
         title,
@@ -30,6 +31,7 @@ describe('information reducer', () => {
         due,
         author,
         tags,
+        created,
       })
   })
 })
