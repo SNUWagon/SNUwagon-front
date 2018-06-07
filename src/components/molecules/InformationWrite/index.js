@@ -1,10 +1,12 @@
 import React, { PropTypes } from 'react'
+import { connect } from 'react-redux'
 import { Card, CardActions, CardHeader, CardMedia, CardTitle, CardText } from 'material-ui/Card'
 import * as colors from 'material-ui/styles/colors'
 import RaisedButton from 'material-ui/RaisedButton'
 import Input from '../../atoms/BaseInput'
 import CustomDatePicker from '../../atoms/CustomDatePicker'
 import TagSelector from '../../molecules/TagSelector'
+import { updateModal } from '../../../store/display/actions'
 
 const style = {
   width: 800,
@@ -14,94 +16,132 @@ const style = {
   padding: '20px 20px 20px 20px',
 }
 
-const InformationWrite = ({ onClickBack, onClickWriteInformation, state }) => {
-  let title
-  let content
-  let hiddenExist = false
-  let hiddenContent
-  let hiddenContentCost
-  let hiddenBought
-  let due
-  let sponsorCredit
-  let tags
+let title
+let content
+let hiddenExist = false
+let hiddenContent
+let hiddenContentCost
+let hiddenBought
+let due
+let sponsorCredit
+let tags
 
-  const onClickBackButton = () => {
-    onClickBack('')
+class InformationWrite extends React.Component {
+  constructor(props) {
+    super(props)
+    this.onClickBackButton = this.onClickBackButton.bind(this)
+    this.onClickWriteInformationButton = this.onClickWriteInformationButton.bind(this)
   }
 
-  const onClickWriteInformationButton = () => {
+  onClickBackButton = () => {
+    this.props.onClickBack('')
+  }
+
+  onClickWriteInformationButton = () => {
     if (title && content && due) {
-      if (hiddenExist && hiddenContent !== undefined && hiddenContentCost !== undefined) {
-        hiddenContent = hiddenContent.value
-        hiddenContentCost = hiddenContentCost.value
-        hiddenBought = true
-      } else {
-        hiddenContent = ''
-        hiddenContentCost = 0
-        hiddenBought = false
-      }
       if (sponsorCredit === undefined) {
         sponsorCredit = 0
       } else {
         sponsorCredit = sponsorCredit.value
       }
-      onClickWriteInformation(title.value, content.value, hiddenExist, hiddenContent, hiddenContentCost, hiddenBought, due, state.user.profile.username, sponsorCredit, tags)
+
+      if (hiddenExist && hiddenContent !== undefined && hiddenContentCost !== undefined) {
+        hiddenContent = hiddenContent.value
+        hiddenContentCost = hiddenContentCost.value
+        hiddenBought = true
+      } else if (!hiddenExist || (hiddenContent === undefined && hiddenContentCost === undefined)) {
+        hiddenExist = false
+        hiddenContent = ''
+        hiddenContentCost = 0
+        hiddenBought = false
+      } else {
+        this.props.showFailModal()
+        return
+      }
+
+      this.props.onClickWriteInformation(title.value, content.value, hiddenExist, hiddenContent, hiddenContentCost, hiddenBought, due, this.props.state.user.profile.username, sponsorCredit, tags)
+
+      title = undefined
+      content = undefined
+      hiddenExist = false
+      hiddenContent = undefined
+      hiddenContentCost = undefined
+      hiddenBought = undefined
+      due = undefined
+      sponsorCredit = undefined
+      tags = undefined
+    } else {
+      this.props.showFailModal()
     }
   }
 
-  return (
-    <div style={{ textAlign: 'center', margin: '40px 0px' }}>
-      <Card style={style} zDepth={3}>
-        <div style={{ fontSize: 25, color: colors.indigo500 }}>
-          Write an information!
-        </div>
-        <br />
-        <Input
-          fullWidth
-          className={'title-input'} floatingLabelText="Information Title"
-          floatingLabelFixed
-          onChange={node => { title = node.target }}
-        />
-        <br />
-        <Input
-          style={{ textAlign: 'left' }}
-          fullWidth multiLine rows={5} rowsMax={5}
-          floatingLabelText="Post Contents"
-          floatingLabelFixed
-          className={'content-input'}
-          onChange={node => { content = node.target }} type={'textarea'}
-        />
-        <br />
-        <CardActions actAsExpander>
-          <RaisedButton className={'hidden-content-button'} type={'submit'} onClick={() => { hiddenExist = !hiddenExist }}>Add Hidden Contents</RaisedButton>
-        </CardActions>
-        <CardText expandable>
+  render() {
+    return (
+      <div style={{ textAlign: 'center', margin: '40px 0px' }}>
+        <Card style={style} zDepth={3}>
+          <div style={{ fontSize: 25, color: colors.indigo500 }}>
+            Write an information!
+          </div>
+          <br />
           <Input
-            style={{ textAlign: 'left', width: 500 }}
-            className={'hidden-content-input'} floatingLabelText="Hidden Contents"
-            multiLine rows={2}
+            fullWidth
+            className={'title-input'} floatingLabelText="Information Title"
             floatingLabelFixed
-            onChange={node => { hiddenContent = node.target }}
+            onChange={node => { title = node.target }}
           />
+          <br />
           <Input
-            style={{ width: 200 }}
-            className={'hidden-content-cost-input'} hintText={'Hidden Content Cost'}
-            onChange={node => { hiddenContentCost = node.target }} type={'number'} pattern={'d+'} min={'0'} step={'1'}
+            style={{ textAlign: 'left' }}
+            fullWidth multiLine rows={5} rowsMax={5}
+            floatingLabelText="Post Contents"
+            floatingLabelFixed
+            className={'content-input'}
+            onChange={node => { content = node.target }} type={'textarea'}
           />
-        </CardText>
-        <TagSelector className={'tag-input'} tagList={state.search.tagList.map(tag => `#${tag}`)} onUpdate={(tag) => { tags = tag }} />
-        <Input
-          className={'sponsor-credit-input'} hintText={'Sponsor Credit'}
-          onChange={node => { sponsorCredit = node.target }} type={'number'} pattern={'d+'} min={'0'} step={'1'}
-        />
-        <CustomDatePicker className={'due-input'} onChange={date => { due = date }} />
-        <br />
-        <RaisedButton className={'back-button'} type={'submit'} onClick={onClickBackButton}>Back</RaisedButton>
-        {'   '}
-        <RaisedButton className={'write-information-button'} type={'submit'} onClick={onClickWriteInformationButton}>Submit Information</RaisedButton>
-      </Card>
-    </div>
-  )
+          <br />
+          <CardActions actAsExpander>
+            <RaisedButton className={'hidden-content-button'} type={'submit'} onClick={() => { hiddenExist = !hiddenExist }}>Add Hidden Contents</RaisedButton>
+          </CardActions>
+          <CardText expandable>
+            <Input
+              style={{ textAlign: 'left', width: 500 }}
+              className={'hidden-content-input'} floatingLabelText="Hidden Contents"
+              multiLine rows={2}
+              floatingLabelFixed
+              onChange={node => { hiddenContent = node.target }}
+            />
+            <Input
+              style={{ width: 200 }}
+              className={'hidden-content-cost-input'} hintText={'Hidden Content Cost'}
+              onChange={node => { hiddenContentCost = node.target }} type={'number'} pattern={'d+'} min={'0'} step={'1'}
+            />
+          </CardText>
+          <TagSelector className={'tag-input'} tagList={this.props.state.search.tagList.map(tag => `#${tag}`)} onUpdate={(tag) => { tags = tag }} />
+          <Input
+            className={'sponsor-credit-input'} hintText={'Sponsor Credit (Optional)'}
+            onChange={node => { sponsorCredit = node.target }} type={'number'} pattern={'d+'} min={'0'} step={'1'}
+          />
+          <CustomDatePicker className={'due-input'} onChange={date => { due = date }} />
+          <br />
+          <RaisedButton className={'back-button'} type={'submit'} onClick={this.onClickBackButton}>Back</RaisedButton>
+          {'   '}
+          <RaisedButton className={'write-information-button'} type={'submit'} onClick={this.onClickWriteInformationButton}>Submit Information</RaisedButton>
+        </Card>
+      </div>
+    )
+  }
+}
+
+export const mapStateToProps = () => {
+  return {}
+}
+
+export const mapDispatchToProps = (dispatch) => {
+  return {
+    showFailModal: () => {
+      dispatch(updateModal(true, 'Please fill in all required fields.'))
+    },
+  }
 }
 
 InformationWrite.propTypes = {
@@ -109,6 +149,8 @@ InformationWrite.propTypes = {
   onClickWriteInformation: PropTypes.func,
   state: PropTypes.object,
   reverse: PropTypes.bool,
+  showFailModal: PropTypes.func,
 }
 
-export default InformationWrite
+export const InformationWriteShallow = InformationWrite
+export default connect(mapStateToProps, mapDispatchToProps)(InformationWrite)
