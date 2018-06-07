@@ -5,6 +5,7 @@ import Avatar from 'material-ui/Avatar'
 import Chip from 'material-ui/Chip'
 // import RaisedButton from 'material-ui/RaisedButton'
 import Button from '../../../components/atoms/BaseButton'
+import VoteBox from '../../../components/molecules/VoteBox'
 
 const style = {
   width: 800,
@@ -14,7 +15,7 @@ const style = {
   padding: '20px 20px 20px 20px',
 }
 
-const Information = ({ onClickPurchase, ...props }) => {
+const Information = ({ onClickPurchase, postVote, ...props }) => {
   const i = props.information
   const onClickPurchaseButton = () => {
     onClickPurchase(i.postId)
@@ -64,6 +65,13 @@ const Information = ({ onClickPurchase, ...props }) => {
             }
           </div>
         </CardText>
+        <VoteBox
+          className={'vote-box'}
+          upVoteValue={i.vote.upVote}
+          downVoteValue={i.vote.downVote}
+          onClickUpVote={() => postVote(i.postId, 'upvote')}
+          onClickDownVote={() => postVote(i.postId, 'downvote')}
+        />
         <CardHeader style={{ float: 'right', textAlign: 'right', margin: '0px', padding: '0px' }} >
           <div style={{ display: 'inline-block', verticalAlign: 'top', whitespace: 'normal', padding: '0px' }} >
             <span style={{ display: 'block', fontSize: '15px', margin: '0px' }} >{`Written by ${i.author}`}</span>
@@ -86,6 +94,7 @@ Information.propTypes = {
   onClickPurchase: PropTypes.func,
   information: PropTypes.object,
   user: PropTypes.object,
+  postVote: PropTypes.func,
 }
 
 export default Information
