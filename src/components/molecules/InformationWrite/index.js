@@ -51,11 +51,6 @@ class InformationWrite extends React.Component {
       }
 
       if (hiddenExist && hiddenContent !== undefined && hiddenContentCost !== undefined) {
-        if (hiddenContentCost.value < 0) {
-          this.props.showFailModal()
-          return
-        }
-
         hiddenContentValue = hiddenContent.value
         hiddenContentCostValue = hiddenContentCost.value
         hiddenBought = true
