@@ -73,7 +73,7 @@ it('handles click submit question button with tags', () => {
         },
       },
       search: {
-        tagList: [],
+        tagList: ['tag1', 'tag2'],
       },
     },
     onClickWriteQuestion: jest.fn(),
