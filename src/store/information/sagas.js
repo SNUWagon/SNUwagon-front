@@ -3,9 +3,11 @@ import { push } from 'react-router-redux'
 import api from 'services/api'
 import * as actions from './actions'
 import * as userActions from '../user/actions'
+import * as displayActions from '../display/actions'
 
 const baseUrl = ''
 const informationUrl = `${baseUrl}/posts/information`
+const voteUrl = `${baseUrl}/vote`
 
 export function* handleChangeRoute(newRoute) {
   yield put(push(newRoute))
@@ -47,6 +49,25 @@ export function* handlePurchaseInformationPost(postId) {
   }
 }
 
+export function* handleGetVote(postId) {
+  const response = yield call(api.get, `${voteUrl}/${postId}`)
+  if (response.success === true) {
+    yield put(actions.updateVote(response.data.upvotes, response.data.downvotes))
+  }
+}
+
+export function* handlePostVote(postId, voteType) {
+  const data = {
+    vote_type: voteType,
+  }
+  const response = yield call(api.post, `${voteUrl}/${postId}`, data)
+  if (response.success === true) {
+    yield put(actions.getVote(postId))
+  } else {
+    yield put(displayActions.updateModal(true, 'You already voted for this information!'))
+  }
+}
+
 /* watcher functions */
 function* watchChangeRoute() {
   while (true) {
@@ -76,9 +97,25 @@ function* watchPurchaseInformationPost() {
   }
 }
 
+function* watchGetVote() {
+  while (true) {
+    const { postId } = yield take(actions.GET_VOTE)
+    yield call(handleGetVote, postId)
+  }
+}
+
+function* watchPostVote() {
+  while (true) {
+    const { postId, voteType } = yield take(actions.POST_VOTE)
+    yield call(handlePostVote, postId, voteType)
+  }
+}
+
 export default function* () {
   yield fork(watchChangeRoute)
   yield fork(watchWriteInformationPost)
   yield fork(watchGetInformationPost)
   yield fork(watchPurchaseInformationPost)
+  yield fork(watchGetVote)
+  yield fork(watchPostVote)
 }

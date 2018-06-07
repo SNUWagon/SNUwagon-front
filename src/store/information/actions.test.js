@@ -81,4 +81,35 @@ describe('information actions', () => {
     }
     expect(actions.purchaseInformationPost(postId)).toEqual(expectedAction)
   })
+
+  it('should create an action to get vote', () => {
+    const postId = 1
+    const expectedAction = {
+      type: actions.GET_VOTE,
+      postId,
+    }
+    expect(actions.getVote(postId)).toEqual(expectedAction)
+  })
+
+  it('should create an action to update vote', () => {
+    const upVote = 1
+    const downVote = 2
+    const expectedAction = {
+      type: actions.UPDATE_VOTE,
+      upVote,
+      downVote,
+    }
+    expect(actions.updateVote(upVote, downVote)).toEqual(expectedAction)
+  })
+
+  it('should create an action to post vote', () => {
+    const postId = 1
+    const voteType = 'upvote'
+    const expectedAction = {
+      type: actions.POST_VOTE,
+      postId,
+      voteType,
+    }
+    expect(actions.postVote(postId, voteType)).toEqual(expectedAction)
+  })
 })

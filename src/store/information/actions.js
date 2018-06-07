@@ -3,6 +3,9 @@ export const WRITE_INFORMATION_POST = 'WRITE_INFORMATION_POST'
 export const GET_INFORMATION_POST = 'GET_INFORMATION_POST'
 export const UPDATE_INFORMATION_POST = 'UPDATE_INFORMATION_POST'
 export const PURCHASE_INFORMATION_POST = 'PURCHASE_INFORMATION_POST'
+export const GET_VOTE = 'GET_VOTE'
+export const UPDATE_VOTE = 'UPDATE_VOTE'
+export const POST_VOTE = 'POST_VOTE'
 
 export const changeRoute = (route) => {
   return {
@@ -55,5 +58,28 @@ export const purchaseInformationPost = (postId) => {
   return {
     type: PURCHASE_INFORMATION_POST,
     postId,
+  }
+}
+
+export const getVote = (postId) => {
+  return {
+    type: GET_VOTE,
+    postId,
+  }
+}
+
+export const updateVote = (upVote, downVote) => {
+  return {
+    type: UPDATE_VOTE,
+    upVote,
+    downVote,
+  }
+}
+
+export const postVote = (postId, voteType) => {
+  return {
+    type: POST_VOTE,
+    postId,
+    voteType,
   }
 }
