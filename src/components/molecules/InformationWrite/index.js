@@ -2,7 +2,8 @@ import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { Card, CardActions, CardHeader, CardMedia, CardTitle, CardText } from 'material-ui/Card'
 import * as colors from 'material-ui/styles/colors'
-import RaisedButton from 'material-ui/RaisedButton'
+// import RaisedButton from 'material-ui/RaisedButton'
+import Button from '../../../components/atoms/BaseButton'
 import Input from '../../atoms/BaseInput'
 import CustomDatePicker from '../../atoms/CustomDatePicker'
 import TagSelector from '../../molecules/TagSelector'
@@ -38,28 +39,39 @@ class InformationWrite extends React.Component {
   }
 
   onClickWriteInformationButton = () => {
+    let sponsorCreditValue
+    let hiddenContentValue
+    let hiddenContentCostValue
+
     if (title && content && due) {
-      if (sponsorCredit === undefined) {
-        sponsorCredit = 0
+      if (sponsorCredit === undefined || sponsorCredit < 0) {
+        sponsorCreditValue = 0
       } else {
-        sponsorCredit = sponsorCredit.value
+        sponsorCreditValue = sponsorCredit.value
       }
 
       if (hiddenExist && hiddenContent !== undefined && hiddenContentCost !== undefined) {
-        hiddenContent = hiddenContent.value
-        hiddenContentCost = hiddenContentCost.value
+        if (hiddenContentCost.value < 0) {
+          this.props.showFailModal()
+          return
+        }
+
+        hiddenContentValue = hiddenContent.value
+        hiddenContentCostValue = hiddenContentCost.value
         hiddenBought = true
       } else if (!hiddenExist || (hiddenContent === undefined && hiddenContentCost === undefined)) {
         hiddenExist = false
-        hiddenContent = ''
-        hiddenContentCost = 0
+        hiddenContentValue = ''
+        hiddenContentCostValue = 0
         hiddenBought = false
       } else {
         this.props.showFailModal()
         return
       }
 
-      this.props.onClickWriteInformation(title.value, content.value, hiddenExist, hiddenContent, hiddenContentCost, hiddenBought, due, this.props.state.user.profile.username, sponsorCredit, tags)
+      this.props.onClickWriteInformation(title.value, content.value,
+                                         hiddenExist, hiddenContentValue, hiddenContentCostValue, hiddenBought,
+                                         due, this.props.state.user.profile.username, sponsorCreditValue, tags)
 
       title = undefined
       content = undefined
@@ -100,7 +112,7 @@ class InformationWrite extends React.Component {
           />
           <br />
           <CardActions actAsExpander>
-            <RaisedButton className={'hidden-content-button'} type={'submit'} onClick={() => { hiddenExist = !hiddenExist }}>Add Hidden Contents</RaisedButton>
+            <Button className={'hidden-content-button'} type={'submit'} onClick={() => { hiddenExist = !hiddenExist }}>Add Hidden Contents</Button>
           </CardActions>
           <CardText expandable>
             <Input
@@ -123,9 +135,9 @@ class InformationWrite extends React.Component {
           />
           <CustomDatePicker className={'due-input'} onChange={date => { due = date }} />
           <br />
-          <RaisedButton className={'back-button'} type={'submit'} onClick={this.onClickBackButton}>Back</RaisedButton>
-          {'   '}
-          <RaisedButton className={'write-information-button'} type={'submit'} onClick={this.onClickWriteInformationButton}>Submit Information</RaisedButton>
+          <Button className={'back-button'} style={{ margin: 10 }} type={'submit'} onClick={this.onClickBackButton}>Back</Button>
+          {' '}
+          <Button className={'write-information-button'} style={{ margin: 10 }} type={'submit'} onClick={this.onClickWriteInformationButton}>Submit</Button>
         </Card>
       </div>
     )
