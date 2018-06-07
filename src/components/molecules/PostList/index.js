@@ -34,14 +34,14 @@ class PostList extends React.Component {
       icon = (
         <Avatar
           size={32}
-          color={colors.grey900}
+          color={colors.grey800}
           backgroundColor={colors.blueGrey100}
           style={{
             display: 'flex',
             alignItems: 'center',
           }}
         >
-          {post.bounty}
+          <span style={{ fontSize: 12 }}>{post.bounty}</span>
         </Avatar>
       )
     } else if (this.props.type === 'information') {

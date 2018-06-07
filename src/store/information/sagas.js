@@ -18,6 +18,7 @@ export function* handleWriteInformationPost(title, content, hiddenExist, hiddenC
   const response = yield call(api.post, `${informationUrl}`, data)
   if (response.success === true) {
     yield put(actions.changeRoute(`/information/${response.data.id}`))
+    yield put(displayActions.updateSnackbar(true, `${title} posted!`))
   }
 }
 
@@ -46,6 +47,7 @@ export function* handlePurchaseInformationPost(postId) {
   if (response.success === true) {
     yield put(actions.getInformationPost(postId))
     yield put(userActions.getUserProfile())
+    yield put(displayActions.updateSnackbar(true, 'Successfully bought hidden information *_*!'))
   }
 }
 

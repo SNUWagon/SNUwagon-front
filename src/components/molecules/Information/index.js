@@ -3,6 +3,8 @@ import { Card, CardActions, CardHeader, CardMedia, CardTitle, CardText } from 'm
 import * as colors from 'material-ui/styles/colors'
 import Avatar from 'material-ui/Avatar'
 import Chip from 'material-ui/Chip'
+import Divider from 'material-ui/Divider'
+import Paper from 'material-ui/Paper'
 // import RaisedButton from 'material-ui/RaisedButton'
 import Button from '../../../components/atoms/BaseButton'
 import VoteBox from '../../../components/molecules/VoteBox'
@@ -50,8 +52,16 @@ const Information = ({ onClickPurchase, postVote, ...props }) => {
             <br /><br />
             {i.content}
             <br />
-            {showHidden ? (<div style={{ color: colors.grey500 }} > {i.hiddenContent} </div>) : ''}
+            {showHidden ? (
+              <div style={{ color: colors.grey600, marginTop: 30 }}>
+                <Divider />
+                <div style={{ marginTop: 30 }}>
+                  {i.hiddenContent}
+                </div>
+              </div>
+            ) : ''}
             <br />
+            {/*
             {(i.hiddenExist && !showHidden) ? (
               <div>
                 <CardText style={{ fontSize: 16, textAlign: 'center', color: colors.indigo400 }}>
@@ -63,6 +73,57 @@ const Information = ({ onClickPurchase, postVote, ...props }) => {
               </div>
             ) : ''
             }
+            */}
+            {(i.hiddenExist && !showHidden) ? (
+              <Paper
+                style={{
+                  width: '90%',
+                  margin: 'auto',
+                }}
+                zDepth={1}
+              >
+                <div
+                  style={{
+                    backgroundImage: 'url(/blue-blur.png)',
+                    backgroundSize: 'cover',
+                    opacity: 0.8,
+                  }}
+                >
+                  <Divider style={{ margin: 50 }} />
+                  <Paper
+                    style={{
+                      width: '70%',
+                      margin: 'auto',
+                    }}
+                  >
+                    <div style={{ margin: 50 }}>
+                      <CardText style={{ fontSize: 16, textAlign: 'center', color: colors.indigo400 }}>
+                        {'Purchase hidden contents for '}
+                        <span style={{ fontSize: 24, color: colors.orange700 }}>{i.hiddenContentCost}</span>
+                        {' credit'}
+                      </CardText>
+                      <Button
+                        className={'purchase-button'}
+                        style={{ margin: 30 }}
+                        type={'submit'}
+                        onClick={onClickPurchaseButton}
+                      >Purchase</Button>
+                    </div>
+                  </Paper>
+                  <Divider style={{ margin: 50 }} />
+                </div>
+              </Paper>
+              // <CardMedia
+              //   mediaStyle={{
+              //     width: '60%',
+              //     margin: 'auto',
+              //     opacity: 0.5,
+              //   }}
+              //   overlay={<Button className={'purchase-button'} type={'submit'} onClick={onClickPurchaseButton}>Purchase</Button>}
+              // >
+              //
+              // </CardMedia>
+            ) : ''}
           </div>
         </CardText>
         <VoteBox
