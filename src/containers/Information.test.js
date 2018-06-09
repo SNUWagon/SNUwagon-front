@@ -21,5 +21,7 @@ describe('InformationContainer', () => {
     const dispatch = jest.fn()
     mapDispatchToProps(dispatch).onClickPurchase()
     expect(dispatch.mock.calls[0][0]).toEqual({ type: 'PURCHASE_INFORMATION_POST' })
+    mapDispatchToProps(dispatch).postVote()
+    expect(dispatch.mock.calls[1][0]).toEqual({ type: 'POST_VOTE' })
   })
 })

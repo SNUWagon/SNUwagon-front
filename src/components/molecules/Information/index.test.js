@@ -29,6 +29,10 @@ it('renders', () => {
       author: undefined,
       sponsorCredit: undefined,
       tags: undefined,
+      vote: {
+        upVote: undefined,
+        downVote: undefined,
+      },
     },
   }
   const store = mockStore(initialState)
@@ -55,6 +59,10 @@ it('renders', () => {
       author: 'user',
       sponsorCredit: 5,
       tags: ['tag1', 'tag2'],
+      vote: {
+        upVote: 1,
+        downVote: 1,
+      },
     },
     // onClickPurchase: jest.fn(),
   }
@@ -83,6 +91,10 @@ it('handles click purchase button for unbought question', () => {
       author: undefined,
       sponsorCredit: undefined,
       tags: undefined,
+      vote: {
+        upVote: 1,
+        downVote: 1,
+      },
     },
   }
   const store = mockStore(initialState)
@@ -108,10 +120,18 @@ it('handles click purchase button for unbought question', () => {
       author: 'notuser',
       sponsorCredit: 5,
       tags: ['tag1', 'tag2'],
+      vote: {
+        upVote: 1,
+        downVote: 1,
+      },
     },
     onClickPurchase: jest.fn(),
+    postVote: jest.fn(),
   }
   const wrapper = wrap(props)
   wrapper.find('.purchase-button').simulate('click')
+  wrapper.find('.vote-box').props().onClickUpVote()
+  wrapper.find('.vote-box').props().onClickDownVote()
   expect(props.onClickPurchase).toHaveBeenCalled()
+  expect(props.postVote).toHaveBeenCalled()
 })

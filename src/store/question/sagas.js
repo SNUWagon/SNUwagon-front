@@ -2,6 +2,7 @@ import { take, call, fork, put } from 'redux-saga/effects'
 import { push } from 'react-router-redux'
 import api from 'services/api'
 import * as actions from './actions'
+import * as displayActions from '../display/actions'
 import { updateQuestionAnswer } from '../answer/actions'
 
 const baseUrl = ''
@@ -17,6 +18,7 @@ export function* handleWriteQuestionPost(title, content, due, bounty, author, ta
   const response = yield call(api.post, `${questionUrl}`, data)
   if (response.success === true) {
     yield put(actions.changeRoute(`/question/${response.data.id}`))
+    yield put(displayActions.updateSnackbar(true, `${title} posted!`))
   }
 }
 

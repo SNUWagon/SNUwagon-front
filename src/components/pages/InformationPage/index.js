@@ -2,7 +2,9 @@ import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
 import TitleBar from '../../../components/molecules/TitleBar'
 import Information from '../../../containers/Information'
-import { getInformationPost } from '../../../store/information/actions'
+import { getInformationPost, getVote } from '../../../store/information/actions'
+import BaseModal from '../../../containers/modals/BaseModal'
+import BaseSnackbar from '../../../containers/BaseSnackbar'
 
 class InformationPage extends React.Component {
 
@@ -21,6 +23,8 @@ class InformationPage extends React.Component {
       <div>
         <TitleBar />
         <Information id={informationId} />
+        <BaseModal />
+        <BaseSnackbar />
       </div>
     )
   }
@@ -43,6 +47,7 @@ export const mapDispatchToProps = (dispatch) => {
   return {
     loadInformation: (postId) => {
       dispatch(getInformationPost(postId))
+      dispatch(getVote(postId))
     },
   }
 }

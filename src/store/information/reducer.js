@@ -17,6 +17,13 @@ const informationReducer = (state = initialState, action) => {
         tags: action.tags,
         created: action.created,
       })
+    case actions.UPDATE_VOTE:
+      return Object.assign({}, state, {
+        vote: {
+          upVote: action.upVote,
+          downVote: action.downVote,
+        },
+      })
     default:
       return state
   }

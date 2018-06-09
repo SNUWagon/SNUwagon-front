@@ -11,4 +11,9 @@ export const initialState = {
   sponsorCredit: undefined,
   tags: [],
   created: undefined,
+
+  vote: {
+    upVote: 0,
+    downVote: 0,
+  },
 }

@@ -4,6 +4,8 @@ import TitleBar from '../../../components/molecules/TitleBar'
 import Question from '../../../containers/Question'
 import { getQuestionPost } from '../../../store/question/actions'
 import { getQuestionAnswer } from '../../../store/answer/actions'
+import BaseSnackbar from '../../../containers/BaseSnackbar'
+import BaseModal from '../../../containers/modals/BaseModal'
 
 class QuestionPage extends React.Component {
 
@@ -24,6 +26,8 @@ class QuestionPage extends React.Component {
       <div>
         <TitleBar />
         <Question id={questionId} />
+        <BaseModal />
+        <BaseSnackbar />
       </div>
     )
   }

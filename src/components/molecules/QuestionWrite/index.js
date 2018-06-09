@@ -2,7 +2,8 @@ import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
 import Paper from 'material-ui/Paper'
 import * as colors from 'material-ui/styles/colors'
-import RaisedButton from 'material-ui/RaisedButton'
+// import RaisedButton from 'material-ui/RaisedButton'
+import Button from '../../../components/atoms/BaseButton'
 import Input from '../../atoms/BaseInput'
 import CustomDatePicker from '../../atoms/CustomDatePicker'
 import TagSelector from '../../molecules/TagSelector'
@@ -78,9 +79,8 @@ class QuestionWrite extends React.Component {
           />
           <CustomDatePicker className={'due-input'} onChange={date => { due = date }} />
           <br />
-          <RaisedButton className={'back-button'} type={'submit'} onClick={this.onClickBackButton}>Back</RaisedButton>
-          {'   '}
-          <RaisedButton className={'write-question-button'} type={'submit'} onClick={this.onClickWriteQuestionButton}>Submit Question</RaisedButton>
+          <Button className={'back-button'} style={{ margin: 10 }} type={'submit'} onClick={this.onClickBackButton}>Back</Button>
+          <Button className={'write-question-button'} style={{ margin: 10 }} type={'submit'} onClick={this.onClickWriteQuestionButton}>Submit</Button>
         </Paper>
       </div>
     )

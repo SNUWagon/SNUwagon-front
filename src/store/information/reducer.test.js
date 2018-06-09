@@ -34,4 +34,14 @@ describe('information reducer', () => {
         created,
       })
   })
+
+  it('should handle update vote', () => {
+    const upVote = 1
+    const downVote = 1
+    expect(informationReducer({}, actions.updateVote(upVote, downVote)).vote)
+      .toEqual({
+        upVote,
+        downVote,
+      })
+  })
 })
