@@ -9,7 +9,7 @@ import { getInformationList, getQuestionList } from '../../../store/list/actions
 import { getTagList } from '../../../store/search/actions'
 
 const style = {
-  width: 800,
+  width: '50%',
   margin: 'auto',
   textAlign: 'center',
   display: 'inline-block',
@@ -25,7 +25,7 @@ class IndexBox extends React.Component {
 
   render() {
     return (
-      <div style={{ textAlign: 'center', margin: '40px 300px' }}>
+      <div style={{ width: '50%', textAlign: 'center', margin: '60px auto' }}>
         <Paper style={{ style }}>
           <IndexButtons
             logged={this.props.logged}

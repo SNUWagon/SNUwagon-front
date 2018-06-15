@@ -7,12 +7,12 @@ import * as colors from 'material-ui/styles/colors'
 import Pagination from 'material-ui-pagination'
 import PostList from '../../../components/molecules/PostList'
 import { changeRoute } from '../../../store/user/actions'
-import { getQuestionList, getInformationList } from '../../../store/list/actions'
+import { getQuestionList, getInformationList, updateQuestionList, updateInformationList } from '../../../store/list/actions'
 import { updateModal } from '../../../store/display/actions'
 
 const styles = {
   grid: {
-    margin: '40px 300px',
+    margin: '60px 300px',
     display: 'grid',
     gridTemplateColumns: '1fr 1fr',
     gridColumnGap: '30',
@@ -58,6 +58,10 @@ class PostListBox extends React.Component {
       informationTotalPage: Math.ceil(informationCount / this.postPerPage),
       informationCurrentPage: 1,
     })
+  }
+
+  componentWillUnmount() {
+    this.props.resetPostList()
   }
 
   render() {
@@ -122,6 +126,7 @@ PostListBox.propTypes = {
   informationList: PropTypes.array,
   changeRoute: PropTypes.func,
   loadPostList: PropTypes.func,
+  resetPostList: PropTypes.func,
   showFailModal: PropTypes.func,
 }
 
@@ -146,6 +151,10 @@ export const mapDispatchToProps = (dispatch) => {
     },
     showFailModal: () => {
       dispatch(updateModal(true, 'Sign in first'))
+    },
+    resetPostList: () => {
+      dispatch(updateQuestionList([]))
+      dispatch(updateInformationList([]))
     },
   }
 }

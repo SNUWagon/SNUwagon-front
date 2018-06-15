@@ -33,6 +33,12 @@ const SignInBox = ({ onClickSignIn, onClickSignUp }) => {
     onClickSignUp('/signup')
   }
 
+  const onEnter = (ev) => {
+    if (ev.key === 'Enter') {
+      onClickSignInButton()
+    }
+  }
+
   return (
     <Paper style={style} zDepth={3}>
       <h1>Sign In</h1>
@@ -44,6 +50,7 @@ const SignInBox = ({ onClickSignIn, onClickSignUp }) => {
       <Input
         className={'password-input'} placeholder={'Password'} type={'password'}
         onChange={node => { password = node.target }}
+        onKeyDown={onEnter}
       />
       <ButtonP>
         <Button className={'sign-in-button'} type={'submit'} onClick={onClickSignInButton}>Sign In</Button>
