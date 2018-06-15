@@ -8,6 +8,7 @@ import * as displayActions from '../display/actions'
 const baseUrl = ''
 const informationUrl = `${baseUrl}/posts/information`
 const voteUrl = `${baseUrl}/vote`
+const authUrl = `${baseUrl}/auth`
 
 export function* handleChangeRoute(newRoute) {
   yield put(push(newRoute))
@@ -38,6 +39,7 @@ export function* handleGetInformationPost(postId) {
       response.data.tags,
       response.data.created,
     ))
+    // yield put(actions.getInformationUserProfile(response.data.authorId))
   }
 }
 
@@ -67,6 +69,15 @@ export function* handlePostVote(postId, voteType) {
     yield put(actions.getVote(postId))
   } else {
     yield put(displayActions.updateModal(true, 'You already voted for this information!'))
+  }
+}
+
+export function* handleGetInformationUserProfile(userId) {
+  const response = yield call(api.get, `${authUrl}/userinfo/${userId}`)
+  if (response.success === true) {
+    yield put(actions.updateInformationUserProfile(response.data.credit))
+  } else {
+    yield put(actions.updateInformationUserProfile(undefined))
   }
 }
 
@@ -113,6 +124,13 @@ function* watchPostVote() {
   }
 }
 
+function* watchGetInformationUserProfile() {
+  while (true) {
+    const { userId } = yield take(actions.GET_INFORMATION_USER_PROFILE)
+    yield call(handleGetInformationUserProfile, userId)
+  }
+}
+
 export default function* () {
   yield fork(watchChangeRoute)
   yield fork(watchWriteInformationPost)
@@ -120,4 +138,5 @@ export default function* () {
   yield fork(watchPurchaseInformationPost)
   yield fork(watchGetVote)
   yield fork(watchPostVote)
+  yield fork(watchGetInformationUserProfile)
 }

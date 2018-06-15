@@ -16,4 +16,6 @@ export const initialState = {
     upVote: 0,
     downVote: 0,
   },
+
+  authorCredit: undefined,
 }
