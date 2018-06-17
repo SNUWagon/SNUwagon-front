@@ -5,6 +5,7 @@ import Information from '../../../containers/Information'
 import { getInformationPost, getVote } from '../../../store/information/actions'
 import BaseModal from '../../../containers/modals/BaseModal'
 import BaseSnackbar from '../../../containers/BaseSnackbar'
+import LoadingModal from '../../../containers/modals/LoadingModal'
 
 class InformationPage extends React.Component {
 
@@ -25,6 +26,7 @@ class InformationPage extends React.Component {
         <Information id={informationId} />
         <BaseModal />
         <BaseSnackbar />
+        <LoadingModal />
       </div>
     )
   }

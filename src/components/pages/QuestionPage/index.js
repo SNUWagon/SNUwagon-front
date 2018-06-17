@@ -6,6 +6,7 @@ import { getQuestionPost } from '../../../store/question/actions'
 import { getQuestionAnswer } from '../../../store/answer/actions'
 import BaseSnackbar from '../../../containers/BaseSnackbar'
 import BaseModal from '../../../containers/modals/BaseModal'
+import LoadingModal from '../../../containers/modals/LoadingModal'
 
 class QuestionPage extends React.Component {
 
@@ -28,6 +29,7 @@ class QuestionPage extends React.Component {
         <Question id={questionId} />
         <BaseModal />
         <BaseSnackbar />
+        <LoadingModal />
       </div>
     )
   }

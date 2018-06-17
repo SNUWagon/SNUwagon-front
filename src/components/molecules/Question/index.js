@@ -17,7 +17,7 @@ const style = {
 const Question = ({ onClickAnswer, onClickDelete, ...props }) => {
   const q = props.question
   const a = props.answer
-  const selectedId = (a !== undefined && q.resolved) ? a.find(x => x.id === q.selected).id : undefined
+  const selectedId = (a !== undefined && q.resolved) ? a.find(x => x !== undefined && x.id === q.selected).id : undefined
 
   let answer
   const resolved = (q.resolved !== undefined) ? q.resolved.toString() : ''
