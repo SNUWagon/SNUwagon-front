@@ -32,6 +32,12 @@ const SearchInput = ({ titleSearch, tagSearch, tagList, searched }) => {
     return ret
   }
 
+  const onEnter = (ev) => {
+    if (ev.key === 'Enter') {
+      onClickSearch()
+    }
+  }
+
   return (
     <div>
       <AutoComplete
@@ -41,6 +47,7 @@ const SearchInput = ({ titleSearch, tagSearch, tagList, searched }) => {
         onUpdateInput={updateQuery}
         maxSearchResults={5}
         filter={isQueryTag}
+        onKeyDown={onEnter}
       />
       {' '}
       <Button className={'search-button'} onClick={onClickSearch}>Search</Button>

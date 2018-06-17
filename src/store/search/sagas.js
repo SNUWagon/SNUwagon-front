@@ -2,6 +2,7 @@ import { take, call, fork, put } from 'redux-saga/effects'
 import { push } from 'react-router-redux'
 import api from 'services/api'
 import * as actions from './actions'
+import * as displayActions from '../display/actions'
 
 const baseUrl = ''
 const listUrl = `${baseUrl}/list`
@@ -35,7 +36,10 @@ export function* handleSearch(postType, searchType, query) {
       break
   }
 
+  yield put(displayActions.updateLoadingModal(true))
   const response = yield call(api.get, `${url}/${query}`)
+  yield put(displayActions.updateLoadingModal(false))
+
   if (response.success === true) {
     switch (postType) {
       case 'question':

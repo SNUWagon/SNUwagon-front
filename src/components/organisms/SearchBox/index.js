@@ -30,7 +30,7 @@ const styles = {
   },
   input: {
     textAlign: 'center',
-    margin: '40px 300px',
+    margin: '60px 300px',
   },
   header: {
     textAlign: 'center',
@@ -137,7 +137,7 @@ class SearchBox extends React.Component {
             </div>
             :
             <div style={styles.input}>
-              <p>Search Something!</p>
+              <p>{'Search Posts!'}</p>
             </div>
         }
       </div>

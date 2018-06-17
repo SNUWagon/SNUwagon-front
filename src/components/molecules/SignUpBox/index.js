@@ -32,6 +32,13 @@ class SignUpBox extends React.Component {
     this.onClickBackButton = this.onClickBackButton.bind(this)
     this.checkEmailFormat = this.checkEmailFormat.bind(this)
     this.isAllInputValid = this.isAllInputValid.bind(this)
+    this.onEnter = this.onEnter.bind(this)
+  }
+
+  onEnter(ev) {
+    if (this.isAllInputValid() === true && ev.key === 'Enter') {
+      this.onClickSignUpButton()
+    }
   }
 
   onClickSignUpButton() {
@@ -79,6 +86,7 @@ class SignUpBox extends React.Component {
         <Input
           className={'password-input'} placeholder={'Password'} type={'password'}
           onChange={node => this.setState({ password: node.target })}
+          onKeyDown={this.onEnter}
         />
         <ButtonP>
           <Button className={'back-button'} type={'submit'} onClick={this.onClickBackButton}>Back</Button>

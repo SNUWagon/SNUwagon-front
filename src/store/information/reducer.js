@@ -24,6 +24,10 @@ const informationReducer = (state = initialState, action) => {
           downVote: action.downVote,
         },
       })
+    case actions.UPDATE_INFORMATION_USER_PROFILE:
+      return Object.assign({}, state, {
+        authorCredit: action.credit,
+      })
     default:
       return state
   }

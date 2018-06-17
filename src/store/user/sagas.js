@@ -18,7 +18,9 @@ export function* handleChangeRoute(newRoute) {
 
 export function* handleSignIn(username, password) {
   const data = { username, password }
+  yield put(displayActions.updateLoadingModal(true))
   const response = yield call(api.post, `${authUrl}/signin`, data)
+  yield put(displayActions.updateLoadingModal(false))
 
   if (response.success === true) {
     yield put(actions.getUserProfile())

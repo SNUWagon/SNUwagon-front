@@ -2,6 +2,7 @@ import { take, call, fork, put } from 'redux-saga/effects'
 import { push } from 'react-router-redux'
 import api from 'services/api'
 import * as actions from './actions'
+import * as displayActions from '../display/actions'
 
 const baseUrl = ''
 const listUrl = `${baseUrl}/list`
@@ -23,7 +24,9 @@ function* handleGetPostList(type) {
       return
   }
 
+  yield put(displayActions.updateLoadingModal(true))
   const response = yield call(api.get, url)
+  yield put(displayActions.updateLoadingModal(false))
 
   if (response.success === true) {
     yield put(action(response.data.map(

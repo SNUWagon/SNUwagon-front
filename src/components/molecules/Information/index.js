@@ -5,6 +5,7 @@ import Avatar from 'material-ui/Avatar'
 import Chip from 'material-ui/Chip'
 import Divider from 'material-ui/Divider'
 import Paper from 'material-ui/Paper'
+import IconButton from 'material-ui/IconButton'
 // import RaisedButton from 'material-ui/RaisedButton'
 import Button from '../../../components/atoms/BaseButton'
 import VoteBox from '../../../components/molecules/VoteBox'
@@ -35,6 +36,27 @@ const Information = ({ onClickPurchase, postVote, ...props }) => {
   const formatDue = (due) => {
     const d = new Date(due)
     return d.toLocaleString()
+  }
+
+  const credit2Color = (credit) => {
+    let color
+    if (credit === undefined) color = colors.black
+    else if (credit > 1500) color = colors.lightGreen700
+    else if (credit > 500) color = colors.black
+    else color = colors.red700
+
+    return color
+  }
+
+  const credit2FontSize = (credit) => {
+    let fontSize
+
+    if (credit === undefined) fontSize = '15px'
+    else if (credit > 1500) fontSize = '20px'
+    else if (credit > 500) fontSize = '15px'
+    else fontSize = '20px'
+
+    return fontSize
   }
 
   return (
@@ -135,7 +157,17 @@ const Information = ({ onClickPurchase, postVote, ...props }) => {
         />
         <CardHeader style={{ float: 'right', textAlign: 'right', margin: '0px', padding: '0px' }} >
           <div style={{ display: 'inline-block', verticalAlign: 'top', whitespace: 'normal', padding: '0px' }} >
-            <span style={{ display: 'block', fontSize: '15px', margin: '0px' }} >{`Written by ${i.author}`}</span>
+            <span style={{ display: 'block', fontSize: '15px', margin: '0px' }} >
+              {'Written by '}
+              <span
+                style={{
+                  color: credit2Color(i.authorCredit),
+                  fontSize: credit2FontSize(i.authorCredit),
+                }}
+              >
+                {`${i.author}`}
+              </span>
+            </span>
             <span style={{ display: 'block', fontSize: '15px', margin: '0px', color: colors.grey500 }} >{`Submitted on ${formatDue(i.created)}`}</span>
           </div>
         </CardHeader>

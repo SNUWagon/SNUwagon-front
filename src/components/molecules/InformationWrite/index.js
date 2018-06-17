@@ -107,18 +107,18 @@ class InformationWrite extends React.Component {
           />
           <br />
           <CardActions actAsExpander>
-            <Button className={'hidden-content-button'} type={'submit'} onClick={() => { hiddenExist = !hiddenExist }}>Add Hidden Contents</Button>
+            <Button className={'hidden-content-button'} type={'submit'} onClick={() => { hiddenExist = !hiddenExist }}>{' Add Hidden Contents '}</Button>
           </CardActions>
           <CardText expandable>
             <Input
-              style={{ textAlign: 'left', width: 500 }}
+              style={{ textAlign: 'left', width: '90%' }}
               className={'hidden-content-input'} floatingLabelText="Hidden Contents"
               multiLine rows={2}
               floatingLabelFixed
               onChange={node => { hiddenContent = node.target }}
             />
             <Input
-              style={{ width: 200 }}
+              // style={{ width: 200 }}
               className={'hidden-content-cost-input'} hintText={'Hidden Content Cost'}
               onChange={node => { hiddenContentCost = node.target }} type={'number'} pattern={'d+'} min={'0'} step={'1'}
             />

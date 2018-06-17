@@ -10,15 +10,17 @@ import _ from 'lodash'
 
 const styles = {
   chip: {
-    margin: 20,
+    margin: '20px',
   },
   label: {
-    fontSize: 18,
+    fontSize: 20,
     color: colors.indigo500,
+    whiteSpace: 'initial',
   },
   tag: {
     color: colors.orange800,
     fontSize: 14,
+    textAlgin: 'center',
   },
   wrapper: {
     margin: '30px 0',

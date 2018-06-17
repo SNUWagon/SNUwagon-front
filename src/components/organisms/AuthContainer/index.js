@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react'
 import styled from 'styled-components'
 
 const Wrapper = styled.div`
-  margin: auto;
+  margin: 100px auto;
   width: 100%;
   display: inline-block;
   text-align: center;
