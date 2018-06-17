@@ -37,8 +37,8 @@ export function* handleGetQuestionPost(postId) {
       response.data.tags,
     ))
   } else {
-    yield put(actions.changeRoute('/'))
-    yield put(displayActions.updateModal(true, 'Oops... that Question is deleted'))
+    // yield put(actions.changeRoute('/'))
+    // yield put(displayActions.updateModal(true, 'Oops... that Question is deleted'))
   }
 }
 
@@ -46,7 +46,7 @@ export function* handleDeleteQuestionPost(postId) {
   const response = yield call(api.delete, `${questionUrl}/${postId}`)
   if (response.success === true) {
     yield put(actions.changeRoute('/'))
-    yield put(displayActions.updateSnackbar(true, 'Question deleted'))
+    // yield put(displayActions.updateSnackbar(true, 'Question deleted'))
   }
 }
 
