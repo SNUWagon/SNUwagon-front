@@ -36,7 +36,13 @@ class IndexBox extends React.Component {
             logged={this.props.logged}
             onNotLoggedIn={this.props.openModal}
             questionList={this.props.questionList}
-            informationList={this.props.informationList}
+            informationList={this.props.informationList.sort(
+              (a, b) => {
+                if (a.sponsorCredit < b.sponsorCredit) return 1
+                else if (a.sponsorCredit > b.sponsorCredit) return -1
+                return 0
+              }
+            )}
             changeRoute={this.props.changeRoute}
           />
         </Paper>

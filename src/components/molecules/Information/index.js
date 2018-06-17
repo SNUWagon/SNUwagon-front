@@ -53,8 +53,8 @@ const Information = ({ onClickPurchase, postVote, ...props }) => {
 
     if (credit === undefined) fontSize = '15px'
     else if (credit > 1500) fontSize = '20px'
-    else if (credit > 500) fontSize = '20px'
-    else fontSize = '15px'
+    else if (credit > 500) fontSize = '15px'
+    else fontSize = '20px'
 
     return fontSize
   }

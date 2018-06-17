@@ -10,16 +10,11 @@ import _ from 'lodash'
 
 const styles = {
   chip: {
-    display: 'block',
     margin: '20px',
-    width: '80%',
-    textAlign: 'center',
   },
   label: {
     fontSize: 20,
     color: colors.indigo500,
-    width: 'auto',
-    textAlign: 'center',
     whiteSpace: 'initial',
   },
   tag: {

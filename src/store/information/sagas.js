@@ -39,7 +39,7 @@ export function* handleGetInformationPost(postId) {
       response.data.tags,
       response.data.created,
     ))
-    // yield put(actions.getInformationUserProfile(response.data.authorId))
+    yield put(actions.getInformationUserProfile(response.data.author_id))
   }
 }
 

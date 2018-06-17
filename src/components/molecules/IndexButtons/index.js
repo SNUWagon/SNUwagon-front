@@ -9,7 +9,7 @@ import LiveHelp from 'material-ui/svg-icons/communication/live-help'
 import Button from '../../../components/atoms/BaseButton'
 
 const style = {
-  width: '20%',
+  width: '18%',
   fontSize: '30px',
   margin: 20,
   backgroundColor: '#FFFFFF00',
