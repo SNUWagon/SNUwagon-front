@@ -12,13 +12,13 @@ import { updateModal } from '../../../store/display/actions'
 
 const styles = {
   grid: {
-    margin: '60px 300px',
+    margin: '60px 20%',
     display: 'grid',
     gridTemplateColumns: '1fr 1fr',
     gridColumnGap: '30',
   },
   paper: {
-    width: 500,
+    width: '100%',
     margin: 'auto',
     textAlign: 'center',
     display: 'inline-block',

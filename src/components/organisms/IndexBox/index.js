@@ -38,8 +38,8 @@ class IndexBox extends React.Component {
             questionList={this.props.questionList}
             informationList={this.props.informationList.sort(
               (a, b) => {
-                if (a.sponsorCredit < b.sponsorCredit) return 1
-                else if (a.sponsorCredit > b.sponsorCredit) return -1
+                if (a.sponsor_credit < b.sponsor_credit) return 1
+                else if (a.sponsor_credit > b.sponsor_credit) return -1
                 return 0
               }
             )}
