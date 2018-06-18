@@ -56,7 +56,7 @@ const Question = ({ onClickAnswer, onClickDelete, ...props }) => {
         </CardText>
         <CardText>
           <div style={{ fontSize: 20, textAlign: 'center', padding: '20px' }} >
-            {q.content}
+            <pre style={{ fontFamily: 'Roboto' }}>{q.content}</pre>
             <br /><br />
           </div>
         </CardText>
