@@ -9,6 +9,7 @@ import Menu from 'material-ui/Menu'
 import MenuItem from 'material-ui/MenuItem'
 import Badge from 'material-ui/Badge'
 import NotificationsIcon from 'material-ui/svg-icons/social/notifications'
+import MoreVert from 'material-ui/svg-icons/navigation/more-vert'
 import { connect } from 'react-redux'
 import NewsfeedElement from '../../../components/atoms/NewsfeedElement'
 import WatchTagPickerDialog from '../../../components/molecules/WatchTagPickerDialog'
@@ -161,10 +162,12 @@ class TitleBar extends React.Component {
           </Popover>
 
         </Badge>
-        <FlatButton
-          style={{ color: 'white' }}
+        <IconButton
+          iconStyle={{ color: colors.white }}
           onClick={this.handleProfileOpen}
-        >{ this.props.profile.username }</FlatButton>
+        >
+          <MoreVert />
+        </IconButton>
         <Popover
           open={this.state.profileOpen}
           anchorEl={this.state.anchorProfilePopover}
@@ -175,8 +178,14 @@ class TitleBar extends React.Component {
         >
           <Menu>
             <MenuItem
+              primaryText={this.props.profile.username}
+              style={{ color: colors.blueGrey600 }}
+              disableTouchRipple
+            />
+            <MenuItem
               primaryText={`credit: ${this.props.profile.credit}`}
-              disabled
+              style={{ color: colors.blueGrey600 }}
+              disableTouchRipple
             />
             <MenuItem
               primaryText={'Set tag notification'}
@@ -195,7 +204,7 @@ class TitleBar extends React.Component {
       <FlatButton
         className={'sign-in-button'}
         onClick={this.handleSignIn}
-        style={{ color: 'white' }}
+        style={{ color: 'white', fontSize: 20 }}
       >Sign in</FlatButton>
     )
 
