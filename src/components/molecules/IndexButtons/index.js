@@ -10,14 +10,12 @@ import Button from '../../../components/atoms/BaseButton'
 
 const style = {
   width: '18%',
-  fontSize: '30px',
   margin: 20,
   backgroundColor: '#FFFFFF00',
 }
 
 const iconStyle = {
-  margin: 'auto',
-  width: '40%',
+  width: '72px',
   height: 'auto',
 }
 

@@ -17,7 +17,7 @@ const style = {
 const Question = ({ onClickAnswer, onClickDelete, ...props }) => {
   const q = props.question
   const a = props.answer
-  const selectedId = (a !== undefined && q.resolved) ? a.find(x => x.id === q.selected).id : undefined
+  const selectedId = (a !== undefined && q.resolved) ? a.find(x => x !== undefined && x.id === q.selected).id : undefined
 
   let answer
   const resolved = (q.resolved !== undefined) ? q.resolved.toString() : ''
@@ -56,7 +56,7 @@ const Question = ({ onClickAnswer, onClickDelete, ...props }) => {
         </CardText>
         <CardText>
           <div style={{ fontSize: 20, textAlign: 'center', padding: '20px' }} >
-            {q.content}
+            <pre style={{ fontFamily: 'Roboto' }}>{q.content}</pre>
             <br /><br />
           </div>
         </CardText>

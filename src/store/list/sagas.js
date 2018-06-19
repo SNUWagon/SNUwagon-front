@@ -24,9 +24,7 @@ function* handleGetPostList(type) {
       return
   }
 
-  yield put(displayActions.updateLoadingModal(true))
   const response = yield call(api.get, url)
-  yield put(displayActions.updateLoadingModal(false))
 
   if (response.success === true) {
     yield put(action(response.data.map(

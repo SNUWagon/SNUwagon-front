@@ -9,7 +9,7 @@ const style = {
 }
 
 const WatchTagPickerDialog = ({ open, tagList, watchTagList, onClick, onClose }) => {
-  let watchTags = []
+  let watchTags = watchTagList.slice()
 
   const onTagUpdate = (tags) => {
     watchTags = tags.slice()

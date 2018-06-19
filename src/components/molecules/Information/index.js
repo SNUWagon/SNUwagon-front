@@ -72,7 +72,7 @@ const Information = ({ onClickPurchase, postVote, ...props }) => {
         <CardText>
           <div style={{ fontSize: 20, textAlign: 'center', padding: '20px' }} >
             <br /><br />
-            {i.content}
+            <pre style={{ fontFamily: 'Roboto' }}>{i.content}</pre>
             <br />
             {showHidden ? (
               <div style={{ color: colors.grey600, marginTop: 30 }}>

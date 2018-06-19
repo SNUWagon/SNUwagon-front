@@ -29,8 +29,8 @@ const HomePage = () => {
             />
           }
           title={'SNUwagon?'}
-          style={{ textAlign: 'center' }}
-          titleStyle={{ color: colors.indigo300, fontSize: 40, textAlign: 'center' }}
+          style={{ textAlign: 'center', overflow: 'auto' }}
+          titleStyle={{ color: colors.indigo300, fontSize: '36', textAlign: 'center' }}
           actAsExpander
           showExpandableButton
         />

@@ -29,7 +29,7 @@ class TagSelector extends React.Component {
     }
 
     this.maxTags = 5
-    this.hintText = props.hintText || `search tag(#), maximum ${this.maxTags} tags are available`
+    this.hintText = props.hintText || `set tags(#), maximum ${this.maxTags} tags are available`
 
     this.updateInput = this.updateInput.bind(this)
     this.saveInput = this.saveInput.bind(this)

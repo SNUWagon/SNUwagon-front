@@ -30,7 +30,7 @@ const styles = {
   },
   input: {
     textAlign: 'center',
-    margin: '60px 300px',
+    margin: '60px 30%',
   },
   header: {
     textAlign: 'center',
